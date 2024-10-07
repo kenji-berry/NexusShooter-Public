@@ -551,7 +551,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 292456943}
 --- !u!143 &510071454
 CharacterController:
   m_ObjectHideFlags: 0
@@ -590,9 +590,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61f1d21bbb109040b259bde805bf384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 292456943}
   moveValue: {x: 0, y: 0}
+  lookValue: {x: 0, y: 0}
   CharacterVelocity: {x: 0, y: 0, z: 0}
   speed: 10
+  mouseSensitivity: 0.1
 --- !u!1 &674059972
 GameObject:
   m_ObjectHideFlags: 0
