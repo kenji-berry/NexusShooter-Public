@@ -1,19 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private CharacterController controller;
     public Camera playerCamera;
+
+    [Header("Movement")]
+    public float speed = 10f;
+    public float sprintSpeedMultiplier = 1.5f;
+    public float mouseSensitivity = 0.1f;
+    public float verticalRotation = 0f;
+    public bool isSprinting = false;
     public Vector2 moveValue, lookValue;
     public Vector3 CharacterVelocity;
-    public float speed = 10f;
-    public float mouseSensitivity = 0.1f;
-    private CharacterController controller;
-    private float verticalRotation = 0f;
 
-    // HEALTHBAR
+    [Header("Health")]
     public int maxHealth = 100;
     public int currentHealth;
 
@@ -41,6 +46,11 @@ public class PlayerController : MonoBehaviour
         lookValue = value.Get<Vector2>();
     }
 
+    void OnSprint(InputValue value)
+    {
+        isSprinting = value.isPressed;
+    }
+
     void Update()
     {
         transform.Rotate(new Vector3(0.0f, (lookValue.x * mouseSensitivity), 0.0f));
@@ -50,6 +60,9 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = new Vector3(moveValue.x, 0.0f, moveValue.y);
         Vector3 targetVelocity = transform.TransformVector(movement) * speed;
+
+        if (isSprinting) targetVelocity *= sprintSpeedMultiplier;
+
         CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, 10f * Time.deltaTime);
         controller.Move(CharacterVelocity * Time.deltaTime);
     }
