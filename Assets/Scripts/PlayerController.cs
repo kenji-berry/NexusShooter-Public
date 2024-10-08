@@ -13,10 +13,22 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private float verticalRotation = 0f;
 
+    // HEALTHBAR
+    public int maxHealth = 100;
+    public int currentHealth;
+
+    private GameController gameController;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        currentHealth = maxHealth;
+        gameController = FindFirstObjectByType<GameController>();
+
+        // Initialize the health bar with the player's starting health
+        gameController.UpdateHealthBar(currentHealth, maxHealth);
     }
 
     void OnMove(InputValue value)
@@ -40,5 +52,23 @@ public class PlayerController : MonoBehaviour
         Vector3 targetVelocity = transform.TransformVector(movement) * speed;
         CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, 10f * Time.deltaTime);
         controller.Move(CharacterVelocity * Time.deltaTime);
+    }
+
+    // Method to take damage
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth < 0) currentHealth = 0;
+        gameController.UpdateHealthBar(currentHealth, maxHealth);
+
+    }
+
+    // Method to heal
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        gameController.UpdateHealthBar(currentHealth, maxHealth);
+        // UpdateHealthBar();
     }
 }
