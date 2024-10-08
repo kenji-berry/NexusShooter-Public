@@ -13,8 +13,12 @@ public class PlayerController : MonoBehaviour
     public float speed = 10f;
     public float sprintSpeedMultiplier = 1.5f;
     public float mouseSensitivity = 0.1f;
+    public float gravitationalForce = 100f;
+    public float jumpForce = 30f;
     public float verticalRotation = 0f;
     public bool isSprinting = false;
+    public bool isJumping = false;
+    public bool isGrounded = true;
     public Vector2 moveValue, lookValue;
     public Vector3 CharacterVelocity;
 
@@ -51,6 +55,11 @@ public class PlayerController : MonoBehaviour
         isSprinting = value.isPressed;
     }
 
+    void OnJump(InputValue value)
+    {
+        isJumping = value.isPressed;
+    }
+
     void Update()
     {
         transform.Rotate(new Vector3(0.0f, (lookValue.x * mouseSensitivity), 0.0f));
@@ -64,6 +73,17 @@ public class PlayerController : MonoBehaviour
         if (isSprinting) targetVelocity *= sprintSpeedMultiplier;
 
         CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, 10f * Time.deltaTime);
+
+        isGrounded = controller.isGrounded;
+        if (isGrounded && isJumping)
+        {
+            CharacterVelocity = new Vector3(CharacterVelocity.x, 0f, CharacterVelocity.z);
+            CharacterVelocity += Vector3.up * jumpForce;
+            isJumping = false;
+        } 
+
+        CharacterVelocity += Vector3.down * gravitationalForce * Time.deltaTime;
+
         controller.Move(CharacterVelocity * Time.deltaTime);
     }
 
