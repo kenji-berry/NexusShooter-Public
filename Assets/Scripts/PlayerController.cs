@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float mouseSensitivity = 0.1f;
     public float gravitationalForce = 100f;
     public float jumpForce = 30f;
+    public float playerFOV = 60f;
     public float verticalRotation = 0f;
     public bool isSprinting = false;
     public bool isJumping = false;
@@ -70,7 +71,15 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(moveValue.x, 0.0f, moveValue.y);
         Vector3 targetVelocity = transform.TransformVector(movement) * speed;
 
-        if (isSprinting) targetVelocity *= sprintSpeedMultiplier;
+        if (isSprinting)
+        {
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, playerFOV + 10f, 10f * Time.deltaTime);
+            targetVelocity *= sprintSpeedMultiplier;
+        }
+        else
+        {
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, playerFOV, 10f * Time.deltaTime);
+        }
 
         CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, 10f * Time.deltaTime);
 
