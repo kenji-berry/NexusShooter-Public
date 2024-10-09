@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
 
     void OnJump(InputValue value)
     {
+        if (!controller.isGrounded) return;
         isJumping = value.isPressed;
     }
 
