@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,15 +14,17 @@ public class PlayerController : MonoBehaviour
     public float speed = 10f;
     public float sprintSpeedMultiplier = 1.5f;
     public float mouseSensitivity = 0.1f;
-    public float gravitationalForce = 100f;
-    public float jumpForce = 30f;
+    public float gravitationalForce = 30f;
+    public float jumpForce = 10f;
     public float playerFOV = 60f;
     public float verticalRotation = 0f;
     public bool isSprinting = false;
     public bool isJumping = false;
     public bool isGrounded = true;
     public Vector2 moveValue, lookValue;
-    public Vector3 CharacterVelocity;
+    public float verticalVelocity;
+
+    Vector3 m_GroundNormal;
 
     [Header("Health")]
     public int maxHealth = 100;
@@ -69,32 +72,41 @@ public class PlayerController : MonoBehaviour
         verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
         playerCamera.transform.localEulerAngles = new Vector3(verticalRotation, 0.0f, 0.0f);
 
-        Vector3 movement = new Vector3(moveValue.x, 0.0f, moveValue.y);
-        Vector3 targetVelocity = transform.TransformVector(movement) * speed;
+        handleSprintFOV();
 
+        isGrounded = controller.isGrounded;
+        if (isGrounded)
+        {
+            if (isJumping)
+            {
+                verticalVelocity = jumpForce;
+                isJumping = false;
+            }
+        } else
+        {
+            verticalVelocity -= gravitationalForce * Time.deltaTime;
+
+        }
+
+        Vector3 moveVector = new Vector3(moveValue.x, 0f, moveValue.y);
+        Vector3 targetVelocity = transform.TransformVector(moveVector) * speed;
+        targetVelocity.y = verticalVelocity;
+
+        if (isSprinting) targetVelocity *= sprintSpeedMultiplier;
+
+        controller.Move(targetVelocity * Time.deltaTime);
+    }
+
+    void handleSprintFOV()
+    {
         if (isSprinting)
         {
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, playerFOV + 10f, 10f * Time.deltaTime);
-            targetVelocity *= sprintSpeedMultiplier;
         }
         else
         {
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, playerFOV, 10f * Time.deltaTime);
         }
-
-        CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, 10f * Time.deltaTime);
-
-        isGrounded = controller.isGrounded;
-        if (isGrounded && isJumping)
-        {
-            CharacterVelocity = new Vector3(CharacterVelocity.x, 0f, CharacterVelocity.z);
-            CharacterVelocity += Vector3.up * jumpForce;
-            isJumping = false;
-        } 
-
-        CharacterVelocity += Vector3.down * gravitationalForce * Time.deltaTime;
-
-        controller.Move(CharacterVelocity * Time.deltaTime);
     }
 
     // Method to take damage
