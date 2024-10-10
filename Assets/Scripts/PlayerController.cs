@@ -21,9 +21,8 @@ public class PlayerController : MonoBehaviour
     public bool isJumping = false;
     public bool isGrounded = true;
     public Vector2 moveValue, lookValue;
+    public Vector3 characterVelocity;
     public float verticalVelocity;
-
-    Vector3 m_GroundNormal;
 
     [Header("Health")]
     public int maxHealth = 100;
@@ -89,11 +88,14 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveVector = new Vector3(moveValue.x, 0f, moveValue.y);
         Vector3 targetVelocity = transform.TransformVector(moveVector) * speed;
-        targetVelocity.y = verticalVelocity;
 
         if (isSprinting) targetVelocity *= sprintSpeedMultiplier;
 
-        controller.Move(targetVelocity * Time.deltaTime);
+        characterVelocity.x = Mathf.Lerp(characterVelocity.x, targetVelocity.x, 10f * Time.deltaTime);
+        characterVelocity.y = verticalVelocity;
+        characterVelocity.z = Mathf.Lerp(characterVelocity.z, targetVelocity.z, 10f * Time.deltaTime);
+
+        controller.Move(characterVelocity * Time.deltaTime);
     }
 
     void handleSprintFOV()
