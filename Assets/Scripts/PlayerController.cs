@@ -17,9 +17,13 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 10f;
     public float playerFOV = 60f;
     public float verticalRotation = 0f;
+    public float standHeight = 2f;
+    public float currentHeight = 2f;
+    public float crouchHeight = 1f;
     public bool isSprinting = false;
     public bool isJumping = false;
     public bool isGrounded = true;
+    public bool isCrouched = false;
     public Vector2 moveValue, lookValue;
     public Vector3 characterVelocity;
     public float verticalVelocity;
@@ -63,6 +67,11 @@ public class PlayerController : MonoBehaviour
         isJumping = value.isPressed;
     }
 
+    void OnCrouch(InputValue value)
+    {
+        isCrouched = value.isPressed;
+    }
+
     void Update()
     {
         transform.Rotate(new Vector3(0.0f, (lookValue.x * mouseSensitivity), 0.0f));
@@ -71,6 +80,7 @@ public class PlayerController : MonoBehaviour
         playerCamera.transform.localEulerAngles = new Vector3(verticalRotation, 0.0f, 0.0f);
 
         handleSprintFOV();
+        handleCrouch();
 
         isGrounded = controller.isGrounded;
         if (isGrounded)
@@ -107,6 +117,19 @@ public class PlayerController : MonoBehaviour
         else
         {
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, playerFOV, 10f * Time.deltaTime);
+        }
+    }
+
+    void handleCrouch()
+    {
+        if (isCrouched)
+        {
+            currentHeight = Mathf.Lerp(currentHeight, crouchHeight, 10f * Time.deltaTime);
+            controller.height = controller.GetComponent<CapsuleCollider>().height = currentHeight;
+        } else
+        {
+            currentHeight = Mathf.Lerp(currentHeight, standHeight, 10f * Time.deltaTime);
+            controller.height = controller.GetComponent<CapsuleCollider>().height = currentHeight;
         }
     }
 
