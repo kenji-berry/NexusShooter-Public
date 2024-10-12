@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public float speed = 6f;
     public float sprintSpeedMultiplier = 1.4f;
+    public float crouchSpeedMultiplier = 0.5f;
     public float mouseSensitivity = 0.1f;
     public float gravity = 14f;
     public float jumpForce = 8f;
@@ -79,9 +80,6 @@ public class PlayerController : MonoBehaviour
         verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
         playerCamera.transform.localEulerAngles = new Vector3(verticalRotation, 0.0f, 0.0f);
 
-        handleSprintFOV();
-        handleCrouch();
-
         isGrounded = controller.isGrounded;
         if (isGrounded)
         {
@@ -103,18 +101,21 @@ public class PlayerController : MonoBehaviour
         Vector3 moveVector = new Vector3(moveValue.x, 0f, moveValue.y);
         Vector3 targetVelocity = transform.TransformVector(moveVector) * speed;
 
-        if (isSprinting) targetVelocity *= sprintSpeedMultiplier;
-
         characterVelocity = new Vector3(targetVelocity.x, verticalVelocity, targetVelocity.z);
+
+        handleSprint();
+        handleCrouch();
 
         controller.Move(characterVelocity * Time.deltaTime);
     }
 
-    void handleSprintFOV()
+    void handleSprint()
     {
         if (isSprinting)
         {
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, playerFOV + 10f, 10f * Time.deltaTime);
+            characterVelocity.x *= sprintSpeedMultiplier;
+            characterVelocity.z *= sprintSpeedMultiplier;
         }
         else
         {
@@ -128,6 +129,8 @@ public class PlayerController : MonoBehaviour
         {
             currentHeight = Mathf.Lerp(currentHeight, crouchHeight, 10f * Time.deltaTime);
             controller.height = controller.GetComponent<CapsuleCollider>().height = currentHeight;
+            characterVelocity.x *= crouchSpeedMultiplier;
+            characterVelocity.z *= crouchSpeedMultiplier;
         } else
         {
             currentHeight = Mathf.Lerp(currentHeight, standHeight, 10f * Time.deltaTime);
