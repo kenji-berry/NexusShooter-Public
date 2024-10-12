@@ -6982,19 +6982,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 292456943}
-  speed: 10
-  sprintSpeedMultiplier: 1.5
+  speed: 6
+  sprintSpeedMultiplier: 1.4
   mouseSensitivity: 0.1
-  gravitationalForce: 100
-  jumpForce: 30
-  playerFOV: 60
+  gravity: 14
+  jumpForce: 8
+  playerFOV: 90
   verticalRotation: 0
+  standHeight: 2
+  currentHeight: 2
+  crouchHeight: 1
+  moveValue: {x: 0, y: 0}
+  lookValue: {x: 0, y: 0}
+  characterVelocity: {x: 0, y: 0, z: 0}
+  verticalVelocity: 0
   isSprinting: 0
   isJumping: 0
   isGrounded: 1
-  moveValue: {x: 0, y: 0}
-  lookValue: {x: 0, y: 0}
-  CharacterVelocity: {x: 0, y: 0, z: 0}
+  isCrouched: 0
   maxHealth: 100
   currentHealth: 0
 --- !u!43 &523122412
