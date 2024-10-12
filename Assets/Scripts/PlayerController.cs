@@ -7,32 +7,32 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
+    private GameController gameController;
     public Camera playerCamera;
 
     [Header("Movement")]
-    public float speed = 10f;
-    public float sprintSpeedMultiplier = 1.5f;
+    public float speed = 6f;
+    public float sprintSpeedMultiplier = 1.4f;
     public float mouseSensitivity = 0.1f;
-    public float gravitationalForce = 30f;
-    public float jumpForce = 10f;
-    public float playerFOV = 60f;
+    public float gravity = 14f;
+    public float jumpForce = 8f;
+    public float playerFOV = 90f;
     public float verticalRotation = 0f;
     public float standHeight = 2f;
     public float currentHeight = 2f;
     public float crouchHeight = 1f;
-    public bool isSprinting = false;
-    public bool isJumping = false;
-    public bool isGrounded = true;
-    public bool isCrouched = false;
     public Vector2 moveValue, lookValue;
     public Vector3 characterVelocity;
     public float verticalVelocity;
 
+    public bool isSprinting = false;
+    public bool isJumping = false;
+    public bool isGrounded = true;
+    public bool isCrouched = false;
+
     [Header("Health")]
     public int maxHealth = 100;
     public int currentHealth;
-
-    private GameController gameController;
 
     void Start()
     {
@@ -85,6 +85,11 @@ public class PlayerController : MonoBehaviour
         isGrounded = controller.isGrounded;
         if (isGrounded)
         {
+            if (verticalVelocity < 0f)
+            {
+                verticalVelocity = -1f;
+            } 
+
             if (isJumping)
             {
                 verticalVelocity = jumpForce;
@@ -92,8 +97,7 @@ public class PlayerController : MonoBehaviour
             }
         } else
         {
-            verticalVelocity -= gravitationalForce * Time.deltaTime;
-
+            verticalVelocity -= gravity * Time.deltaTime;
         }
 
         Vector3 moveVector = new Vector3(moveValue.x, 0f, moveValue.y);
@@ -101,9 +105,7 @@ public class PlayerController : MonoBehaviour
 
         if (isSprinting) targetVelocity *= sprintSpeedMultiplier;
 
-        characterVelocity.x = Mathf.Lerp(characterVelocity.x, targetVelocity.x, 10f * Time.deltaTime);
-        characterVelocity.y = verticalVelocity;
-        characterVelocity.z = Mathf.Lerp(characterVelocity.z, targetVelocity.z, 10f * Time.deltaTime);
+        characterVelocity = new Vector3(targetVelocity.x, verticalVelocity, targetVelocity.z);
 
         controller.Move(characterVelocity * Time.deltaTime);
     }
