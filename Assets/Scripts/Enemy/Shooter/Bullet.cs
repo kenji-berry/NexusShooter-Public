@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public int damage = 10;
+    private bool hasCollided = false; 
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +20,17 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        // Check if the collided object has the tag "Player"
+        if (hasCollided) return; // If the bullet has already collided, return
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Destroy the bullet
+            PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+            if (playerController != null) 
+            {
+                playerController.TakeDamage(damage);
+                Debug.Log("Health is " + playerController.currentHealth);
+            }
+            hasCollided = true; // Set the flag to true to prevent further collisions
             Destroy(gameObject);
         }
     }
