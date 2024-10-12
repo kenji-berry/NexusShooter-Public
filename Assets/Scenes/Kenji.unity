@@ -19033,6 +19033,26 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1987705137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5769329703806966832, guid: fd0330f829c9d7c40b329b1d2aad12f7, type: 3}
+  m_PrefabInstance: {fileID: 1803823149973255940}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1987705143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987705137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5529c5b74832e9a48af8a9482a7a0d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  attackRange: 2
+  attackCooldown: 1
 --- !u!43 &2026220974
 Mesh:
   m_ObjectHideFlags: 0
@@ -21951,6 +21971,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 510071450}
+    - target: {fileID: 8402197345562590662, guid: 254f0d92369afe04a8d6a52f5ec5f612, type: 3}
+      propertyPath: stoppingDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9049552802252326944, guid: 254f0d92369afe04a8d6a52f5ec5f612, type: 3}
       propertyPath: player
       value: 
@@ -22020,6 +22044,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 510071450}
+    - target: {fileID: 1369175510695606651, guid: fd0330f829c9d7c40b329b1d2aad12f7, type: 3}
+      propertyPath: stoppingDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4136586384575200088, guid: fd0330f829c9d7c40b329b1d2aad12f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.103
@@ -22064,10 +22092,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyMelee
       objectReference: {fileID: 0}
+    - target: {fileID: 8096634840001404071, guid: fd0330f829c9d7c40b329b1d2aad12f7, type: 3}
+      propertyPath: m_Speed
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096634840001404071, guid: fd0330f829c9d7c40b329b1d2aad12f7, type: 3}
+      propertyPath: m_Acceleration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096634840001404071, guid: fd0330f829c9d7c40b329b1d2aad12f7, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096634840001404071, guid: fd0330f829c9d7c40b329b1d2aad12f7, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5769329703806966832, guid: fd0330f829c9d7c40b329b1d2aad12f7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1987705143}
   m_SourcePrefab: {fileID: 100100000, guid: fd0330f829c9d7c40b329b1d2aad12f7, type: 3}
 --- !u!4 &8260299978441103218 stripped
 Transform:
@@ -22086,6 +22133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb832a4cea7c5f43840c021b46459f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

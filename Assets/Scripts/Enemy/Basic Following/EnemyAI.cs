@@ -5,14 +5,16 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform player; // Location of player using transform properties
-    public float detectionRange = 10f; // Range at which the enemy can detect the player
+    public Transform player; // Reference to the player
+    public float detectionRange = 10f; 
+    public float stoppingDistance = 1f; // The distance at which the enemy will stop moving towards the player doesn't seem to work in navmesh
 
     private NavMeshAgent agent; 
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>(); // Get the NavMesh Agent component
+        agent.stoppingDistance = stoppingDistance; // Set the stopping distance
     }
 
     void Update()
