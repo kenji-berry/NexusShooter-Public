@@ -13,11 +13,16 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public float speed = 6f;
     public float sprintSpeedMultiplier = 1.4f;
-    public float mouseSensitivity = 0.1f;
-    public float gravity = 14f;
+    public float crouchSpeedMultiplier = 0.5f;
+
+    public float gravity = 18f;
+    public float friction = 6f;
     public float jumpForce = 8f;
+
+    public float mouseSensitivity = 0.1f;
     public float playerFOV = 90f;
     public float verticalRotation = 0f;
+
     public float standHeight = 2f;
     public float currentHeight = 2f;
     public float crouchHeight = 1f;
@@ -74,13 +79,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(new Vector3(0.0f, (lookValue.x * mouseSensitivity), 0.0f));
-        verticalRotation += (-lookValue.y * mouseSensitivity);
-        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
-        playerCamera.transform.localEulerAngles = new Vector3(verticalRotation, 0.0f, 0.0f);
-
-        handleSprintFOV();
-        handleCrouch();
+        handleLook();
 
         isGrounded = controller.isGrounded;
         if (isGrounded)
@@ -92,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
             if (isJumping)
             {
-                verticalVelocity = jumpForce;
+                verticalVelocity += jumpForce;
                 isJumping = false;
             }
         } else
@@ -101,16 +100,73 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector3 moveVector = new Vector3(moveValue.x, 0f, moveValue.y);
-        Vector3 targetVelocity = transform.TransformVector(moveVector) * speed;
+        Vector3 targetVelocity = transform.TransformVector(moveVector);
 
-        if (isSprinting) targetVelocity *= sprintSpeedMultiplier;
+        Accelerate(targetVelocity, speed, 10f);
+        ApplyFriction();
 
-        characterVelocity = new Vector3(targetVelocity.x, verticalVelocity, targetVelocity.z);
+        characterVelocity.y = verticalVelocity;
+
+        handleSprint();
+        handleCrouch();
 
         controller.Move(characterVelocity * Time.deltaTime);
     }
 
-    void handleSprintFOV()
+    void Accelerate(Vector3 wishdir, float wishspeed, float accel)
+    {
+        float addSpeed, accelSpeed, currSpeed;
+        float wishSpeed = wishspeed;
+
+        if (!isGrounded) wishSpeed = Mathf.Min(wishSpeed, 20f);
+        if (isSprinting) wishSpeed *= sprintSpeedMultiplier;
+        if (isCrouched) wishSpeed *= crouchSpeedMultiplier;
+
+        currSpeed = Vector3.Dot(characterVelocity, wishdir);
+
+        addSpeed = wishSpeed - currSpeed;
+        if (addSpeed <= 0) return;
+
+        accelSpeed = accel * Time.deltaTime * wishSpeed;
+        if (accelSpeed > addSpeed) accelSpeed = addSpeed;
+
+        characterVelocity.x += accelSpeed * wishdir.x;
+        characterVelocity.z += accelSpeed * wishdir.z;
+    }
+
+    void ApplyFriction()
+    {
+        Vector3 currVelocity = new Vector3(characterVelocity.x, 0f, characterVelocity.z);
+
+        float currSpeed = currVelocity.magnitude; // calculates speed in xz plane
+        float drop = 0f;
+        float controlSpeed;
+
+        if (isGrounded)
+        {
+            currVelocity.y = characterVelocity.y;
+            controlSpeed = currSpeed < 10f ? 10f : currSpeed;
+            drop += controlSpeed * 3f * Time.deltaTime;
+        }
+
+        float newSpeed = Mathf.Max(currSpeed - drop, 0f); // calculates new speed after decreasing drop
+
+        if (currSpeed > 0f) newSpeed /= currSpeed;
+
+        characterVelocity *= newSpeed;
+    }
+
+    void handleLook()
+    {
+        lookValue *= mouseSensitivity;
+        transform.Rotate(new Vector3(0.0f, (lookValue.x), 0.0f));
+
+        verticalRotation -= lookValue.y;
+        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
+        playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+    }
+
+    void handleSprint()
     {
         if (isSprinting)
         {
