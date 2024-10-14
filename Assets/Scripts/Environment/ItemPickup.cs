@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemPickup : MonoBehaviour
 {
     public int itemIndex = 1; // What item is it? 1 = health, 2 = ammo, etc.
+    public int healthAmount = 20; // Amount of health to restore
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +18,16 @@ public class ItemPickup : MonoBehaviour
 
     private void CollectItem(GameObject player)
     {
-        Debug.Log("Item collected! Value: " + itemIndex); 
+        Debug.Log("Item collected! Value: " + itemIndex);
+
+        if (itemIndex == 1) // Check if the item is a health pickup
+        {
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.Heal(healthAmount); // Heal the player
+                Debug.Log(playerController.currentHealth);
+            }
+        }
     }
 }
