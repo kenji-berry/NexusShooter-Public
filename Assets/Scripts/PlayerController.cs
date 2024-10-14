@@ -12,11 +12,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement")]
     public float speed = 6f;
+    public float airSpeed = 4f;
     public float sprintSpeedMultiplier = 1.4f;
     public float crouchSpeedMultiplier = 0.5f;
 
     public float gravity = 18f;
-    public float friction = 6f;
+    public float friction = 3f;
+    public float airFriction = 0.4f;
     public float jumpForce = 8f;
 
     public float mouseSensitivity = 0.1f;
@@ -31,9 +33,9 @@ public class PlayerController : MonoBehaviour
     public float verticalVelocity;
 
     public bool isSprinting = false;
-    public bool isJumping = false;
     public bool isGrounded = true;
     public bool isCrouched = false;
+    public bool isJumping = false;
 
     [Header("Health")]
     public int maxHealth = 100;
@@ -68,7 +70,6 @@ public class PlayerController : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        if (!controller.isGrounded) return;
         isJumping = value.isPressed;
     }
 
@@ -88,12 +89,6 @@ public class PlayerController : MonoBehaviour
             {
                 verticalVelocity = -1f;
             } 
-
-            if (isJumping)
-            {
-                verticalVelocity += jumpForce;
-                isJumping = false;
-            }
         } else
         {
             verticalVelocity -= gravity * Time.deltaTime;
@@ -102,14 +97,17 @@ public class PlayerController : MonoBehaviour
         Vector3 moveVector = new Vector3(moveValue.x, 0f, moveValue.y);
         Vector3 targetVelocity = transform.TransformVector(moveVector);
 
-        Accelerate(targetVelocity, speed, 10f);
+        if (isGrounded) Accelerate(targetVelocity, speed, 10f);
+        else Accelerate(targetVelocity, speed, 3f);
+
         ApplyFriction();
 
-        characterVelocity.y = verticalVelocity;
 
         handleSprint();
         handleCrouch();
+        handleJump();
 
+        characterVelocity.y = verticalVelocity;
         controller.Move(characterVelocity * Time.deltaTime);
     }
 
@@ -118,9 +116,11 @@ public class PlayerController : MonoBehaviour
         float addSpeed, accelSpeed, currSpeed;
         float wishSpeed = wishspeed;
 
-        if (!isGrounded) wishSpeed = Mathf.Min(wishSpeed, 20f);
         if (isSprinting) wishSpeed *= sprintSpeedMultiplier;
-        if (isCrouched) wishSpeed *= crouchSpeedMultiplier;
+        if (isCrouched)
+        {
+            wishSpeed *= crouchSpeedMultiplier;
+        }
 
         currSpeed = Vector3.Dot(characterVelocity, wishdir);
 
@@ -146,7 +146,11 @@ public class PlayerController : MonoBehaviour
         {
             currVelocity.y = characterVelocity.y;
             controlSpeed = currSpeed < 10f ? 10f : currSpeed;
-            drop += controlSpeed * 3f * Time.deltaTime;
+            drop += controlSpeed * (isCrouched ? friction * 0.5f : friction) * Time.deltaTime;
+        } else
+        {
+            controlSpeed = currSpeed < 10f ? 10f : currSpeed;
+            drop += controlSpeed * airFriction * Time.deltaTime;
         }
 
         float newSpeed = Mathf.Max(currSpeed - drop, 0f); // calculates new speed after decreasing drop
@@ -168,14 +172,8 @@ public class PlayerController : MonoBehaviour
 
     void handleSprint()
     {
-        if (isSprinting)
-        {
-            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, playerFOV + 10f, 10f * Time.deltaTime);
-        }
-        else
-        {
-            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, playerFOV, 10f * Time.deltaTime);
-        }
+        float targetFov = isSprinting ? playerFOV + 5f : playerFOV;
+        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFov, 10f * Time.deltaTime);
     }
 
     void handleCrouch()
@@ -188,6 +186,14 @@ public class PlayerController : MonoBehaviour
         {
             currentHeight = Mathf.Lerp(currentHeight, standHeight, 10f * Time.deltaTime);
             controller.height = controller.GetComponent<CapsuleCollider>().height = currentHeight;
+        }
+    }
+
+    void handleJump()
+    {
+        if (isJumping && isGrounded)
+        {
+            verticalVelocity += jumpForce;
         }
     }
 
