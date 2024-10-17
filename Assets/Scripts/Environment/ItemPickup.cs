@@ -25,8 +25,8 @@ public class ItemPickup : MonoBehaviour
             PlayerController playerController = player.GetComponent<PlayerController>();
             if (playerController != null)
             {
-                playerController.Heal(healthAmount); // Heal the player
-                Debug.Log(playerController.currentHealth);
+                playerController.GetComponent<HealthController>().Heal(healthAmount); // Heal the player
+                Debug.Log(playerController.GetComponent<HealthController>().currentHealth);
             }
         }
     }

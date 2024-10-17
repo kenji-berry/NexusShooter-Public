@@ -27,8 +27,8 @@ public class Bullet : MonoBehaviour
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
             if (playerController != null) 
             {
-                playerController.TakeDamage(damage);
-                Debug.Log("Health is " + playerController.currentHealth);
+                playerController.GetComponent<HealthController>().TakeDamage(damage);
+                Debug.Log("Health is " + playerController.GetComponent<HealthController>().currentHealth);
             }
             hasCollided = true; // Set the flag to true to prevent further collisions
             Destroy(gameObject);

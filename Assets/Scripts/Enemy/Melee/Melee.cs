@@ -33,8 +33,8 @@ public class Melee : MonoBehaviour
         PlayerController playerController = enemyAI.player.GetComponent<PlayerController>();
         if (playerController != null)
         {
-            playerController.TakeDamage(damage);
-            Debug.Log("MELEEE " + playerController.currentHealth); // Debug log to print the player's health
+            playerController.GetComponent<HealthController>().TakeDamage(damage);
+            Debug.Log("MELEEE " + playerController.GetComponent<HealthController>().currentHealth); // Debug log to print the player's health
         }
     }
 }
