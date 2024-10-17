@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
-    private GameController gameController;
+    private HealthController healthController;
     public Camera playerCamera;
 
     [Header("Movement")]
@@ -37,20 +37,11 @@ public class PlayerController : MonoBehaviour
     public bool isCrouched = false;
     public bool isJumping = false;
 
-    [Header("Health")]
-    public int maxHealth = 100;
-    public int currentHealth;
-
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        healthController = GetComponent<HealthController>();
         Cursor.lockState = CursorLockMode.Locked;
-
-        currentHealth = maxHealth;
-        gameController = FindFirstObjectByType<GameController>();
-
-        // Initialize the health bar with the player's starting health
-        gameController.UpdateHealthBar(currentHealth, maxHealth);
     }
 
     void OnMove(InputValue value)
@@ -195,23 +186,5 @@ public class PlayerController : MonoBehaviour
         {
             verticalVelocity += jumpForce;
         }
-    }
-
-    // Method to take damage
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth < 0) currentHealth = 0;
-        gameController.UpdateHealthBar(currentHealth, maxHealth);
-
-    }
-
-    // Method to heal
-    public void Heal(int amount)
-    {
-        currentHealth += amount;
-        if (currentHealth > maxHealth) currentHealth = maxHealth;
-        gameController.UpdateHealthBar(currentHealth, maxHealth);
-        // UpdateHealthBar();
     }
 }
