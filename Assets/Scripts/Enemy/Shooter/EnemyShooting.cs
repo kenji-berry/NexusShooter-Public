@@ -26,6 +26,7 @@ public class EnemyShooting : MonoBehaviour
     }
     void Shoot()
     {
+        if (bulletPrefab == null) return;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); // Spawn a bullet at the fire point
         Rigidbody rb = bullet.GetComponent<Rigidbody>(); // Get the Rigidbody component of the bullet
         rb.velocity = firePoint.forward * bulletSpeed; // Shoot the bullet in the forward direction of the fire point
