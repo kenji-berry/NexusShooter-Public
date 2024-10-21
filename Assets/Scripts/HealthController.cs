@@ -28,7 +28,7 @@ public class HealthController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (currentHealth < 0) currentHealth = 0;
+        currentHealth = Mathf.Max(currentHealth, 0);
         UpdateHealthBar(currentHealth, maxHealth);
 
     }
@@ -37,7 +37,7 @@ public class HealthController : MonoBehaviour
     public void Heal(int amount)
     {
         currentHealth += amount;
-        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
         UpdateHealthBar(currentHealth, maxHealth);
     }
 }
