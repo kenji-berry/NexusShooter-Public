@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemPickup : MonoBehaviour
 {
     public int itemIndex = 1; // What item is it? 1 = health, 2 = ammo, etc.
-    public int healthAmount = 20; // Amount of health to restore
+    public int healthAmount = 50; // Amount of health to restore
 
     private void OnTriggerEnter(Collider other)
     {
