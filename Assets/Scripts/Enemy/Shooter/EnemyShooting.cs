@@ -30,6 +30,7 @@ public class EnemyShooting : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); // Spawn a bullet at the fire point
         Rigidbody rb = bullet.GetComponent<Rigidbody>(); // Get the Rigidbody component of the bullet
         rb.velocity = firePoint.forward * bulletSpeed; // Shoot the bullet in the forward direction of the fire point
+        Destroy(bullet, 5f);
     }
     void FaceTarget()
     {
