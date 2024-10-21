@@ -9,11 +9,16 @@ public class Melee : MonoBehaviour
     public float attackCooldown = 1f; 
     private float nextAttackTime = 0f;
 
+    private HealthController healthController;
+
+
     private EnemyAI enemyAI;
 
     void Start()
     {
         enemyAI = GetComponent<EnemyAI>();
+        healthController = GetComponent<HealthController>();
+
     }
 
     void Update()
