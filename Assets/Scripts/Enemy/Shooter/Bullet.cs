@@ -21,7 +21,6 @@ public class Bullet : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (hasCollided) return; // If the bullet has already collided, return
-
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
@@ -33,5 +32,6 @@ public class Bullet : MonoBehaviour
             hasCollided = true; // Set the flag to true to prevent further collisions
             Destroy(gameObject);
         }
+
     }
 }
