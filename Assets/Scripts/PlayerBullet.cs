@@ -6,10 +6,10 @@ public class PlayerBullet : MonoBehaviour
 {
     public int damage = 10;
     private bool hasCollided = false; 
-    // Start is called before the first frame update
+
     void OnCollisionEnter(Collision collision)
     {
-        if (hasCollided) return; // If the bullet has already collided, return
+        if (hasCollided) return; 
         print("Collided with " + collision.gameObject.name);
         if (collision.gameObject.CompareTag("Player")){
             Destroy(gameObject);
