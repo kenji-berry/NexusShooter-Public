@@ -165,7 +165,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0503cb45-021c-4c93-9d3d-b48e82b1c43b"",
-                    ""path"": ""<Keyboard>/ctrl"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
