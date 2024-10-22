@@ -93,7 +93,6 @@ public class PlayerController : MonoBehaviour
 
         ApplyFriction();
 
-
         handleSprint();
         handleCrouch();
         handleJump();
@@ -107,13 +106,12 @@ public class PlayerController : MonoBehaviour
         float addSpeed, accelSpeed, currSpeed;
         float wishSpeed = wishspeed;
 
+        // Calculates the player's target speed
         if (isSprinting) wishSpeed *= sprintSpeedMultiplier;
-        if (isCrouched)
-        {
-            wishSpeed *= crouchSpeedMultiplier;
-        }
+        if (isCrouched) wishSpeed *= crouchSpeedMultiplier;
 
-        currSpeed = Vector3.Dot(characterVelocity, wishdir);
+        // Calculates the speed component in the xz plane
+        currSpeed = Vector3.Dot(characterVelocity, wishdir); 
 
         addSpeed = wishSpeed - currSpeed;
         if (addSpeed <= 0) return;
@@ -121,6 +119,7 @@ public class PlayerController : MonoBehaviour
         accelSpeed = accel * Time.deltaTime * wishSpeed;
         if (accelSpeed > addSpeed) accelSpeed = addSpeed;
 
+        // Apply the acceleration to the player
         characterVelocity.x += accelSpeed * wishdir.x;
         characterVelocity.z += accelSpeed * wishdir.z;
     }
@@ -129,7 +128,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 currVelocity = new Vector3(characterVelocity.x, 0f, characterVelocity.z);
 
-        float currSpeed = currVelocity.magnitude; // calculates speed in xz plane
+        float currSpeed = currVelocity.magnitude;
         float drop = 0f;
         float controlSpeed;
 
@@ -137,10 +136,14 @@ public class PlayerController : MonoBehaviour
         {
             currVelocity.y = characterVelocity.y;
             controlSpeed = currSpeed < 10f ? 10f : currSpeed;
-            drop += controlSpeed * (isCrouched ? friction * 0.5f : friction) * Time.deltaTime;
+
+            // Calculates the amount to decrease the player's speed by
+            drop += controlSpeed * (isCrouched ? friction * 0.5f : friction) * Time.deltaTime; 
         } else
         {
             controlSpeed = currSpeed < 10f ? 10f : currSpeed;
+
+            // Calculates the amount to decrease the player's speed by
             drop += controlSpeed * airFriction * Time.deltaTime;
         }
 
@@ -161,12 +164,16 @@ public class PlayerController : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
     }
 
+    /* Smoothly changes the camera FOV based on whether the player is sprinting
+     */
     void handleSprint()
     {
         float targetFov = isSprinting ? playerFOV + 5f : playerFOV;
         playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFov, 10f * Time.deltaTime);
     }
 
+    /* Adjusts the player height based on whether they are crouched
+     */
     void handleCrouch()
     {
         if (isCrouched)
