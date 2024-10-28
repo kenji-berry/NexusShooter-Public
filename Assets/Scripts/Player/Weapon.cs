@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     public float spread;
 
     public enum ShootingMode{
-        Single, Burst, Auto
+        SINGLE, BURST, AUTO
     }
 
     public ShootingMode shootingMode;
@@ -39,15 +39,37 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if(shootingMode == ShootingMode.Auto){
+        if(shootingMode == ShootingMode.AUTO){
             isShooting = Input.GetKey(KeyCode.Mouse0);
         }
-        else if(shootingMode == ShootingMode.Single || shootingMode == ShootingMode.Burst){
-            isShooting = Input.GetKeyDown(KeyCode.Mouse0);
-        }
+
         if(readyToShoot && isShooting){
             burstBulletsLeft = bulletPerBurst;
             FireWeapon();
+        }
+    }
+
+    public void Shoot()
+    {
+        if (readyToShoot)
+        {
+            burstBulletsLeft = bulletPerBurst;
+            FireWeapon();
+        }
+    }
+
+    public void ToggleShootMode()
+    {
+        switch (shootingMode)
+        {
+            case ShootingMode.SINGLE:
+                shootingMode = ShootingMode.AUTO; break;
+
+            case ShootingMode.AUTO:
+                shootingMode = ShootingMode.BURST; break;
+
+            case ShootingMode.BURST:
+                shootingMode = ShootingMode.SINGLE; break;
         }
     }
 
@@ -88,10 +110,10 @@ public class Weapon : MonoBehaviour
             Invoke("ResetShot", shootingDelay);
             allowReset = false;
         }
-        if(shootingMode == ShootingMode.Burst && burstBulletsLeft > 1){
+
+        if(shootingMode == ShootingMode.BURST && burstBulletsLeft > 1){
             burstBulletsLeft--;
             Invoke("FireWeapon", shootingDelay);
-        
         }
     }
 

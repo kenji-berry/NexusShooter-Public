@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
     private HealthController healthController;
+    public Weapon weapon;
     public Camera playerCamera;
 
     [Header("Movement")]
@@ -67,6 +68,16 @@ public class PlayerController : MonoBehaviour
     void OnCrouch(InputValue value)
     {
         isCrouched = value.isPressed;
+    }
+
+    void OnShoot(InputValue value)
+    {
+        weapon.Shoot();
+    }
+
+    void OnToggleShootMode(InputValue value)
+    {
+        weapon.ToggleShootMode();
     }
 
     void Update()
