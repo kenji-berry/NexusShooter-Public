@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPickup : MonoBehaviour
+public class HealthPack : MonoBehaviour
 {
     public int itemIndex = 1; // What item is it? 1 = health, 2 = ammo, etc.
     public int healthAmount = 50; // Amount of health to restore
+
+    void Update()
+    {
+        transform.Rotate(0, 20 * Time.deltaTime, 0);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,7 +31,6 @@ public class ItemPickup : MonoBehaviour
             if (playerController != null)
             {
                 playerController.GetComponent<HealthController>().Heal(healthAmount); // Heal the player
-                Debug.Log(playerController.GetComponent<HealthController>().currentHealth);
             }
         }
     }
