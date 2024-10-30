@@ -19,7 +19,10 @@ public class EnemyHealthController : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 
-
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Method to heal
