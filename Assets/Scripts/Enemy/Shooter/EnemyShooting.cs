@@ -12,6 +12,11 @@ public class EnemyShooting : MonoBehaviour
     public float bulletSpeed = 20f; // Speed of the bullet
     private float nextFireTime = 0f;  // Time to fire next bullet
 
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform; 
+    }
+
     void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position); // Calculate the distance between the enemy and the player
