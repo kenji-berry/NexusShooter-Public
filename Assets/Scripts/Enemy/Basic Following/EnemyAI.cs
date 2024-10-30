@@ -15,6 +15,7 @@ public class EnemyAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>(); // Get the NavMesh Agent component
         agent.stoppingDistance = stoppingDistance; // Set the stopping distance
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
