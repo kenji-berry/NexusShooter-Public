@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
     private HealthController healthController;
-    public Weapon weapon;
+    public Gun gun;
     public Camera playerCamera;
 
     [Header("Movement")]
@@ -72,12 +72,12 @@ public class PlayerController : MonoBehaviour
 
     void OnShoot(InputValue value)
     {
-        weapon.Shoot();
+        gun.Shoot();
     }
 
     void OnToggleShootMode(InputValue value)
     {
-        weapon.ToggleShootMode();
+        gun.ToggleShootMode();
     }
 
     void Update()

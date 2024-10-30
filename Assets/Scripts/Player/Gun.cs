@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Gun : MonoBehaviour
 {
     public Camera playerCamera;
     public bool isShooting;
     public bool readyToShoot;
     bool allowReset = true;
-    public float shootingDelay = 2f;
+    public float shootingDelay = 0.1f;
 
     public int bulletPerBurst = 3;
     public int burstBulletsLeft;
@@ -24,8 +24,10 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
 
-    public float bulletVelocity = 30f;
+    public float bulletVelocity = 300f;
     public float bulletLifeTime = 3f;
+
+    public int damage = 30;
 
     SoundController soundController;
 
@@ -98,13 +100,17 @@ public class Weapon : MonoBehaviour
         soundController.Play(soundController.shoot);
         readyToShoot = false;
 
-        Vector3 shootDirection = CalculateDirectionAndSpread().normalized;
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit))
+        {
+            EnemyHealthController enemyHealthController = hit.transform.GetComponent<EnemyHealthController>();
+            if (enemyHealthController != null)
+            {
+                enemyHealthController.TakeDamage(damage);
 
-        bullet.transform.forward = shootDirection;
-
-        bullet.GetComponent<Rigidbody>().AddForce(shootDirection * bulletVelocity, ForceMode.Impulse);
-        Destroy(bullet, bulletLifeTime);
+                Debug.Log("Enemy health: " + enemyHealthController.currentHealth);
+            }
+        }
 
         if(allowReset){
             Invoke("ResetShot", shootingDelay);
