@@ -23,6 +23,7 @@ public class Gun : MonoBehaviour
 
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
+    public ParticleSystem muzzleFlash;
 
     public float bulletVelocity = 300f;
     public float bulletLifeTime = 3f;
@@ -97,6 +98,7 @@ public class Gun : MonoBehaviour
     }
 
     private void FireWeapon(){
+        muzzleFlash.Play();
         soundController.Play(soundController.shoot);
         readyToShoot = false;
 
