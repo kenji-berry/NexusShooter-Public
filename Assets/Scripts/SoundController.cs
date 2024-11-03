@@ -6,6 +6,7 @@ public class SoundController : MonoBehaviour
 {
     public AudioSource audioSource;
     public AudioClip shoot;
+    public AudioClip hit;
 
     public void Play(AudioClip clip)
     {
