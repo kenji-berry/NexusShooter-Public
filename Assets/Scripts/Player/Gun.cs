@@ -108,6 +108,7 @@ public class Gun : MonoBehaviour
             EnemyHealthController enemyHealthController = hit.transform.GetComponent<EnemyHealthController>();
             if (enemyHealthController != null)
             {
+                soundController.Play(soundController.hit);
                 enemyHealthController.TakeDamage(damage);
 
                 Debug.Log("Enemy health: " + enemyHealthController.currentHealth);
