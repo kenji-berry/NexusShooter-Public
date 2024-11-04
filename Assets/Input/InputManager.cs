@@ -89,6 +89,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a94c5fc-df13-4711-9a8e-c3d667a36e0d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,17 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""ToggleShootMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e94de1f4-0d94-457c-8a7e-91f2aaeca7e5"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -227,6 +247,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_ToggleShootMode = m_Player.FindAction("ToggleShootMode", throwIfNotFound: true);
+        m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -295,6 +316,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_ToggleShootMode;
+    private readonly InputAction m_Player_Use;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -306,6 +328,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @ToggleShootMode => m_Wrapper.m_Player_ToggleShootMode;
+        public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -336,6 +359,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @ToggleShootMode.started += instance.OnToggleShootMode;
             @ToggleShootMode.performed += instance.OnToggleShootMode;
             @ToggleShootMode.canceled += instance.OnToggleShootMode;
+            @Use.started += instance.OnUse;
+            @Use.performed += instance.OnUse;
+            @Use.canceled += instance.OnUse;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -361,6 +387,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @ToggleShootMode.started -= instance.OnToggleShootMode;
             @ToggleShootMode.performed -= instance.OnToggleShootMode;
             @ToggleShootMode.canceled -= instance.OnToggleShootMode;
+            @Use.started -= instance.OnUse;
+            @Use.performed -= instance.OnUse;
+            @Use.canceled -= instance.OnUse;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -387,5 +416,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnToggleShootMode(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
     }
 }
