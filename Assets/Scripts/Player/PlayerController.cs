@@ -70,16 +70,6 @@ public class PlayerController : MonoBehaviour
         isCrouched = value.isPressed;
     }
 
-    void OnShoot(InputValue value)
-    {
-        gun.Shoot();
-    }
-
-    void OnToggleShootMode(InputValue value)
-    {
-        gun.ToggleShootMode();
-    }
-
     void Update()
     {
         handleLook();
