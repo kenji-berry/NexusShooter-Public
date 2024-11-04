@@ -9,81 +9,36 @@ public abstract class Gun : MonoBehaviour
     public Camera playerCamera;
     public ParticleSystem muzzleFlash;
 
-    public bool isShooting = false;
-    public bool readyToShoot;
-    bool allowReset = true;
-    public float shootingDelay = 0.1f;
-    public float spread;
-
-    public enum ShootingMode {
-        SINGLE, AUTO
-    }
-
-    public ShootingMode shootingMode;
-
-    public float bulletVelocity = 300f;
-    public float bulletLifeTime = 3f;
-
-    public int damage = 30;
+    private float nextTimeToFire = 0f;
 
     public SoundController soundController;
 
     void OnShoot(InputValue value)
     {
-        HandleShoot();
+        TryShoot();
     }
 
     void Awake()
     {
-        readyToShoot = true;
         soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
     }
 
-    void Update()
+    public void TryShoot()
     {
-        if(shootingMode == ShootingMode.AUTO){
-            isShooting = Input.GetKey(KeyCode.Mouse0);
-        }
-
-        if(readyToShoot && isShooting){
+        if (Time.time >= nextTimeToFire)
+        {
+            nextTimeToFire = Time.time + (1 / gunData.fireRate);
             HandleShoot();
         }
     }
 
     public void HandleShoot()
     {
-        if (readyToShoot)
-        {
-            muzzleFlash.Play();
-            soundController.Play(soundController.shoot);
-            readyToShoot = false;
+        muzzleFlash.Play();
+        soundController.Play(gunData.shootSound);
 
-            Shoot();
-
-            if (allowReset)
-            {
-                Invoke("ResetShot", shootingDelay);
-                allowReset = false;
-            }
-        }
+        Shoot();
     }
 
     public abstract void Shoot();
-
-    public void ToggleShootMode()
-    {
-        switch (shootingMode)
-        {
-            case ShootingMode.SINGLE:
-                shootingMode = ShootingMode.AUTO; break;
-
-            case ShootingMode.AUTO:
-                shootingMode = ShootingMode.SINGLE; break;
-        }
-    }
-
-    private void ResetShot(){
-        readyToShoot = true;
-        allowReset = true;
-    }
 }

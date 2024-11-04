@@ -13,7 +13,7 @@ public class Pistol : Gun
             if (enemyHealthController != null)
             {
                 soundController.Play(soundController.hit);
-                enemyHealthController.TakeDamage(damage);
+                enemyHealthController.TakeDamage(gunData.damage);
             }
         }
     }
