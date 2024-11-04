@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SlidingDoor : MonoBehaviour
+public class AutomaticSlidingDoor : MonoBehaviour
 {
-    public Camera playerCamera;
     public GameObject leftDoor;
     public GameObject rightDoor;
 
@@ -20,18 +19,6 @@ public class SlidingDoor : MonoBehaviour
     private Vector3 rightDoorStartPos;
 
     public Vector3 SlideDirection = Vector3.left;
-
-    void OnUse(InputValue value)
-    {
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, 1f))
-        {
-            if (hit.collider.gameObject == leftDoor || hit.collider.gameObject == rightDoor)
-            {
-                if (isOpen) Close();
-                else Open();
-            }
-        }
-    }
 
     private void Awake()
     {
