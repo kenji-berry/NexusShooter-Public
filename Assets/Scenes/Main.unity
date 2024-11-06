@@ -5675,6 +5675,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2964254077775416760, guid: c3c16e69d8ef29f4fae2dce9a5d2befa, type: 3}
+      propertyPath: speed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2964254077775416760, guid: c3c16e69d8ef29f4fae2dce9a5d2befa, type: 3}
+      propertyPath: friction
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2964254077775416760, guid: c3c16e69d8ef29f4fae2dce9a5d2befa, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1789002433}
+    - target: {fileID: 2964254077775416760, guid: c3c16e69d8ef29f4fae2dce9a5d2befa, type: 3}
+      propertyPath: walkSpeedMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4896275611355688094, guid: c3c16e69d8ef29f4fae2dce9a5d2befa, type: 3}
       propertyPath: m_Name
       value: Player

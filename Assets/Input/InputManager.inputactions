@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Sprint",
+                    "name": "Walk",
                     "type": "PassThrough",
                     "id": "f022f2db-a77d-4872-a2da-b8624cde2f14",
                     "expectedControlType": "Button",
@@ -152,7 +152,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Sprint",
+                    "action": "Walk",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
