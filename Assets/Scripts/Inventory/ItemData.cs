@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-[CreateAssetMenu( menuName = "Inventory System/Inventory Item", order = 0)]
-public class InventoryItemData : ScriptableObject {
+[CreateAssetMenu( menuName = "Inventory System/Item", order = 0)]
+public class ItemData : ScriptableObject {
 
     public int ID;
     public string DisplayName;
@@ -16,4 +14,11 @@ public class InventoryItemData : ScriptableObject {
 
     public ItemType Type; // New field to specify item type
 
+}
+
+public enum ItemType {
+    WEAPON,
+    HEALS,
+    ARMOUR,
+    // Add other types as needed
 }

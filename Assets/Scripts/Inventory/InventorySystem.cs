@@ -25,7 +25,7 @@ public class InventorySystem
         }
     }
 
-    public bool AddToInventory(InventoryItemData item, int amount){
+    public bool AddToInventory(ItemData item, int amount){
 
         // if (item.Type == ItemType.Weapon && CountItemsOfType(ItemType.Weapon) >= maxWeaponSlots)
         // {
@@ -61,7 +61,7 @@ public class InventorySystem
         return inventorySlots.Count(slot => slot.Item != null && slot.Item.Type == itemType);
     }
 
-    public bool ContainsItem(InventoryItemData item, out List<InventorySlot> invSlot){
+    public bool ContainsItem(ItemData item, out List<InventorySlot> invSlot){
         invSlot = inventorySlots.Where(x => x.Item == item).ToList();
         return invSlot.Count > 0;
     }
