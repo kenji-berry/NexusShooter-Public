@@ -7,7 +7,7 @@ using System.Linq;
 
 [System.Serializable]
 public class InventorySystem
-{
+{ 
     [SerializeField] private List<InventorySlot> inventorySlots;
 
     public List<InventorySlot> InventorySlots => inventorySlots;

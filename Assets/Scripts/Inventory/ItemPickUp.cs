@@ -19,7 +19,6 @@ public class ItemPickUp : MonoBehaviour
         myCollider = GetComponent<SphereCollider>();
         myCollider.isTrigger = true;
         myCollider.radius = PickUpRadius;
-
     }
 
     void Start()
@@ -36,20 +35,11 @@ public class ItemPickUp : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        var inventory = other.transform.GetComponent<InventoryHolder>();
-        if(!inventory) return;
-
-        if(itemData.Type == ItemType.WEAPON){
-            if(inventory.WeaponInventorySystem.AddToInventory(itemData, 1)){
-                Destroy(gameObject);
-            }
+        InventoryHolder inventoryHolder = other.transform.GetComponent<InventoryHolder>();
+        if (inventoryHolder != null)
+        {
+            bool added = inventoryHolder.add(itemData);
+            if (added) Destroy(gameObject);
         }
-        else{
-            if(inventory.InventorySystem.AddToInventory(itemData, 1)){
-                Destroy(gameObject);
-            }
-        }
-
-
     }
 }
