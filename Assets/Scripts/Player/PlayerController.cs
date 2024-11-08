@@ -8,17 +8,16 @@ public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
     private HealthController healthController;
-    public Gun gun;
     public Camera playerCamera;
 
     [Header("Movement")]
-    public float speed = 6f;
+    public float speed = 14f;
     public float airSpeed = 4f;
-    public float sprintSpeedMultiplier = 1.4f;
+    public float walkSpeedMultiplier = 0.5f;
     public float crouchSpeedMultiplier = 0.5f;
 
     public float gravity = 18f;
-    public float friction = 3f;
+    public float friction = 7f;
     public float airFriction = 0.4f;
     public float jumpForce = 8f;
 
@@ -33,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 characterVelocity;
     public float verticalVelocity;
 
-    public bool isSprinting = false;
+    public bool isWalking = false;
     public bool isGrounded = true;
     public bool isCrouched = false;
     public bool isJumping = false;
@@ -55,9 +54,9 @@ public class PlayerController : MonoBehaviour
         lookValue = value.Get<Vector2>();
     }
 
-    void OnSprint(InputValue value)
+    void OnWalk(InputValue value)
     {
-        isSprinting = value.isPressed;
+        isWalking = value.isPressed;
     }
 
     void OnJump(InputValue value)
@@ -68,16 +67,6 @@ public class PlayerController : MonoBehaviour
     void OnCrouch(InputValue value)
     {
         isCrouched = value.isPressed;
-    }
-
-    void OnShoot(InputValue value)
-    {
-        gun.Shoot();
-    }
-
-    void OnToggleShootMode(InputValue value)
-    {
-        gun.ToggleShootMode();
     }
 
     void Update()
@@ -104,7 +93,6 @@ public class PlayerController : MonoBehaviour
 
         ApplyFriction();
 
-        handleSprint();
         handleCrouch();
         handleJump();
 
@@ -118,7 +106,7 @@ public class PlayerController : MonoBehaviour
         float wishSpeed = wishspeed;
 
         // Calculates the player's target speed
-        if (isSprinting) wishSpeed *= sprintSpeedMultiplier;
+        if (isWalking) wishSpeed *= walkSpeedMultiplier;
         if (isCrouched) wishSpeed *= crouchSpeedMultiplier;
 
         // Calculates the speed component in the xz plane
@@ -173,14 +161,6 @@ public class PlayerController : MonoBehaviour
         verticalRotation -= lookValue.y;
         verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
         playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-    }
-
-    /* Smoothly changes the camera FOV based on whether the player is sprinting
-     */
-    void handleSprint()
-    {
-        float targetFov = isSprinting ? playerFOV + 5f : playerFOV;
-        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFov, 10f * Time.deltaTime);
     }
 
     /* Adjusts the player height based on whether they are crouched
