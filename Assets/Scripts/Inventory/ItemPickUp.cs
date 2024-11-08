@@ -11,7 +11,7 @@ public class ItemPickUp : MonoBehaviour
     private float bounceSpeed = 3f;
     private Vector3 originalPosition;
 
-    public InventoryItemData itemData;
+    public ItemData itemData;
 
     private SphereCollider myCollider;
 
@@ -38,7 +38,7 @@ public class ItemPickUp : MonoBehaviour
         var inventory = other.transform.GetComponent<InventoryHolder>();
         if(!inventory) return;
 
-        if(itemData.Type == ItemType.Weapon){
+        if(itemData.Type == ItemType.WEAPON){
             if(inventory.WeaponInventorySystem.AddToInventory(itemData, 1)){
                 Destroy(gameObject);
             }
