@@ -65,7 +65,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 90
   orthographic: 0
@@ -324,11 +324,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61f1d21bbb109040b259bde805bf384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 0}
   playerCamera: {fileID: 4353063901611725181}
-  speed: 6
+  speed: 10
   airSpeed: 4
-  sprintSpeedMultiplier: 1.4
+  walkSpeedMultiplier: 0.5
   crouchSpeedMultiplier: 0.5
   gravity: 18
   friction: 3
@@ -344,7 +343,7 @@ MonoBehaviour:
   lookValue: {x: 0, y: 0}
   characterVelocity: {x: 0, y: 0, z: 0}
   verticalVelocity: 0
-  isSprinting: 0
+  isWalking: 0
   isGrounded: 1
   isCrouched: 0
   isJumping: 0
