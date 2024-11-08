@@ -29,9 +29,10 @@ public class ItemPickUp : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(0, 40 * Time.deltaTime, 0); // Rotate the item
-        float newY = originalPosition.y + Mathf.Sin(Time.time * bounceSpeed) * bounceHeight; // Move the item up and down
-        transform.position = new Vector3(originalPosition.x, newY, originalPosition.z); // Set the new position
+        // Rotate and bob item up and down
+        transform.Rotate(0, 40 * Time.deltaTime, 0);
+        float newY = originalPosition.y + Mathf.Sin(Time.time * bounceSpeed) * bounceHeight;
+        transform.position = new Vector3(originalPosition.x, newY, originalPosition.z);
     }
 
     private void OnTriggerEnter(Collider other) {
