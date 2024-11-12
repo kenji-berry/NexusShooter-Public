@@ -52,7 +52,6 @@ public class EnemyAI : MonoBehaviour
     {
         if (patrolPoints.Length == 0) return;
 
-        // if we are not waiting, check if we have reached the destination
         if (!isWaiting)
         {
             if (agent.remainingDistance <= agent.stoppingDistance)
@@ -60,8 +59,11 @@ public class EnemyAI : MonoBehaviour
                 isWaiting = true;
                 waitTimer = patrolWaitTime;
             }
+            else
+            {
+                FaceMovementDirection();
+            }
         }
-        // if we are waiting, decrement the timer
         else
         {
             waitTimer -= Time.deltaTime;
@@ -83,6 +85,26 @@ public class EnemyAI : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        FaceTarget();
+    }
+
+    private void FaceMovementDirection()
+    {
+        if (agent.velocity.magnitude > 0.1f) // check if moving
+        {
+            Vector3 direction = agent.velocity.normalized; // get movement direction
+            direction.y = 0;
+            Quaternion lookRotation = Quaternion.LookRotation(direction); // calculate rotation towards movement direction
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // rotate
+        }
+    }
+
+    private void FaceTarget()
+    {
+        Vector3 direction = (player.position - transform.position).normalized; // get direction towards player
+        direction.y = 0;
+        Quaternion lookRotation = Quaternion.LookRotation(direction); // calculate rotation towards player
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // rotate
     }
 
     public void TakeDamage()
