@@ -6,18 +6,20 @@ public class EnemyHealthController : MonoBehaviour
 {
     public int currentHealth;
     public int maxHealth = 100;
-    // Start is called before the first frame update
+    public delegate void DamageEvent(int damage); // delegate for damage event
+    public event DamageEvent onDamageTaken; // event to notify subscribers when damage is taken
+
     void Start()
     {
         currentHealth = maxHealth;
     }
-
-
-    // Method to take damage
+    
+    // method to take damage
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
+        onDamageTaken?.Invoke(damage); // notify subscribers
 
         if (currentHealth <= 0)
         {
@@ -25,7 +27,7 @@ public class EnemyHealthController : MonoBehaviour
         }
     }
 
-    // Method to heal
+    // method to heal
     public void Heal(int amount)
     {
         currentHealth += amount;
