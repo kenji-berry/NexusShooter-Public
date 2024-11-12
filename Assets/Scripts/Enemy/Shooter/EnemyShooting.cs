@@ -32,15 +32,24 @@ public class EnemyShooting : MonoBehaviour
     void Shoot()
     {
         if (bulletPrefab == null) return;
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation); // Spawn a bullet at the fire point
-        Rigidbody rb = bullet.GetComponent<Rigidbody>(); // Get the Rigidbody component of the bullet
-        rb.velocity = firePoint.forward * bulletSpeed; // Shoot the bullet in the forward direction of the fire point
+
+        
+        Vector3 directionToPlayer = (player.position - firePoint.position).normalized;// Calculate direction to player's center (assuming player pivot is at center)
+        
+        // Spawn bullet
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(directionToPlayer));
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        
+        rb.velocity = directionToPlayer * bulletSpeed;
+        
         Destroy(bullet, 5f);
     }
     void FaceTarget()
     {
-        Vector3 direction = (player.position - transform.position).normalized; // Calculate the direction to look at the player
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)); // Calculate the rotation to look at the player
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f); // Rotate towards the player
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0; // Keep enemy rotation only on Y axis
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 }
+
