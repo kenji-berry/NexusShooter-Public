@@ -5,18 +5,17 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int damage = 10;
-    private bool hasCollided = false; 
+    private bool hasCollided = false;
     
     void Start()
     {
-        
+        // disable collisions with enemy layer
+        Physics.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Enemy"), true);
     }
-
-
 
     void OnCollisionEnter(Collision collision)
     {
-        if (hasCollided) return; // If the bullet has already collided, return
+        if (hasCollided) return;
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
@@ -25,9 +24,8 @@ public class Bullet : MonoBehaviour
                 playerController.GetComponent<HealthController>().TakeDamage(damage);
                 Debug.Log("Health is " + playerController.GetComponent<HealthController>().currentHealth);
             }
-            hasCollided = true; // Set the flag to true to prevent further collisions
+            hasCollided = true;
             Destroy(gameObject);
         }
-
     }
 }

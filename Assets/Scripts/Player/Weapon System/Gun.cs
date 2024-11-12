@@ -13,6 +13,8 @@ public abstract class Gun : MonoBehaviour
 
     public SoundController soundController;
 
+    protected int shootableMask; // Layer mask for objects we can shoot
+
     void OnShoot(InputValue value)
     {
         TryShoot();
@@ -21,6 +23,7 @@ public abstract class Gun : MonoBehaviour
     void Awake()
     {
         soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
+        shootableMask = LayerMask.GetMask("Enemy"); // Get the layer mask for the enemy layer to ensure enemy layer objects are shootable
     }
 
     public void TryShoot()
