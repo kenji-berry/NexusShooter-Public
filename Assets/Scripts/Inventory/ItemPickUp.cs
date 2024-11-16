@@ -11,9 +11,9 @@ public class ItemPickUp : MonoBehaviour
     private float bounceSpeed = 3f;
     private Vector3 originalPosition;
 
-    public ItemData itemData;
-
     private SphereCollider myCollider;
+
+    public InventorySystem inventorySystem;
 
     private void Awake(){
         myCollider = GetComponent<SphereCollider>();
@@ -28,18 +28,18 @@ public class ItemPickUp : MonoBehaviour
 
     void Update()
     {
-        // Rotate and bob item up and down
+        /* Rotate and bob item up and down
+         */
         transform.Rotate(0, 40 * Time.deltaTime, 0);
         float newY = originalPosition.y + Mathf.Sin(Time.time * bounceSpeed) * bounceHeight;
         transform.position = new Vector3(originalPosition.x, newY, originalPosition.z);
     }
 
     private void OnTriggerEnter(Collider other) {
-        InventoryHolder inventoryHolder = other.transform.GetComponent<InventoryHolder>();
-        if (inventoryHolder != null)
+        CharacterController controller = other.transform.GetComponent<CharacterController>();
+        if (controller != null)
         {
-            bool added = inventoryHolder.add(itemData);
-            if (added) Destroy(gameObject);
+            inventorySystem.Add(gameObject.GetComponent<Item>());
         }
     }
 }

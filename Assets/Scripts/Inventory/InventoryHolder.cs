@@ -18,23 +18,25 @@ public class InventoryHolder : MonoBehaviour
     public static UnityAction<InventorySystem, InventorySystem> OnDynamicInventoryDisplayRequested;
 
     private void Awake(){
-        inventorySystem = new InventorySystem(inventorySize);
-        weaponInventorySystem = new InventorySystem(weaponInventorySize); 
+        //inventorySystem = new InventorySystem(inventorySize);
+        //weaponInventorySystem = new InventorySystem(weaponInventorySize); 
     }
 
     private void Update(){
+        /*
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             // Trigger the inventory display request
             OnDynamicInventoryDisplayRequested?.Invoke(inventorySystem, weaponInventorySystem);
         }
+        */
     }
 
     public bool add(ItemData itemData, int amount=1)
     {
         bool result = false;
 
-        if (itemData.Type == ItemType.WEAPON)
+        if (itemData.type == ItemType.WEAPON)
         {
             result = weaponInventorySystem.AddToInventory(itemData, amount);
         } else 

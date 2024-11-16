@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu( menuName = "Inventory System/Item", order = 0)]
-public class ItemData : ScriptableObject {
+public class ItemData : ScriptableObject 
+{
+    public int id;
+    public string itemName;
+    [TextArea(3, 3)] public string description;
+    public Sprite icon;
 
-    public int ID;
-    public string DisplayName;
-    [TextArea(15, 20)]
-    public string Description;
-    public Sprite Icon;
-    public int MaxStackSize;
+    public GameObject prefab;
 
-    public ItemType Type; // New field to specify item type
-
+    public ItemType type;
+    public int maxStackSize;
 }
 
-public enum ItemType {
+public enum ItemType 
+{
     WEAPON,
     HEALS,
-    ARMOUR,
-    // Add other types as needed
+    ARMOUR
 }

@@ -327,6 +327,7 @@ MonoBehaviour:
   playerCamera: {fileID: 4353063901611725181}
   speed: 10
   airSpeed: 4
+  acceleration: 20
   walkSpeedMultiplier: 0.5
   crouchSpeedMultiplier: 0.5
   gravity: 18
@@ -339,14 +340,12 @@ MonoBehaviour:
   standHeight: 2
   currentHeight: 2
   crouchHeight: 1
-  moveValue: {x: 0, y: 0}
-  lookValue: {x: 0, y: 0}
   characterVelocity: {x: 0, y: 0, z: 0}
-  verticalVelocity: 0
   isWalking: 0
   isGrounded: 1
   isCrouched: 0
-  isJumping: 0
+  wishJump: 0
+  inventoryOpen: 0
 --- !u!114 &6972288319703828842
 MonoBehaviour:
   m_ObjectHideFlags: 0
