@@ -53,14 +53,14 @@ public class InventoryUIController : MonoBehaviour
         Debug.Log("Displaying inventory");
         Debug.Log(isInventoryOpen);
         ClearExistingSlots();
-        foreach (var slot in inventorySystem.InventorySlots)
+        foreach (var slot in inventorySystem.slots)
         {
             var slotUI = Instantiate(slotPrefab, slotContainer);
             slotToGameObjectMap[slot] = slotUI;
             UpdateSlotUI(slot); // Initial update for each slot
         }
 
-        foreach (var slot in weaponInventorySystem.InventorySlots)
+        foreach (var slot in weaponInventorySystem.slots)
         {
             var slotUI = Instantiate(weaponSlotPrefab, weaponSlotContainer);
             slotToGameObjectMap[slot] = slotUI;
@@ -78,13 +78,13 @@ public class InventoryUIController : MonoBehaviour
             var itemIcon = slotUI.transform.Find("ItemIcon").GetComponent<Image>();
             var itemCount = slotUI.transform.Find("ItemCount").GetComponent<TMP_Text>();
             var itemTitle = slotUI.transform.Find("ItemTitle").GetComponent<TMP_Text>();
-            if (slot.Item != null)
+            if (slot.item != null)
             {
                 slotUI.SetActive(true);
-                itemIcon.sprite = slot.Item.Icon;
+                itemIcon.sprite = slot.item.icon;
                 itemIcon.enabled = true;
-                itemTitle.text = slot.Item.DisplayName;
-                itemCount.text = slot.Amount.ToString();
+                itemTitle.text = slot.item.name;
+                itemCount.text = slot.amount.ToString();
             }
             else
             {

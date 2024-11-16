@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6502e6e8c151c44999fc05a660b3d37c, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  ID: 10
-  DisplayName: Pistol
-  Description: pew pew
-  Icon: {fileID: 0}
-  MaxStackSize: 1
-  Type: 0
+  id: 1
+  itemName: Pistol
+  description: 
+  icon: {fileID: 21300000, guid: 1376c4b97ab6cbf44867a016d1af0776, type: 3}
+  prefab: {fileID: 4739855536523141813, guid: 1a9dd4a441bb1794d9c87e1477d3e0d9, type: 3}
+  type: 0
+  maxStackSize: 1

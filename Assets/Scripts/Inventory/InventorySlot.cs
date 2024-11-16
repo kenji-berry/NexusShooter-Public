@@ -1,50 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-[System.Serializable]
-public class InventorySlot{
-    [SerializeField] private ItemData item;
-    [SerializeField] private int stackSize;
+public class InventorySlot : MonoBehaviour
+{
+    public ItemData item;
+    public int amount;
 
-    public ItemData Item => item;
-    public int Amount => stackSize;
+    public Image icon;
+    public TextMeshProUGUI amountText;
 
-    public InventorySlot(ItemData item, int amount){
-        this.item = item;
-        this.stackSize = amount;
-    }
-
-    public InventorySlot(){
-        ClearSlot();
-    }
-
-    public void ClearSlot(){
-        item = null;
-        stackSize = -1;
-    }
-
-    public void UpdateInventorySlot(ItemData item, int amount){
-        this.item = item;
-        this.stackSize = amount;
+    public void UpdateSlot(){
+        icon.sprite = item.icon;
+        amountText.text = $"{amount}x";
     }
 
     public bool RoomLeftInStack(int amount){
-        return this.stackSize + amount <= item.MaxStackSize;
+        return this.amount + amount <= item.maxStackSize;
     }
 
 public bool RoomLeftInStack(int amount, out int amountRemaining){
-        amountRemaining = item.MaxStackSize - this.stackSize;
+        amountRemaining = item.maxStackSize - this.amount;
         return RoomLeftInStack(amount);
     }
 
     public void AddToStack(int amount){
-        this.stackSize += amount;
+        this.amount += amount;
 
     }
 
     public void RemoveFromStack(int amount){
-        this.stackSize -= amount;
+        this.amount -= amount;
     }
 
 }
