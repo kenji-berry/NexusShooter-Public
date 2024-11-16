@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = true;
     public bool isCrouched = false;
     public bool wishJump = false;
+    public bool inventoryOpen = false;
 
     void Start()
     {
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        handleLook();
+        if (!inventoryOpen) handleLook();
 
         if (!wishJump) ApplyFriction();
 

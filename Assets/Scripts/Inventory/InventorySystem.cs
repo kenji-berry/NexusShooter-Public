@@ -22,9 +22,16 @@ public class InventorySystem : MonoBehaviour
         if (inventoryUI.activeInHierarchy)
         {
             inventoryUI.SetActive(false);
-        } else
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            gameObject.GetComponent<PlayerController>().inventoryOpen = false;
+        }
+        else
         {
             inventoryUI.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            gameObject.GetComponent<PlayerController>().inventoryOpen = true;
         }
     }
 
