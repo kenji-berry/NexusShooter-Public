@@ -5,13 +5,20 @@ using UnityEngine.InputSystem;
 
 public class MeleeWeapon : MonoBehaviour
 {
+    public SoundController soundController;
     public Camera playerCamera;
 
     public int damage = 30;
     public float attackRange = 3f;
 
+    void Awake()
+    {
+        soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
+    }
+
     void OnMeleeAttack(InputValue value)
     {
+        soundController.Play(soundController.melee, 0.1f);
         Attack();
     }
 
