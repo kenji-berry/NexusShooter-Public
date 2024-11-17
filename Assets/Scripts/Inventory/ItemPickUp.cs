@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class ItemPickUp : MonoBehaviour
 {
+    public Gun prefab;
+
     public float PickUpRadius = 1f;
 
     private float bounceHeight = 0.1f;
@@ -13,7 +15,7 @@ public class ItemPickUp : MonoBehaviour
 
     private SphereCollider myCollider;
 
-    public InventorySystem inventorySystem;
+    public WeaponsManager weaponsManager;
 
     private void Awake(){
         myCollider = GetComponent<SphereCollider>();
@@ -39,7 +41,7 @@ public class ItemPickUp : MonoBehaviour
         CharacterController controller = other.transform.GetComponent<CharacterController>();
         if (controller != null)
         {
-            inventorySystem.Add(gameObject.GetComponent<Item>());
+            if (weaponsManager.AddGun(prefab)) Destroy(gameObject);
         }
     }
 }
