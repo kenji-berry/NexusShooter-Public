@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HealthPack : MonoBehaviour
 {
-    public int itemIndex = 1; // What item is it? 1 = health, 2 = ammo, etc.
     public int healthAmount = 50;
     public float bounceHeight = 0.1f;
     public float bounceSpeed = 3f;
@@ -30,16 +29,12 @@ public class HealthPack : MonoBehaviour
     }
 
     private void CollectItem(GameObject player)
-    {
-        Debug.Log("Item collected! Value: " + itemIndex);
-
-        if (itemIndex == 1) // Check if the item is a health pickup
         {
             PlayerController playerController = player.GetComponent<PlayerController>();
             if (playerController != null)
             {
                 playerController.GetComponent<HealthController>().Heal(healthAmount); // Heal the player
             }
-        }
+        
     }
 }
