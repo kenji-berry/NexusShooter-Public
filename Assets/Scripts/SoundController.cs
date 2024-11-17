@@ -6,10 +6,12 @@ public class SoundController : MonoBehaviour
 {
     public AudioSource audioSource;
     public AudioClip shoot;
+    public AudioClip melee;
     public AudioClip hit;
+    public AudioClip jump;
 
-    public void Play(AudioClip clip)
+    public void Play(AudioClip clip, float volume = 1f)
     {
-        audioSource.PlayOneShot(clip);
+        audioSource.PlayOneShot(clip, volume);
     }
 }
