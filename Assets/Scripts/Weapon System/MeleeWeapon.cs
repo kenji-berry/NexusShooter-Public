@@ -11,9 +11,6 @@ public class MeleeWeapon : MonoBehaviour
     public int damage = 30;
     public float attackRange = 3f;
 
-<<<<<<< HEAD:Assets/Scripts/Weapon System/MeleeWeapon.cs
-    public void Attack()
-=======
     void Awake()
     {
         soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
@@ -26,7 +23,6 @@ public class MeleeWeapon : MonoBehaviour
     }
 
     void Attack()
->>>>>>> 34b9e90284fa343abb1140a5b18e2d2b463a3a0d:Assets/Scripts/Player/Weapon System/MeleeWeapon.cs
     {
         Debug.Log("Performing melee attack");
         
