@@ -87,9 +87,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleInventory",
+                    "name": "SelectWeaponOne",
                     "type": "Button",
-                    "id": "423456f2-d037-4dda-8cc3-b266f6b24481",
+                    "id": "22604003-bdd3-45e4-b562-e60094759bf0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectWeaponTwo",
+                    "type": "Button",
+                    "id": "f2a23b91-6dcf-401b-a192-7e61c396b74f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectWeaponThree",
+                    "type": "Button",
+                    "id": "9b8af3e5-0bce-4607-afbb-39633e1a3af7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -242,12 +260,34 @@
                 },
                 {
                     "name": "",
-                    "id": "e2ddad38-f35e-4845-9b56-41de65c7963a",
-                    "path": "<Keyboard>/tab",
+                    "id": "e509953a-c750-4dd2-9652-8eca243d861f",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ToggleInventory",
+                    "action": "SelectWeaponOne",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fffd11a9-f92d-4043-9c1d-d7a5a36713cf",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectWeaponTwo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44cdf869-05eb-4324-9f86-7570313cacce",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectWeaponThree",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

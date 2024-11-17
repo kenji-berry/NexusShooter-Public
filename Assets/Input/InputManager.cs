@@ -109,9 +109,27 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ToggleInventory"",
+                    ""name"": ""SelectWeaponOne"",
                     ""type"": ""Button"",
-                    ""id"": ""423456f2-d037-4dda-8cc3-b266f6b24481"",
+                    ""id"": ""22604003-bdd3-45e4-b562-e60094759bf0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectWeaponTwo"",
+                    ""type"": ""Button"",
+                    ""id"": ""f2a23b91-6dcf-401b-a192-7e61c396b74f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectWeaponThree"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b8af3e5-0bce-4607-afbb-39633e1a3af7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -264,12 +282,34 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e2ddad38-f35e-4845-9b56-41de65c7963a"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""id"": ""e509953a-c750-4dd2-9652-8eca243d861f"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ToggleInventory"",
+                    ""action"": ""SelectWeaponOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fffd11a9-f92d-4043-9c1d-d7a5a36713cf"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectWeaponTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44cdf869-05eb-4324-9f86-7570313cacce"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectWeaponThree"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -289,7 +329,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Player_ToggleShootMode = m_Player.FindAction("ToggleShootMode", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
         m_Player_MeleeAttack = m_Player.FindAction("MeleeAttack", throwIfNotFound: true);
-        m_Player_ToggleInventory = m_Player.FindAction("ToggleInventory", throwIfNotFound: true);
+        m_Player_SelectWeaponOne = m_Player.FindAction("SelectWeaponOne", throwIfNotFound: true);
+        m_Player_SelectWeaponTwo = m_Player.FindAction("SelectWeaponTwo", throwIfNotFound: true);
+        m_Player_SelectWeaponThree = m_Player.FindAction("SelectWeaponThree", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -360,7 +402,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ToggleShootMode;
     private readonly InputAction m_Player_Use;
     private readonly InputAction m_Player_MeleeAttack;
-    private readonly InputAction m_Player_ToggleInventory;
+    private readonly InputAction m_Player_SelectWeaponOne;
+    private readonly InputAction m_Player_SelectWeaponTwo;
+    private readonly InputAction m_Player_SelectWeaponThree;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -374,7 +418,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         public InputAction @ToggleShootMode => m_Wrapper.m_Player_ToggleShootMode;
         public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputAction @MeleeAttack => m_Wrapper.m_Player_MeleeAttack;
-        public InputAction @ToggleInventory => m_Wrapper.m_Player_ToggleInventory;
+        public InputAction @SelectWeaponOne => m_Wrapper.m_Player_SelectWeaponOne;
+        public InputAction @SelectWeaponTwo => m_Wrapper.m_Player_SelectWeaponTwo;
+        public InputAction @SelectWeaponThree => m_Wrapper.m_Player_SelectWeaponThree;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -411,9 +457,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @MeleeAttack.started += instance.OnMeleeAttack;
             @MeleeAttack.performed += instance.OnMeleeAttack;
             @MeleeAttack.canceled += instance.OnMeleeAttack;
-            @ToggleInventory.started += instance.OnToggleInventory;
-            @ToggleInventory.performed += instance.OnToggleInventory;
-            @ToggleInventory.canceled += instance.OnToggleInventory;
+            @SelectWeaponOne.started += instance.OnSelectWeaponOne;
+            @SelectWeaponOne.performed += instance.OnSelectWeaponOne;
+            @SelectWeaponOne.canceled += instance.OnSelectWeaponOne;
+            @SelectWeaponTwo.started += instance.OnSelectWeaponTwo;
+            @SelectWeaponTwo.performed += instance.OnSelectWeaponTwo;
+            @SelectWeaponTwo.canceled += instance.OnSelectWeaponTwo;
+            @SelectWeaponThree.started += instance.OnSelectWeaponThree;
+            @SelectWeaponThree.performed += instance.OnSelectWeaponThree;
+            @SelectWeaponThree.canceled += instance.OnSelectWeaponThree;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -445,9 +497,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @MeleeAttack.started -= instance.OnMeleeAttack;
             @MeleeAttack.performed -= instance.OnMeleeAttack;
             @MeleeAttack.canceled -= instance.OnMeleeAttack;
-            @ToggleInventory.started -= instance.OnToggleInventory;
-            @ToggleInventory.performed -= instance.OnToggleInventory;
-            @ToggleInventory.canceled -= instance.OnToggleInventory;
+            @SelectWeaponOne.started -= instance.OnSelectWeaponOne;
+            @SelectWeaponOne.performed -= instance.OnSelectWeaponOne;
+            @SelectWeaponOne.canceled -= instance.OnSelectWeaponOne;
+            @SelectWeaponTwo.started -= instance.OnSelectWeaponTwo;
+            @SelectWeaponTwo.performed -= instance.OnSelectWeaponTwo;
+            @SelectWeaponTwo.canceled -= instance.OnSelectWeaponTwo;
+            @SelectWeaponThree.started -= instance.OnSelectWeaponThree;
+            @SelectWeaponThree.performed -= instance.OnSelectWeaponThree;
+            @SelectWeaponThree.canceled -= instance.OnSelectWeaponThree;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -476,6 +534,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         void OnToggleShootMode(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
         void OnMeleeAttack(InputAction.CallbackContext context);
-        void OnToggleInventory(InputAction.CallbackContext context);
+        void OnSelectWeaponOne(InputAction.CallbackContext context);
+        void OnSelectWeaponTwo(InputAction.CallbackContext context);
+        void OnSelectWeaponThree(InputAction.CallbackContext context);
     }
 }

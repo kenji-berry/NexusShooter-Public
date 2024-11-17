@@ -15,11 +15,6 @@ public abstract class Gun : MonoBehaviour
 
     protected int shootableMask; // Layer mask for objects we can shoot
 
-    void OnShoot(InputValue value)
-    {
-        TryShoot();
-    }
-
     void Awake()
     {
         soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();

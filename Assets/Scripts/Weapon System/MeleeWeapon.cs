@@ -10,12 +10,7 @@ public class MeleeWeapon : MonoBehaviour
     public int damage = 30;
     public float attackRange = 3f;
 
-    void OnMeleeAttack(InputValue value)
-    {
-        Attack();
-    }
-
-    void Attack()
+    public void Attack()
     {
         Debug.Log("Performing melee attack");
         

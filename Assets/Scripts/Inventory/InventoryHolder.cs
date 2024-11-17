@@ -36,7 +36,7 @@ public class InventoryHolder : MonoBehaviour
     {
         bool result = false;
 
-        if (itemData.type == ItemType.WEAPON)
+        if (itemData.type == ItemType.GUN)
         {
             result = weaponInventorySystem.AddToInventory(itemData, amount);
         } else 
