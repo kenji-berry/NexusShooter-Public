@@ -47,6 +47,12 @@ public class HealthController : MonoBehaviour
         currentHealth -= adjustedDamage;
         currentHealth = Mathf.Max(currentHealth, 0);
         UpdateHealthBar(currentHealth, maxHealth);
+
+        if (currentHealth <= 0) 
+        {
+            FindFirstObjectByType<GameController>().Die();
+            gameObject.GetComponent<PlayerController>().SetDead();
+        }
     }
 
     // Method to heal
