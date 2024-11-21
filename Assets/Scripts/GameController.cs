@@ -6,6 +6,7 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
     public TextMeshProUGUI timer;
+    public GameObject deathScreen;
 
     private float startTime;
     private float endTime;
@@ -34,6 +35,11 @@ public class GameController : MonoBehaviour
             float timeTaken = endTime - startTime;
             timer.text = FormatTime(timeTaken);
         }
+    }
+
+    public void Die()
+    {
+        deathScreen.SetActive(true);
     }
 
     private string FormatTime(float time)

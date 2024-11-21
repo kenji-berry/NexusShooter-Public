@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public bool isCrouched = false;
     public bool wishJump = false;
     public bool inventoryOpen = false;
+    public bool isDead = false;
 
     void Awake()
     {
@@ -82,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!inventoryOpen) handleLook();
+        if (!(inventoryOpen || isDead)) handleLook();
 
         if (!wishJump) ApplyFriction();
 
@@ -205,4 +206,6 @@ public class PlayerController : MonoBehaviour
             controller.height = controller.GetComponent<CapsuleCollider>().height = currentHeight;
         }
     }
+
+    public void SetDead() { isDead = true; }
 }
