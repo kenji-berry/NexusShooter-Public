@@ -87,6 +87,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ToggleInventory",
+                    "type": "Button",
+                    "id": "4df7f42f-2a39-4736-9364-006397a777a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "SelectWeaponOne",
                     "type": "Button",
                     "id": "22604003-bdd3-45e4-b562-e60094759bf0",
@@ -288,6 +297,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SelectWeaponThree",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9364e18d-aaa1-49c2-98db-9c299091e25a",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

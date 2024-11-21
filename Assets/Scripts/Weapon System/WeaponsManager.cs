@@ -5,19 +5,41 @@ using UnityEngine.InputSystem;
 
 public class WeaponsManager : MonoBehaviour
 {
-    public List<Gun> startingGuns = new List<Gun>();
+    const int WEAPON_INVENTORY_SIZE = 3;
 
+    public List<Gun> startingGuns = new List<Gun>();
+    public InventorySlot[] inventorySlots = new InventorySlot[WEAPON_INVENTORY_SIZE];
+
+    public GameObject inventoryUI;
     public Transform weaponHolder;
 
     public int selectedGun = -1;
 
-    public Gun[] gunSlots = new Gun[3];
+    public Gun[] gunSlots = new Gun[WEAPON_INVENTORY_SIZE];
 
     void Start()
     {
         foreach (Gun gun in startingGuns)
         {
             AddGun(gun);
+        }
+    }
+
+    void OnToggleInventory(InputValue value)
+    {
+        if (inventoryUI.activeInHierarchy)
+        {
+            inventoryUI.SetActive(false);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            gameObject.GetComponent<PlayerController>().inventoryOpen = false;
+        }
+        else
+        {
+            inventoryUI.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            gameObject.GetComponent<PlayerController>().inventoryOpen = true;
         }
     }
 
@@ -94,13 +116,17 @@ public class WeaponsManager : MonoBehaviour
         gunInstance.gameObject.SetActive(false);
         gunSlots[pos] = gunInstance;
 
+        // Add to UI inventory
+        inventorySlots[pos].item = gunPrefab.gameObject.GetComponent<Item>().itemData;
+        inventorySlots[pos].UpdateSlot();
+
         SwitchWeapon(pos);
         return true;
     }
 
     int FindNextFreeSlot()
     {
-        for (int i=0; i<gunSlots.Length; i++) 
+        for (int i=0; i<WEAPON_INVENTORY_SIZE; i++) 
         { 
             if (gunSlots[i] == null)
             {
