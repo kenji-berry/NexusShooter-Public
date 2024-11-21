@@ -4928,9 +4928,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7286917157599450562}
+  - component: {fileID: 9010007720963452433}
   - component: {fileID: 8439105584519137549}
   - component: {fileID: 8945550589689734302}
-  - component: {fileID: 9010007720963452433}
+  - component: {fileID: 3424469521026291544}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -4947,7 +4948,7 @@ Transform:
   m_GameObject: {fileID: 4739855536523141813}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.17, y: 0, z: 0.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4956,6 +4957,27 @@ Transform:
   - {fileID: 8155734912270050178}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &9010007720963452433
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4739855536523141813}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8439105584519137549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5002,27 +5024,20 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!135 &9010007720963452433
-SphereCollider:
+--- !u!114 &3424469521026291544
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4739855536523141813}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0814bf3218056164c82e0c6dd3015098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 93013999e46b048ac98b2b505e950c36, type: 2}
+  amount: 1
 --- !u!1001 &8549033637342266473
 PrefabInstance:
   m_ObjectHideFlags: 0

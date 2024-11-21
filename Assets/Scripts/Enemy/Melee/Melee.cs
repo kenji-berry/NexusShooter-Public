@@ -39,7 +39,7 @@ public class Melee : MonoBehaviour
         if (playerController != null)
         {
             playerController.GetComponent<HealthController>().TakeDamage(damage);
-            Debug.Log("MELEEE " + playerController.GetComponent<HealthController>().currentHealth); // Debug log to print the player's health
+            // Debug.Log("MELEEE " + playerController.GetComponent<HealthController>().currentHealth); // Debug log to print the player's health
         }
     }
 }

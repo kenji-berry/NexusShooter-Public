@@ -10,28 +10,31 @@ public class InventorySlot : MonoBehaviour
     public int amount;
 
     public Image icon;
-    public TextMeshProUGUI amountText;
 
-    public void UpdateSlot(){
+    public void UpdateSlot()
+    {
         icon.sprite = item.icon;
-        amountText.text = $"{amount}x";
     }
 
-    public bool RoomLeftInStack(int amount){
+    public bool RoomLeftInStack(int amount)
+    {
         return this.amount + amount <= item.maxStackSize;
     }
 
-public bool RoomLeftInStack(int amount, out int amountRemaining){
+    public bool RoomLeftInStack(int amount, out int amountRemaining)
+    {
         amountRemaining = item.maxStackSize - this.amount;
         return RoomLeftInStack(amount);
     }
 
-    public void AddToStack(int amount){
+    public void AddToStack(int amount)
+    {
         this.amount += amount;
 
     }
 
-    public void RemoveFromStack(int amount){
+    public void RemoveFromStack(int amount)
+    {
         this.amount -= amount;
     }
 

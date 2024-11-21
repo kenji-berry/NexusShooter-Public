@@ -16,6 +16,6 @@ MonoBehaviour:
   itemName: Axe
   description: 
   icon: {fileID: 21300000, guid: 2d2f336512660344c8e83fc3ce8daf3f, type: 3}
-  prefab: {fileID: 3994870661710444259, guid: 2f36252caaadb3242bd7d6676746cbca, type: 3}
+  prefab: {fileID: 1164328234615206, guid: e048a401410aa9f4791cdd97e15735ca, type: 3}
   type: 0
   maxStackSize: 1
