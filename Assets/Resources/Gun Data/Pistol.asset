@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   gunName: Pistol
-  fireRate: 5
+  maxAmmo: 1000
+  fireRate: 3
   damage: 20
   shootSound: {fileID: 8300000, guid: 7636ab8197918f849bf4d107d9f76739, type: 3}

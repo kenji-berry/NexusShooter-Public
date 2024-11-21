@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class WeaponsManager : MonoBehaviour
 {
@@ -13,9 +14,18 @@ public class WeaponsManager : MonoBehaviour
     public GameObject inventoryUI;
     public Transform weaponHolder;
 
+    public GameObject ammoPanel;
+    public TextMeshProUGUI ammoText;
+
     public int selectedGun = -1;
 
     public Gun[] gunSlots = new Gun[WEAPON_INVENTORY_SIZE];
+
+    void OnSelectWeaponOne(InputValue value) { SwitchWeapon(0); }
+
+    void OnSelectWeaponTwo(InputValue value) { SwitchWeapon(1); }
+
+    void OnSelectWeaponThree(InputValue value) { SwitchWeapon(2); }
 
     void Start()
     {
@@ -43,24 +53,6 @@ public class WeaponsManager : MonoBehaviour
         }
     }
 
-    void OnSelectWeaponOne(InputValue value)
-    {
-        SwitchWeapon(0);
-        Debug.Log("Switching to weapon 0");
-    }
-
-    void OnSelectWeaponTwo(InputValue value)
-    {
-        SwitchWeapon(1);
-        Debug.Log("Switching to weapon 1");
-    }
-
-    void OnSelectWeaponThree(InputValue value)
-    {
-        SwitchWeapon(2);
-        Debug.Log("Switching to weapon 2");
-    }
-
     void SwitchWeapon(int pos)
     {
         if (gunSlots[pos] == null)
@@ -73,6 +65,9 @@ public class WeaponsManager : MonoBehaviour
         {
             selectedGun = pos;
             gunSlots[selectedGun].gameObject.SetActive(true);
+
+            // show ammo count
+            ammoPanel.SetActive(true);
         }
         else
         {
@@ -80,6 +75,9 @@ public class WeaponsManager : MonoBehaviour
             selectedGun = pos;
             gunSlots[selectedGun].gameObject.SetActive(true);
         }
+
+        // initialise ammo text
+        ammoText.text = gunSlots[selectedGun].gameObject.GetComponent<Gun>().currentAmmo.ToString();
     }
 
     void OnShoot(InputValue value)

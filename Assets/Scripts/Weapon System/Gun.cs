@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public abstract class Gun : MonoBehaviour
 {
     public GunData gunData;
     public Camera playerCamera;
     public ParticleSystem muzzleFlash;
+    public TextMeshProUGUI ammoText;
 
     private float nextTimeToFire = 0f;
+    public int currentAmmo;
 
     public SoundController soundController;
 
@@ -23,11 +26,13 @@ public abstract class Gun : MonoBehaviour
         
         // Debug log to verify layer mask
         Debug.Log($"Shootable Layer Mask: {shootableMask}");
+
+        currentAmmo = gunData.maxAmmo;
     }
 
     public void TryShoot()
     {
-        if (Time.time >= nextTimeToFire)
+        if (Time.time >= nextTimeToFire && currentAmmo > 0)
         {
             nextTimeToFire = Time.time + (1 / gunData.fireRate);
             HandleShoot();
@@ -38,8 +43,9 @@ public abstract class Gun : MonoBehaviour
     {
         muzzleFlash.Play();
         soundController.Play(gunData.shootSound);
-
         Shoot();
+        currentAmmo--;
+        UpdateAmmoUI();
     }
 
     // Optional: Add debug visualization of raycast
@@ -55,6 +61,14 @@ public abstract class Gun : MonoBehaviour
             Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * 100f, Color.red, 1f);
             Debug.Log("No hit detected");
         }
+    }
+
+    private void UpdateAmmoUI()
+    {
+        //ammoText.text = currentAmmo.ToString();
+
+
+        GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>().text = currentAmmo.ToString();
     }
 
     public abstract void Shoot();
