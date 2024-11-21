@@ -15,7 +15,8 @@ public class ArmourPack : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(0, 40 * Time.deltaTime, 0);
+        // Changed rotation to X-axis (first parameter)
+        transform.Rotate(40 * Time.deltaTime, 0, 0);
         float newY = originalPosition.y + Mathf.Sin(Time.time * bounceSpeed) * bounceHeight; // Move the item up and down
         transform.position = new Vector3(originalPosition.x, newY, originalPosition.z); // Set the new position
     }
