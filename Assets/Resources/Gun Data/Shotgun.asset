@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   gunName: Shotgun
-  fireRate: 1
+  maxAmmo: 40
+  fireRate: 2
   damage: 100
   shootSound: {fileID: 8300000, guid: 8f92505560243414db6b5fcd71126c5f, type: 3}
