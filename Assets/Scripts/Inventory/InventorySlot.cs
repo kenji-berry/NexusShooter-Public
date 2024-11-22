@@ -7,6 +7,7 @@ using TMPro;
 public class InventorySlot : MonoBehaviour
 {
     public ItemData item;
+    public TextMeshProUGUI ammoCountText;
     public int amount;
 
     public Image icon;
@@ -14,6 +15,7 @@ public class InventorySlot : MonoBehaviour
     public void UpdateSlot()
     {
         icon.sprite = item.icon;
+        icon.color = new Color(1f, 1f, 1f);
     }
 
     public bool RoomLeftInStack(int amount)
