@@ -7,6 +7,7 @@ using TMPro;
 public class InventorySlot : MonoBehaviour
 {
     public ItemData item;
+    public TextMeshProUGUI ammoCountText;
     public int amount;
 
     public Image icon;

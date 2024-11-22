@@ -18,6 +18,7 @@ public class WeaponsManager : MonoBehaviour
     public TextMeshProUGUI ammoText;
 
     public int selectedGun = -1;
+    private bool isInventoryOpen = false;
 
     public Gun[] gunSlots = new Gun[WEAPON_INVENTORY_SIZE];
 
@@ -43,13 +44,16 @@ public class WeaponsManager : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             gameObject.GetComponent<PlayerController>().inventoryOpen = false;
+            isInventoryOpen = false;
         }
         else
         {
+            UpdateInventoryUI();
             inventoryUI.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             gameObject.GetComponent<PlayerController>().inventoryOpen = true;
+            isInventoryOpen = true;
         }
     }
 
@@ -82,7 +86,8 @@ public class WeaponsManager : MonoBehaviour
 
     void OnShoot(InputValue value)
     {
-        if (selectedGun == -1)
+
+        if (selectedGun == -1 || isInventoryOpen)
         {
             return;
         }
@@ -116,6 +121,7 @@ public class WeaponsManager : MonoBehaviour
 
         // Add to UI inventory
         inventorySlots[pos].item = gunPrefab.gameObject.GetComponent<Item>().itemData;
+        inventorySlots[pos].ammoCountText.text = gunInstance.GetComponent<Gun>().currentAmmo.ToString();
         inventorySlots[pos].UpdateSlot();
 
         SwitchWeapon(pos);
@@ -132,5 +138,16 @@ public class WeaponsManager : MonoBehaviour
             }
         }
         return -1;
+    }
+
+    void UpdateInventoryUI()
+    {
+        for (int i = 0; i < gunSlots.Length; i++)
+        {
+            if (gunSlots[i] != null)
+            {
+                inventorySlots[i].ammoCountText.text = gunSlots[i].GetComponent<Gun>().currentAmmo.ToString();
+            }
+        }
     }
 }
