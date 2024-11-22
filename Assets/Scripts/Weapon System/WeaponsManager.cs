@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using TMPro;
 
 public class WeaponsManager : MonoBehaviour
@@ -69,6 +70,7 @@ public class WeaponsManager : MonoBehaviour
         {
             selectedGun = pos;
             gunSlots[selectedGun].gameObject.SetActive(true);
+            inventorySlots[selectedGun].GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f);
 
             // show ammo count
             ammoPanel.SetActive(true);
@@ -76,8 +78,11 @@ public class WeaponsManager : MonoBehaviour
         else
         {
             gunSlots[selectedGun].gameObject.SetActive(false);
+            inventorySlots[selectedGun].GetComponent<Image>().color = new Color(0.12f, 0.12f, 0.12f);
+
             selectedGun = pos;
             gunSlots[selectedGun].gameObject.SetActive(true);
+            inventorySlots[selectedGun].GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f);
         }
 
         // initialise ammo text

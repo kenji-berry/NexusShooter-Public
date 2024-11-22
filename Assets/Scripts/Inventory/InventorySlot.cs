@@ -15,6 +15,7 @@ public class InventorySlot : MonoBehaviour
     public void UpdateSlot()
     {
         icon.sprite = item.icon;
+        icon.color = new Color(1f, 1f, 1f);
     }
 
     public bool RoomLeftInStack(int amount)
