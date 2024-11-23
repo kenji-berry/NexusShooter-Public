@@ -4,6 +4,8 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     public Transform player;
+    public Animator animator;
+
     private float detectionRange = 10f;
     public Transform[] patrolPoints;
     public float patrolWaitTime = 2f;
@@ -20,6 +22,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         healthController = GetComponent<EnemyHealthController>();
@@ -97,6 +100,7 @@ public class EnemyAI : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        animator.SetBool("isRunning", true);
         FaceTarget();
     }
 
@@ -127,6 +131,7 @@ public class EnemyAI : MonoBehaviour
     public void ResetAggro()
     {
         isAggro = false;
+        animator.SetBool("isRunning", false);
     }
 
     private void OnDestroy()
