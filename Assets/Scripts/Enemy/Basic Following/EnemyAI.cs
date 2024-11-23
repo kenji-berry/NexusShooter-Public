@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour
     private bool isAggro = false;
     private EnemyHealthController healthController;
     private float stopDistance = 1f;
+    public bool isDead = false;
 
     private void Start()
     {
@@ -40,6 +41,8 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (isDead) { return; }
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // Changed aggro check to use detectionRange
