@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
 {
+    public Animator animator;
+    public EnemyAI enemyAI;
     public Transform player;  // Location of player using transform properties
     public float shootingRange = 10f;  // Range within which the enemy can shoot
     public float fireRate = 1f; // Time between shots
@@ -14,16 +16,27 @@ public class EnemyShooting : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform; 
+        animator = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyAI = GetComponent<EnemyAI>();
     }
 
     void Update()
     {
+        if (GetComponent<EnemyAI>().isDead) return;
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position); // Calculate the distance between the enemy and the player
 
         if (distanceToPlayer < shootingRange && Time.time >= nextFireTime) // Check if the player is within shooting range and it's time to fire
         {
-            Shoot();
+            GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(transform.position);
+            enemyAI.isAttacking = true;
+
+            // shoot function is called during the shoot animation
+            animator.SetTrigger("shoot");
+            //Shoot();
+
+            enemyAI.isAttacking = false;
             nextFireTime = Time.time + 1f / fireRate; // Set next time to fire
         }
 

@@ -10,7 +10,7 @@ public class Melee : MonoBehaviour
     private float nextAttackTime = 0f;
 
     private HealthController healthController;
-
+    public Animator animator;
 
     private EnemyAI enemyAI;
 
@@ -18,7 +18,7 @@ public class Melee : MonoBehaviour
     {
         enemyAI = GetComponent<EnemyAI>();
         healthController = GetComponent<HealthController>();
-
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -27,13 +27,21 @@ public class Melee : MonoBehaviour
 
         if (distanceToPlayer < attackRange && Time.time >= nextAttackTime) // Check if the player is within attack range and it's time to attack
         {
-            Attack();
+            GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(transform.position);
+            enemyAI.isAttacking = true;
+
+            // attack function is called during the punch animation
+            animator.SetTrigger("punch");
+            // Attack();
+
+            enemyAI.isAttacking = false;
             nextAttackTime = Time.time + attackCooldown; // Set next attack time
         }
     }
 
     void Attack()
     {
+
         // Perform the attack
         PlayerController playerController = enemyAI.player.GetComponent<PlayerController>();
         if (playerController != null)

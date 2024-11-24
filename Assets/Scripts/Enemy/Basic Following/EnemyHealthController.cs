@@ -9,6 +9,13 @@ public class EnemyHealthController : MonoBehaviour
     public delegate void DamageEvent(int damage); // delegate for damage event
     public event DamageEvent onDamageTaken; // event to notify subscribers when damage is taken
 
+    public Animator animator;
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -23,7 +30,9 @@ public class EnemyHealthController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            animator.SetTrigger("death");
+            GetComponent<EnemyAI>().isDead = true;
+            gameObject.GetComponent<Collider>().enabled = false;
         }
     }
 

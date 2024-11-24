@@ -4,6 +4,8 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     public Transform player;
+    public Animator animator;
+
     private float detectionRange = 10f;
     public Transform[] patrolPoints;
     public float patrolWaitTime = 2f;
@@ -17,9 +19,12 @@ public class EnemyAI : MonoBehaviour
     private bool isAggro = false;
     private EnemyHealthController healthController;
     private float stopDistance = 1f;
+    public bool isDead = false;
+    public bool isAttacking = false;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         healthController = GetComponent<EnemyHealthController>();
@@ -37,6 +42,8 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (isDead) { return; }
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // Changed aggro check to use detectionRange
@@ -52,7 +59,7 @@ public class EnemyAI : MonoBehaviour
 
         if (isAggro)
         {
-            ChasePlayer();
+            if (!isAttacking) ChasePlayer();
         }
         else
         {
@@ -97,6 +104,7 @@ public class EnemyAI : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        animator.SetBool("isRunning", true);
         FaceTarget();
     }
 
@@ -127,6 +135,7 @@ public class EnemyAI : MonoBehaviour
     public void ResetAggro()
     {
         isAggro = false;
+        animator.SetBool("isRunning", false);
     }
 
     private void OnDestroy()
