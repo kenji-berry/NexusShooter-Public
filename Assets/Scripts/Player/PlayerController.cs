@@ -78,7 +78,15 @@ public class PlayerController : MonoBehaviour
 
     void OnCrouch(InputValue value)
     {
-        isCrouched = value.isPressed;
+        if (value.isPressed)
+        {
+            controller.height = crouchHeight;
+        }
+        else
+        {
+            controller.height = standHeight;
+        }
+
     }
 
     void Update()
@@ -95,7 +103,7 @@ public class PlayerController : MonoBehaviour
             AirMove();
         }
 
-        handleCrouch();
+        // handleCrouch();
 
         controller.Move(characterVelocity * Time.deltaTime);
         isGrounded = controller.isGrounded;
