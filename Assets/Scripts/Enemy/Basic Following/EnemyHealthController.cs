@@ -33,7 +33,6 @@ public class EnemyHealthController : MonoBehaviour
             animator.SetTrigger("death");
             GetComponent<EnemyAI>().isDead = true;
             gameObject.GetComponent<Collider>().enabled = false;
-            //Destroy(gameObject);
         }
     }
 

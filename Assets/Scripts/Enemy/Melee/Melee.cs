@@ -29,9 +29,9 @@ public class Melee : MonoBehaviour
         {
             GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(transform.position);
             enemyAI.isAttacking = true;
-            //animator.SetBool("isRunning", false);
-            animator.SetTrigger("punch");
 
+            // attack function is called during the punch animation
+            animator.SetTrigger("punch");
             // Attack();
 
             enemyAI.isAttacking = false;
