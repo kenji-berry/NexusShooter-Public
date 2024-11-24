@@ -20,6 +20,7 @@ public class EnemyAI : MonoBehaviour
     private EnemyHealthController healthController;
     private float stopDistance = 1f;
     public bool isDead = false;
+    public bool isAttacking = false;
 
     private void Start()
     {
@@ -58,7 +59,7 @@ public class EnemyAI : MonoBehaviour
 
         if (isAggro)
         {
-            ChasePlayer();
+            if (!isAttacking) ChasePlayer();
         }
         else
         {
