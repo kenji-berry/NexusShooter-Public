@@ -6,7 +6,7 @@ public class EnemyShooting : MonoBehaviour
 {
     public Animator animator;
     public EnemyAI enemyAI;
-    public Transform player;  // Location of player using transform properties
+    public GameObject player;  // Location of player using transform properties
     public float shootingRange = 10f;  // Range within which the enemy can shoot
     public float fireRate = 1f; // Time between shots
     public GameObject bulletPrefab; // Bullet prefab to shoot
@@ -17,7 +17,7 @@ public class EnemyShooting : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
         enemyAI = GetComponent<EnemyAI>();
     }
 
@@ -25,7 +25,7 @@ public class EnemyShooting : MonoBehaviour
     {
         if (GetComponent<EnemyAI>().isDead) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position); // Calculate the distance between the enemy and the player
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position); // Calculate the distance between the enemy and the player
 
         if (distanceToPlayer < shootingRange && Time.time >= nextFireTime) // Check if the player is within shooting range and it's time to fire
         {
@@ -47,8 +47,14 @@ public class EnemyShooting : MonoBehaviour
         if (bulletPrefab == null) return;
 
         
-        Vector3 directionToPlayer = (player.position - firePoint.position).normalized;// Calculate direction to player's center (assuming player pivot is at center)
+        // Vector3 directionToPlayer = (player.position - firePoint.position).normalized;// Calculate direction to player's center (assuming player pivot is at center)
         
+        float distanceToPlayer = (player.transform.position - firePoint.position).magnitude;
+        float timeToPlayer = Mathf.Min(distanceToPlayer / bulletSpeed, 0.2f);
+
+        Vector3 predictedPosition = player.transform.position + player.GetComponent<PlayerController>().characterVelocity * timeToPlayer;
+        Vector3 directionToPlayer = (predictedPosition - firePoint.position).normalized;
+
         // Spawn bullet
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(directionToPlayer));
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
@@ -59,7 +65,7 @@ public class EnemyShooting : MonoBehaviour
     }
     void FaceTarget()
     {
-        Vector3 direction = (player.position - transform.position).normalized;
+        Vector3 direction = (player.transform.position - transform.position).normalized;
         direction.y = 0; // Keep enemy rotation only on Y axis
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);

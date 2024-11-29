@@ -5,7 +5,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int damage = 10;
-    private bool hasCollided = false;
     
     void Start()
     {
@@ -15,7 +14,6 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (hasCollided) return;
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
@@ -24,8 +22,7 @@ public class Bullet : MonoBehaviour
                 playerController.GetComponent<HealthController>().TakeDamage(damage);
                 Debug.Log("Health is " + playerController.GetComponent<HealthController>().currentHealth);
             }
-            hasCollided = true;
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }
