@@ -61794,8 +61794,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6298009754292631004, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
@@ -82658,6 +82657,14 @@ PrefabInstance:
       propertyPath: inventoryUI
       value: 
       objectReference: {fileID: 1847836932}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: startingGuns.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: 'startingGuns.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8439105584519137549, guid: 1a9dd4a441bb1794d9c87e1477d3e0d9, type: 3}
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: 'inventorySlots.Array.data[0]'
       value: 
