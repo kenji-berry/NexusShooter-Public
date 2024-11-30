@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class EnemyHealthController : MonoBehaviour
 {
-    public int currentHealth;
     public int maxHealth = 100;
-    public delegate void DamageEvent(int damage); // delegate for damage event
-    public event DamageEvent onDamageTaken; // event to notify subscribers when damage is taken
-
+    private int currentHealth;
     public Animator animator;
+    public int xpReward = 10; // Amount of XP to reward when this enemy is defeated
+    public event System.Action<int> onDamageTaken; // event to notify subscribers when damage is taken
 
     void Awake()
     {
@@ -21,22 +20,25 @@ public class EnemyHealthController : MonoBehaviour
         currentHealth = maxHealth;
     }
     
-    // method to take damage
+    // Method to take damage
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
-        onDamageTaken?.Invoke(damage); // notify subscribers
+        onDamageTaken?.Invoke(damage); // Notify subscribers
 
         if (currentHealth <= 0)
         {
             animator.SetTrigger("death");
             GetComponent<EnemyAI>().isDead = true;
             gameObject.GetComponent<Collider>().enabled = false;
+
+            // Reward XP when the enemy is defeated
+            XPManager.instance.AddXP(xpReward);
         }
     }
 
-    // method to heal
+    // Method to heal
     public void Heal(int amount)
     {
         currentHealth += amount;
