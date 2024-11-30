@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
 using UnityEngine.InputSystem;
 
 public class GameController : MonoBehaviour
 {
     public TextMeshProUGUI timer;
     public GameObject deathScreen;
+    public GameObject pauseMenu;
 
     private float startTime;
     private float endTime;
@@ -20,7 +20,8 @@ public class GameController : MonoBehaviour
 
 
     void Awake(){
-    playerController = FindObjectOfType<PlayerController>();
+        playerController = FindObjectOfType<PlayerController>();
+        pauseMenu.SetActive(false);
     }
 
 
@@ -78,7 +79,7 @@ public class GameController : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0f; // Freeze game time
-        // pauseMenu.SetActive(true);
+        pauseMenu.SetActive(true);
 
         // Disable player controls
         playerController.inventoryOpen = true; // Blocks inventory and movement in PlayerController
@@ -97,16 +98,24 @@ public class GameController : MonoBehaviour
         Cursor.visible = true;
     }
 
-    private void ResumeGame()
+    public void ResumeGame()
     {
         isPaused = false;
         Time.timeScale = 1f; // Resume game time
-        // pauseMenu.SetActive(false);
+        pauseMenu.SetActive(false);
 
         // Re-enable player controls
         playerController.inventoryOpen = false; // Re-enables inventory and movement
         playerController.enabled = true; // Re-enables PlayerController update loop
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void OpenSettingsMenu(){
+        Debug.Log("Settings menu opened");
+    }
+
+    public void MainMenu(){
+        Debug.Log("MainMenu");
     }
 }
