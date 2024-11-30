@@ -20,7 +20,7 @@ public class XPManager : MonoBehaviour
 
     private int level = 1;
     private int xpToNextLevel = 10;
-    private static int skillPoints = 0; // Skill points that the player can use
+    private static int skillPoints = 50; // Skill points that the player can use
 
     public List<Button> upgradeButtons; // List of upgrade buttons
     public List<TextMeshProUGUI> upgradeCostTexts; // List of upgrade cost texts
@@ -41,7 +41,7 @@ public class XPManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
         if (xpSlider != null)
         {
@@ -59,7 +59,8 @@ public class XPManager : MonoBehaviour
         {
             upgrades.Add(new HealthUpgrade("Increase Health I", 1, healthController, 10));
             upgrades.Add(new HealthUpgrade("Increase Health II", 2, healthController, 15));
-            upgrades.Add(new SpeedUpgrade("Increase Speed I", 2, playerController, 1.0f));
+            upgrades.Add(new HealthUpgrade("Increase Health III", 3, healthController, 25));
+            upgrades.Add(new SpeedUpgrade("Increase Speed I", 1, playerController, 1.0f));
         }
         else
         {
@@ -170,14 +171,31 @@ public class XPManager : MonoBehaviour
                 if (currentUpgrade != null)
                 {
                     upgradeButtons[buttonIndex].GetComponentInChildren<TextMeshProUGUI>().text = currentUpgrade.name;
-                    upgradeCostTexts[buttonIndex].text = "Cost: " + currentUpgrade.skillPointsCost ;
+                    upgradeCostTexts[buttonIndex].text = "Cost: " + currentUpgrade.skillPointsCost;
                     int index = buttonIndex; // Capture the index for the lambda
                     upgradeButtons[buttonIndex].onClick.RemoveAllListeners();
                     upgradeButtons[buttonIndex].onClick.AddListener(() => UseSkillPointsForUpgrade(currentUpgrade.GetType()));
                 }
+                else
+                {
+                    // If all upgrades of this type are purchased, set the cost to MAX LEVEL
+                    upgradeCostTexts[buttonIndex].text = "MAX LEVEL";
+                    SetButtonToMaxLevel(upgradeButtons[buttonIndex]);
+                }
                 buttonIndex++;
             }
         }
+    }
+
+    private void SetButtonToMaxLevel(Button button)
+    {
+        ColorBlock colors = button.colors;
+        colors.normalColor = Color.gray;
+        colors.highlightedColor = Color.gray;
+        colors.pressedColor = Color.gray;
+        colors.selectedColor = Color.gray;
+        button.colors = colors;
+        button.interactable = false;
     }
 
     public void UseSkillPointsForUpgrade(System.Type upgradeType)
