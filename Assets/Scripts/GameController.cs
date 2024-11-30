@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -116,6 +117,8 @@ public class GameController : MonoBehaviour
     }
 
     public void MainMenu(){
-        Debug.Log("MainMenu");
+        Debug.Log("Loading Main Menu...");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 }
