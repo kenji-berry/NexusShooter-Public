@@ -10,7 +10,7 @@ public class HealthController : MonoBehaviour
     public int maxHealth = 100;
 
     public Slider healthBar;
-    public TextMeshProUGUI armourText;
+    public Slider armourBar;
 
     // Armour tiers and their corresponding damage multipliers
     public enum ArmourTier { None, Light, Medium, Heavy }
@@ -29,7 +29,7 @@ public class HealthController : MonoBehaviour
 
         // Initialize the health bar with the player's starting health
         UpdateHealthBar(currentHealth, maxHealth);
-        UpdateArmourText(); // Initialize the armour text
+        UpdateArmourUI(); // Initialize the armour text
     }
 
     public void UpdateHealthBar(int currentHealth, int maxHealth)
@@ -67,12 +67,32 @@ public class HealthController : MonoBehaviour
     public void SetArmourTier(ArmourTier newArmourTier)
     {
         currentArmourTier = newArmourTier;
-        UpdateArmourText(); // Update the armour text when the tier changes
+        UpdateArmourUI(); // Update the armour text when the tier changes
     }
 
     // Method to update the armour text
-    private void UpdateArmourText()
+    private void UpdateArmourUI()
     {
-        armourText.text = "Armour: " + currentArmourTier.ToString();
+        switch (currentArmourTier)
+        {
+            case ArmourTier.None:
+                armourBar.gameObject.SetActive(false);
+                break;
+
+            case ArmourTier.Light:
+                armourBar.fillRect.GetComponent<Image>().color = new Color(0.804f, 0.498f, 0.196f);
+                armourBar.gameObject.SetActive(true);
+                break;
+
+            case ArmourTier.Medium:
+                armourBar.fillRect.GetComponent<Image>().color = new Color(0.753f, 0.753f, 0.753f);
+                armourBar.gameObject.SetActive(true);
+                break;
+
+            case ArmourTier.Heavy:
+                armourBar.fillRect.GetComponent<Image>().color = new Color(1f, 0.843f, 0.0f);
+                armourBar.gameObject.SetActive(true);
+                break;
+        }
     }
 }
