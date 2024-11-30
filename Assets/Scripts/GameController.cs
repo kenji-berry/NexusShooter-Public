@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+using UnityEngine.InputSystem;
+
 public class GameController : MonoBehaviour
 {
     public TextMeshProUGUI timer;
@@ -12,6 +14,16 @@ public class GameController : MonoBehaviour
     private float endTime;
     private bool levelCompleted = false;
 
+    private bool isPaused = false;
+    private PlayerController playerController;
+    private InputManager inputManager; // Reference the generated InputManager
+
+
+    void Awake(){
+    playerController = FindObjectOfType<PlayerController>();
+    }
+
+
     void Start()
     {
         startTime = Time.time;
@@ -19,7 +31,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (!levelCompleted) {
+        if (!levelCompleted && !isPaused) {
             float timeTaken = Time.time - startTime;
             timer.text = FormatTime(timeTaken);
         }
@@ -48,5 +60,45 @@ public class GameController : MonoBehaviour
         int seconds = (int) time % 60;
         int milliseconds = (int) (time * 100) % 100;
         return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
+    }
+
+   void OnTooglePauseMenu(InputValue value) // Automatically linked
+    {
+        Debug.Log("Pause menu toggled");
+
+        if (isPaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
+        }
+    }
+
+   private void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0f; // Freeze game time
+        // pauseMenu.SetActive(true);
+
+        // Disable player controls
+        playerController.inventoryOpen = true; // Blocks inventory and movement in PlayerController
+        playerController.enabled = false; // Disables PlayerController update loop
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1f; // Resume game time
+        // pauseMenu.SetActive(false);
+
+        // Re-enable player controls
+        playerController.inventoryOpen = false; // Re-enables inventory and movement
+        playerController.enabled = true; // Re-enables PlayerController update loop
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
