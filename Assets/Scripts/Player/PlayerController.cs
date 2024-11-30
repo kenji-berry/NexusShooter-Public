@@ -216,4 +216,20 @@ public class PlayerController : MonoBehaviour
     }
 
     public void SetDead() { isDead = true; }
+
+    public void ApplyKnockback(Vector3 direction, float force, float duration)
+    {
+        StartCoroutine(KnockbackCoroutine(direction, force, duration));
+    }
+
+    private IEnumerator KnockbackCoroutine(Vector3 direction, float force, float duration)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            characterVelocity += direction * (force * Time.deltaTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
 }
