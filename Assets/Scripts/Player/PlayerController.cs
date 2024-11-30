@@ -216,4 +216,10 @@ public class PlayerController : MonoBehaviour
     }
 
     public void SetDead() { isDead = true; }
+
+    public void SetMouseSensitivity(float sensitivity)
+    {
+        mouseSensitivity = sensitivity; // Update sensitivity
+        Debug.Log($"Mouse Sensitivity set to: {mouseSensitivity}");
+    }
 }

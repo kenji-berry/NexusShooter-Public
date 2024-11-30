@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameController : MonoBehaviour
     public GameObject deathScreen;
     public GameObject pauseMenu;
     public GameObject settingsPanel; // Reference to Settings Panel
+    public Slider mouseSensitivitySlider;
 
 
     private float startTime;
@@ -26,6 +28,8 @@ public class GameController : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         pauseMenu.SetActive(false);
         settingsPanel.SetActive(false);
+        mouseSensitivitySlider.value = playerController.mouseSensitivity;
+        mouseSensitivitySlider.onValueChanged.AddListener(UpdateMouseSensitivity);
     }
 
 
@@ -132,5 +136,12 @@ public class GameController : MonoBehaviour
         Debug.Log("Loading Main Menu...");
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+    }
+    public void UpdateMouseSensitivity(float sensitivity)
+    {
+        if (playerController != null)
+        {
+            playerController.SetMouseSensitivity(sensitivity);
+        }
     }
 }
