@@ -137,7 +137,7 @@ public class XPManager : MonoBehaviour
     {
         if (levelUpText != null)
         {
-            levelUpText.text = "Level Up! Level: " + level;
+            levelUpText.text = "Level Up! Level " + level;
             levelUpText.gameObject.SetActive(true);
             StartCoroutine(HideLevelUpText());
         }
