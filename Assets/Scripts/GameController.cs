@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI timer;
     public GameObject deathScreen;
     public GameObject pauseMenu;
+    public GameObject settingsPanel; // Reference to Settings Panel
+
 
     private float startTime;
     private float endTime;
@@ -23,6 +25,7 @@ public class GameController : MonoBehaviour
     void Awake(){
         playerController = FindObjectOfType<PlayerController>();
         pauseMenu.SetActive(false);
+        settingsPanel.SetActive(false);
     }
 
 
@@ -104,6 +107,7 @@ public class GameController : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f; // Resume game time
         pauseMenu.SetActive(false);
+        settingsPanel.SetActive(false);
 
         // Re-enable player controls
         playerController.inventoryOpen = false; // Re-enables inventory and movement
@@ -112,8 +116,16 @@ public class GameController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void OpenSettingsMenu(){
-        Debug.Log("Settings menu opened");
+    public void OpenSettingsMenu()
+    {
+        pauseMenu.SetActive(false);   
+        settingsPanel.SetActive(true); 
+    }
+
+    public void CloseSettingsMenu()
+    {
+        settingsPanel.SetActive(false); 
+        pauseMenu.SetActive(true);
     }
 
     public void MainMenu(){
