@@ -348,6 +348,7 @@ MonoBehaviour:
   isCrouched: 0
   wishJump: 0
   inventoryOpen: 0
+  isDead: 0
 --- !u!114 &1631874739560321578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +364,8 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   healthBar: {fileID: 0}
+  armour: {fileID: 0}
+  armourBar: {fileID: 0}
   armourText: {fileID: 0}
   currentArmourTier: 0
 --- !u!114 &6027300963214750294
@@ -378,7 +381,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingGuns: []
+  inventorySlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  inventoryUI: {fileID: 0}
   weaponHolder: {fileID: 9111381679490720939}
+  ammoPanel: {fileID: 0}
+  ammoText: {fileID: 0}
   selectedGun: -1
   gunSlots:
   - {fileID: 0}
