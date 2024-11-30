@@ -11,15 +11,19 @@ public class XPManager : MonoBehaviour
     public Slider xpSlider; // Reference to the XP Slider
     public TextMeshProUGUI levelText; // Reference to the Level Text
     public TextMeshProUGUI skillPointsText; // Reference to the Skill Points Text
+    public TextMeshProUGUI levelUpText; // Reference to the Level Up Text
     public HealthController healthController; // Reference to the HealthController script
     public PlayerController playerController; // Reference to the PlayerController script
+    public SoundController soundController; // Reference to the SoundController script
+
     private int level = 1;
     private int xpToNextLevel = 10;
     private static int skillPoints = 0; // Skill points that the player can use
+
     public List<Button> upgradeButtons; // List of upgrade buttons
     public List<TextMeshProUGUI> upgradeCostTexts; // List of upgrade cost texts
+
     private List<Upgrade> upgrades = new List<Upgrade>(); // List of available upgrades
-    public SoundController soundController;
 
     void Awake()
     {
@@ -47,9 +51,17 @@ public class XPManager : MonoBehaviour
             levelText.text = "Level: " + level;
         }
 
-        // Initialise the upgrades
-        upgrades.Add(new HealthUpgrade("Increase Health", 1, healthController, 10));
-        upgrades.Add(new SpeedUpgrade("Increase Speed", 1, playerController, 20.0f));
+        // Initialize upgrades
+        if (healthController != null && playerController != null)
+        {
+            upgrades.Add(new HealthUpgrade("Increase Health", 1, healthController, 10));
+            upgrades.Add(new HealthUpgrade("Increase Health", 2, healthController, 15));
+            upgrades.Add(new SpeedUpgrade("Increase Speed", 2, playerController, 1.0f));
+        }
+        else
+        {
+            Debug.LogError("HealthController or PlayerController is not assigned in XPManager.");
+        }
 
         UpdateSkillPointsText();
         UpdateUpgradeButtons();
@@ -75,6 +87,7 @@ public class XPManager : MonoBehaviour
             xp -= xpToNextLevel;
             level++;
             soundController.Play(soundController.levelUp, 0.3f);
+            ShowLevelUpText();
             xpToNextLevel += 50; // Increase the XP required for the next level
             AwardSkillPoints();
             UpdateLevelText();
@@ -118,6 +131,22 @@ public class XPManager : MonoBehaviour
         {
             skillPointsText.text = "Skill Points: " + skillPoints;
         }
+    }
+
+    private void ShowLevelUpText()
+    {
+        if (levelUpText != null)
+        {
+            levelUpText.text = "Level Up! Level: " + level;
+            levelUpText.gameObject.SetActive(true);
+            StartCoroutine(HideLevelUpText());
+        }
+    }
+
+    private IEnumerator HideLevelUpText()
+    {
+        yield return new WaitForSeconds(5f);
+        levelUpText.gameObject.SetActive(false);
     }
 
     private void UpdateUpgradeButtons()
