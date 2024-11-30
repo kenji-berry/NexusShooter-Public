@@ -43,7 +43,20 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (!levelCompleted && !isPaused) {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
+
+        if (!levelCompleted && !isPaused)
+        {
             float timeTaken = Time.time - startTime;
             timer.text = FormatTime(timeTaken);
         }
