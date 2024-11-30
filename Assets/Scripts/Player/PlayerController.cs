@@ -232,4 +232,10 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
     }
+
+    public void SetMouseSensitivity(float sensitivity)
+    {
+        mouseSensitivity = sensitivity; // Update sensitivity
+        Debug.Log($"Mouse Sensitivity set to: {mouseSensitivity}");
+    }
 }
