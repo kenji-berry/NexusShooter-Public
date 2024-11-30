@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro; // Import TextMesh Pro namespace
@@ -15,6 +16,7 @@ public class XPManager : MonoBehaviour
     public HealthController healthController; // Reference to the HealthController script
     public PlayerController playerController; // Reference to the PlayerController script
     public SoundController soundController; // Reference to the SoundController script
+    public TextMeshProUGUI insufficientSkillPointsText; 
 
     private int level = 1;
     private int xpToNextLevel = 10;
@@ -24,6 +26,7 @@ public class XPManager : MonoBehaviour
     public List<TextMeshProUGUI> upgradeCostTexts; // List of upgrade cost texts
 
     private List<Upgrade> upgrades = new List<Upgrade>(); // List of available upgrades
+    private Dictionary<System.Type, List<Upgrade>> upgradesByType = new Dictionary<System.Type, List<Upgrade>>(); // Group upgrades by type
 
     void Awake()
     {
@@ -54,15 +57,17 @@ public class XPManager : MonoBehaviour
         // Initialize upgrades
         if (healthController != null && playerController != null)
         {
-            upgrades.Add(new HealthUpgrade("Increase Health", 1, healthController, 10));
-            upgrades.Add(new HealthUpgrade("Increase Health", 2, healthController, 15));
-            upgrades.Add(new SpeedUpgrade("Increase Speed", 2, playerController, 1.0f));
+            upgrades.Add(new HealthUpgrade("Increase Health I", 1, healthController, 10));
+            upgrades.Add(new HealthUpgrade("Increase Health II", 2, healthController, 15));
+            upgrades.Add(new SpeedUpgrade("Increase Speed I", 2, playerController, 1.0f));
         }
         else
         {
             Debug.LogError("HealthController or PlayerController is not assigned in XPManager.");
         }
 
+        // Group upgrades by type, name was getting some issues before so changed to GetType()
+        upgradesByType = upgrades.GroupBy(u => u.GetType()).ToDictionary(g => g.Key, g => g.OrderBy(u => u.skillPointsCost).ToList());
         UpdateSkillPointsText();
         UpdateUpgradeButtons();
     }
@@ -137,7 +142,7 @@ public class XPManager : MonoBehaviour
     {
         if (levelUpText != null)
         {
-            levelUpText.text = "Level Up! Level: " + level;
+            levelUpText.text = "Level Up! Level " + level;
             levelUpText.gameObject.SetActive(true);
             StartCoroutine(HideLevelUpText());
         }
@@ -149,36 +154,52 @@ public class XPManager : MonoBehaviour
         levelUpText.gameObject.SetActive(false);
     }
 
+    // Update the upgrade buttons with the available upgrades
     private void UpdateUpgradeButtons()
     {
-        for (int i = 0; i < upgrades.Count; i++)
+        int buttonIndex = 0;
+        // Loop through the upgrades by type
+        foreach (var upgradeGroup in upgradesByType)
         {
-            if (i < upgradeButtons.Count && i < upgradeCostTexts.Count)
+            // Check if the button index is within the upgrade buttons and upgrade cost texts
+            if (buttonIndex < upgradeButtons.Count && buttonIndex < upgradeCostTexts.Count)
             {
-                Upgrade upgrade = upgrades[i];
-                upgradeButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = upgrade.name;
-                upgradeCostTexts[i].text = "Cost: " + upgrade.skillPointsCost + " Skill Points";
-                int index = i; // Capture the index for the lambda
-                upgradeButtons[i].onClick.RemoveAllListeners();
-                upgradeButtons[i].onClick.AddListener(() => UseSkillPointsForUpgrade(index));
+                // Get the first upgrade that is not purchased
+                Upgrade currentUpgrade = upgradeGroup.Value.FirstOrDefault(u => !u.IsPurchased);
+                // If there is an upgrade available that is not purchased yet set the button text and cost
+                if (currentUpgrade != null)
+                {
+                    upgradeButtons[buttonIndex].GetComponentInChildren<TextMeshProUGUI>().text = currentUpgrade.name;
+                    upgradeCostTexts[buttonIndex].text = "Cost: " + currentUpgrade.skillPointsCost ;
+                    int index = buttonIndex; // Capture the index for the lambda
+                    upgradeButtons[buttonIndex].onClick.RemoveAllListeners();
+                    upgradeButtons[buttonIndex].onClick.AddListener(() => UseSkillPointsForUpgrade(currentUpgrade.GetType()));
+                }
+                buttonIndex++;
             }
         }
     }
 
-    public void UseSkillPointsForUpgrade(int index)
+    public void UseSkillPointsForUpgrade(System.Type upgradeType)
     {
-        if (index < upgrades.Count)
+        if (upgradesByType.ContainsKey(upgradeType))
         {
-            Upgrade upgrade = upgrades[index];
-            if (UseSkillPoints(upgrade.skillPointsCost))
+            Upgrade upgrade = upgradesByType[upgradeType].FirstOrDefault(u => !u.IsPurchased);
+            if (upgrade != null)
             {
-                upgrade.ApplyUpgrade();
-                Debug.Log("Skill points used for " + upgrade.name);
-                UpdateUpgradeButtons(); // Update the button text and cost
-            }
-            else
-            {
-                Debug.Log("Not enough skill points for " + upgrade.name);
+                if (UseSkillPoints(upgrade.skillPointsCost))
+                {
+                    upgrade.Purchase();
+                    upgrade.ApplyUpgrade();
+                    Debug.Log("Skill points used for " + upgrade.name);
+                    UpdateUpgradeButtons(); // Update the button text and cost
+                    insufficientSkillPointsText.text = ""; // Clear the message
+                }
+                else
+                {
+                    Debug.Log("Not enough skill points for " + upgrade.name);
+                    insufficientSkillPointsText.text = "Not enough skill points for " + upgrade.name;
+                }
             }
         }
     }
