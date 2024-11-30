@@ -15,6 +15,7 @@ public class XPManager : MonoBehaviour
     public HealthController healthController; // Reference to the HealthController script
     public PlayerController playerController; // Reference to the PlayerController script
     public SoundController soundController; // Reference to the SoundController script
+    public TextMeshProUGUI insufficientSkillPointsText; 
 
     private int level = 1;
     private int xpToNextLevel = 10;
@@ -175,10 +176,12 @@ public class XPManager : MonoBehaviour
                 upgrade.ApplyUpgrade();
                 Debug.Log("Skill points used for " + upgrade.name);
                 UpdateUpgradeButtons(); // Update the button text and cost
+                insufficientSkillPointsText.text = ""; // Clear the message
             }
             else
             {
                 Debug.Log("Not enough skill points for " + upgrade.name);
+                insufficientSkillPointsText.text = "Not enough skill points for " + upgrade.name;
             }
         }
     }
