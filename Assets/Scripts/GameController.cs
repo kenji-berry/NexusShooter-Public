@@ -64,7 +64,6 @@ public class GameController : MonoBehaviour
 
    void OnTooglePauseMenu(InputValue value) // Automatically linked
     {
-
         if (isPaused)
         {
             ResumeGame();
@@ -84,6 +83,16 @@ public class GameController : MonoBehaviour
         // Disable player controls
         playerController.inventoryOpen = true; // Blocks inventory and movement in PlayerController
         playerController.enabled = false; // Disables PlayerController update loop
+
+            // Close inventory UI
+        var weaponsManager = FindObjectOfType<WeaponsManager>();
+        if (weaponsManager != null && weaponsManager.inventoryUI.activeInHierarchy)
+        {
+            weaponsManager.inventoryUI.SetActive(false); // Hide the inventory
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
