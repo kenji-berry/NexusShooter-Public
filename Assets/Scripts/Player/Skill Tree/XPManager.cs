@@ -12,34 +12,16 @@ public class XPManager : MonoBehaviour
     public TextMeshProUGUI levelText; // Reference to the Level Text
     public TextMeshProUGUI skillPointsText; // Reference to the Skill Points Text
     public HealthController healthController; // Reference to the HealthController script
-    public TextMeshProUGUI upgradeButtonText; // Reference to the upgrade button text
-    public TextMeshProUGUI upgradeCostText; // Reference to the upgrade cost text
+    public PlayerController playerController; // Reference to the PlayerController script
 
     private int level = 1;
     private int xpToNextLevel = 10;
     private static int skillPoints = 0; // Skill points that the player can use
 
-    // Define upgrade tiers
-    private struct UpgradeTier
-    {
-        public int healthIncrease;
-        public int skillPointsCost;
+    public List<Button> upgradeButtons; // List of upgrade buttons
+    public List<TextMeshProUGUI> upgradeCostTexts; // List of upgrade cost texts
 
-        public UpgradeTier(int healthIncrease, int skillPointsCost)
-        {
-            this.healthIncrease = healthIncrease;
-            this.skillPointsCost = skillPointsCost;
-        }
-    }
-
-    private List<UpgradeTier> upgradeTiers = new List<UpgradeTier>
-    {
-        new UpgradeTier(10, 1), // Tier 1: +10 health, 1 skill point
-        new UpgradeTier(15, 2), // Tier 2: +15 health, 2 skill points
-        new UpgradeTier(25, 3)  // Tier 3: +25 health, 3 skill points
-    };
-
-    private int currentUpgradeTier = 0; // Track the current upgrade tier
+    private List<Upgrade> upgrades = new List<Upgrade>(); // List of available upgrades
 
     void Awake()
     {
@@ -67,8 +49,12 @@ public class XPManager : MonoBehaviour
             levelText.text = "Level: " + level;
         }
 
+        // Initialise the upgrades
+        upgrades.Add(new HealthUpgrade("Increase Health", 1, healthController, 10));
+        upgrades.Add(new SpeedUpgrade("Increase Speed", 1, playerController, 20.0f));
+
         UpdateSkillPointsText();
-        UpdateUpgradeButtonText();
+        UpdateUpgradeButtons();
     }
 
     public void AddXP(int amount)
@@ -135,45 +121,38 @@ public class XPManager : MonoBehaviour
         }
     }
 
-    private void UpdateUpgradeButtonText()
+    private void UpdateUpgradeButtons()
     {
-        if (currentUpgradeTier < upgradeTiers.Count)
+        for (int i = 0; i < upgrades.Count; i++)
         {
-            UpgradeTier tier = upgradeTiers[currentUpgradeTier];
-            if (upgradeButtonText != null)
+            if (i < upgradeButtons.Count && i < upgradeCostTexts.Count)
             {
-                upgradeButtonText.text = "Increase Health by " + tier.healthIncrease;
-            }
-            if (upgradeCostText != null)
-            {
-                upgradeCostText.text = "Cost: " + tier.skillPointsCost + " Skill Points";
-            }
-        }
-        else
-        {
-            if (upgradeButtonText != null)
-            {
-                upgradeButtonText.text = "Max Upgrade Reached";
-            }
-            if (upgradeCostText != null)
-            {
-                upgradeCostText.text = "";
+                Upgrade upgrade = upgrades[i];
+                upgradeButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = upgrade.name;
+                upgradeCostTexts[i].text = "Cost: " + upgrade.skillPointsCost + " Skill Points";
+                int index = i; // Capture the index for the lambda
+                upgradeButtons[i].onClick.RemoveAllListeners();
+                upgradeButtons[i].onClick.AddListener(() => UseSkillPointsForUpgrade(index));
             }
         }
     }
 
-    // Public method to get the current skill points
-    public int GetSkillPoints()
+    public void UseSkillPointsForUpgrade(int index)
     {
-        return skillPoints;
-    }
-
-    // Public method to add skill points
-    public void AddSkillPoints(int amount)
-    {
-        skillPoints += amount;
-        Debug.Log("Skill points added: " + amount + ". Total skill points: " + skillPoints);
-        UpdateSkillPointsText();
+        if (index < upgrades.Count)
+        {
+            Upgrade upgrade = upgrades[index];
+            if (UseSkillPoints(upgrade.skillPointsCost))
+            {
+                upgrade.ApplyUpgrade();
+                Debug.Log("Skill points used for " + upgrade.name);
+                UpdateUpgradeButtons(); // Update the button text and cost
+            }
+            else
+            {
+                Debug.Log("Not enough skill points for " + upgrade.name);
+            }
+        }
     }
 
     // Public method to use/subtract skill points
@@ -190,30 +169,6 @@ public class XPManager : MonoBehaviour
         {
             Debug.Log("Not enough skill points. Total skill points: " + skillPoints);
             return false;
-        }
-    }
-
-    // Method to use skill points to increase health
-    public void UseSkillPointsForHealth()
-    {
-        if (currentUpgradeTier < upgradeTiers.Count)
-        {
-            UpgradeTier tier = upgradeTiers[currentUpgradeTier];
-            if (UseSkillPoints(tier.skillPointsCost))
-            {
-                healthController.IncreaseMaxHealth(tier.healthIncrease);
-                Debug.Log("Skill points used to increase health by " + tier.healthIncrease);
-                currentUpgradeTier++; // Move to the next upgrade tier
-                UpdateUpgradeButtonText(); // Update the button text and cost
-            }
-            else
-            {
-                Debug.Log("Not enough skill points to increase health.");
-            }
-        }
-        else
-        {
-            Debug.Log("Max upgrade tier reached.");
         }
     }
 }
