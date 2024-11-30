@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     private float endTime;
     private bool levelCompleted = false;
 
-    private bool isPaused = false;
+    public bool isPaused = false;
     private PlayerController playerController;
     private InputManager inputManager; // Reference the generated InputManager
 
@@ -64,7 +64,6 @@ public class GameController : MonoBehaviour
 
    void OnTooglePauseMenu(InputValue value) // Automatically linked
     {
-        Debug.Log("Pause menu toggled");
 
         if (isPaused)
         {
