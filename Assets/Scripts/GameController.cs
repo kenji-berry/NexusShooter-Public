@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     public bool isPaused = false;
     private PlayerController playerController;
     private InputManager inputManager; // Reference the generated InputManager
+    public Toggle soundsToggle;
 
 
     void Awake(){
@@ -35,6 +36,8 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        soundsToggle.isOn = SoundController.IsSoundEnabled();
+        soundsToggle.onValueChanged.AddListener(ToggleSounds);
         startTime = Time.time;
     }
 
@@ -137,11 +140,17 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
+
     public void UpdateMouseSensitivity(float sensitivity)
     {
         if (playerController != null)
         {
             playerController.SetMouseSensitivity(sensitivity);
         }
+    }
+
+    public void ToggleSounds(bool isEnabled)
+    {
+        SoundController.ToggleSound(isEnabled);
     }
 }
