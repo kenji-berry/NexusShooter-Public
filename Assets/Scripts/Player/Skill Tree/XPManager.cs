@@ -13,15 +13,13 @@ public class XPManager : MonoBehaviour
     public TextMeshProUGUI skillPointsText; // Reference to the Skill Points Text
     public HealthController healthController; // Reference to the HealthController script
     public PlayerController playerController; // Reference to the PlayerController script
-
     private int level = 1;
     private int xpToNextLevel = 10;
     private static int skillPoints = 0; // Skill points that the player can use
-
     public List<Button> upgradeButtons; // List of upgrade buttons
     public List<TextMeshProUGUI> upgradeCostTexts; // List of upgrade cost texts
-
     private List<Upgrade> upgrades = new List<Upgrade>(); // List of available upgrades
+    public SoundController soundController;
 
     void Awake()
     {
@@ -76,6 +74,7 @@ public class XPManager : MonoBehaviour
         {
             xp -= xpToNextLevel;
             level++;
+            soundController.Play(soundController.levelUp, 0.3f);
             xpToNextLevel += 50; // Increase the XP required for the next level
             AwardSkillPoints();
             UpdateLevelText();
