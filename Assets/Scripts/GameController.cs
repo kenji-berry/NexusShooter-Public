@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public GameObject deathScreen;
     public GameObject pauseMenu;
     public GameObject settingsPanel; // Reference to Settings Panel
+    public GameObject skillTreePanel; // Reference to Skill Tree Panel
     public Slider mouseSensitivitySlider;
 
 
@@ -145,6 +146,18 @@ public class GameController : MonoBehaviour
     public void CloseSettingsMenu()
     {
         settingsPanel.SetActive(false); 
+        pauseMenu.SetActive(true);
+    }
+
+    public void OpenSkillTreeMenu()
+    {
+        pauseMenu.SetActive(false);   
+        skillTreePanel.SetActive(true); 
+    }
+
+    public void CloseSkillTreeMenu()
+    {
+        skillTreePanel.SetActive(false); 
         pauseMenu.SetActive(true);
     }
 

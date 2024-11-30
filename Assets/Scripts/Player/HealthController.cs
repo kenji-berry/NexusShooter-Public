@@ -83,6 +83,15 @@ public class HealthController : MonoBehaviour
         UpdateArmourUI(); // Update the armour text when the tier changes
     }
 
+    // Method to increase max health
+    public void IncreaseMaxHealth(int amount)
+    {
+        maxHealth += amount;
+        currentHealth = maxHealth; // Heal the player to full health
+        UpdateHealthBar(currentHealth, maxHealth);
+        Debug.Log("Max health increased. New max health: " + maxHealth);
+    }
+
     // Method to update the armour text
     private void UpdateArmourUI()
     {
