@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyMelee : MonoBehaviour
 {
     public GameObject player;
     public Animator animator;
@@ -11,6 +11,10 @@ public class EnemyAI : MonoBehaviour
     public float patrolWaitTime = 2f;
     public float deaggroRange = 15f;
     public float deaggroTimer = 5f; // Time to maintain aggro after taking damage
+    public float meleeRange = 2f;
+    public int damage = 20;
+    private float nextAttackTime = 0f;
+    public float attackCooldown = 2f;
     private float currentDeaggroTime;
     private NavMeshAgent agent;
     private int currentPatrolIndex = 0;
@@ -36,37 +40,46 @@ public class EnemyAI : MonoBehaviour
         {
             SetNextPatrolPoint();
         }
-
-        agent.stoppingDistance = 0f; // Set initial stopping distance to 0
     }
 
     private void Update()
     {
         if (isDead) { return; }
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        animator.SetFloat("Speed", agent.velocity.magnitude / agent.speed);
 
-        // Changed aggro check to use detectionRange
-        if (distanceToPlayer < detectionRange)
-        {
-            isAggro = true;
-            currentDeaggroTime = Time.time + deaggroTimer;
-        }
-        else if (distanceToPlayer > deaggroRange && Time.time > currentDeaggroTime)
-        {
-            ResetAggro();
-        }
+        bool inSightRange = Vector3.Distance(transform.position, player.transform.position) < detectionRange;
+        bool inAttackRange = Vector3.Distance(transform.position, player.transform.position) < meleeRange;
 
-        if (isAggro)
+        if (inAttackRange)
         {
-            if (!isAttacking) ChasePlayer();
-        }
-        else
+            Attack();
+        } else if (inSightRange)
+        {
+            ChasePlayer();
+        } else
         {
             Patrol();
         }
+    }
 
+    void Attack()
+    {
+        agent.SetDestination(transform.position);
 
+        if (Time.time >= nextAttackTime)
+        {
+            animator.SetBool("isRunning", false);
+            animator.SetTrigger("punch");
+
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.GetComponent<HealthController>().TakeDamage(damage);
+            }
+
+            nextAttackTime = Time.time + attackCooldown; // Set next attack time
+        }
     }
 
     private void Patrol()

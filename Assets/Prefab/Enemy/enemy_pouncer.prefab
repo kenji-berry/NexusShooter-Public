@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1259917503954950585}
   - component: {fileID: 74162241563591181}
   m_Layer: 0
-  m_Name: EnemyPouncer
+  m_Name: enemy_pouncer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
