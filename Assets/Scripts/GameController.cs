@@ -14,8 +14,8 @@ public class GameController : MonoBehaviour
     public GameObject settingsPanel; // Reference to Settings Panel
     public GameObject skillTreePanel; // Reference to Skill Tree Panel
     public Slider mouseSensitivitySlider;
-
-
+    public Slider volumeSlider;
+    public AudioSource audioSource;
     private float startTime;
     private float endTime;
     private bool levelCompleted = false;
@@ -23,7 +23,6 @@ public class GameController : MonoBehaviour
     public bool isPaused = false;
     private PlayerController playerController;
     private InputManager inputManager; // Reference the generated InputManager
-    public Toggle soundsToggle;
 
 
     void Awake(){
@@ -37,9 +36,20 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        soundsToggle.isOn = SoundController.IsSoundEnabled();
-        soundsToggle.onValueChanged.AddListener(ToggleSounds);
         startTime = Time.time;
+
+
+        if (audioSource != null)
+        {
+            audioSource.volume = 1.0f; // Set volume to max
+        }
+
+
+        if (volumeSlider != null && audioSource != null)
+        {
+            volumeSlider.value = audioSource.volume * 10f; // Set slider to match audio source volume (convert 0-1 to 0-10)
+            volumeSlider.onValueChanged.AddListener(UpdateVolume); // Add listener to slider
+        }
     }
 
     void Update()
@@ -141,12 +151,14 @@ public class GameController : MonoBehaviour
     {
         pauseMenu.SetActive(false);   
         settingsPanel.SetActive(true); 
+        Debug.Log("Audio Source Volume: " + audioSource.volume);
     }
 
     public void CloseSettingsMenu()
     {
         settingsPanel.SetActive(false); 
         pauseMenu.SetActive(true);
+        Debug.Log("Audio Source Volume: " + audioSource.volume);
     }
 
     public void OpenSkillTreeMenu()
@@ -175,8 +187,13 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void ToggleSounds(bool isEnabled)
+    public void UpdateVolume(float volume)
     {
-        SoundController.ToggleSound(isEnabled);
+        if (audioSource != null)
+        {
+            audioSource.volume = volume / 10f; // Convert slider value to 0-1 range
+            Debug.Log("Volume set to: " + audioSource.volume);
+            Debug.Log("Slider value: " + volumeSlider.value);
+        }
     }
 }
