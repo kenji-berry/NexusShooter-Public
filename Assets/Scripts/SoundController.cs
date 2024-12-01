@@ -11,6 +11,7 @@ public class SoundController : MonoBehaviour
     public AudioClip jump;
     public AudioClip levelUp;
     public AudioClip skillPointPurchase;
+    public AudioClip buttonClick;
 
     private static bool isSoundEnabled = true; // Global sound state
 
