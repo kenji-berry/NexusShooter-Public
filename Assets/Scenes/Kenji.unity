@@ -13274,8 +13274,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -31111,8 +31111,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -42670,6 +42670,10 @@ PrefabInstance:
       propertyPath: levelUp
       value: 
       objectReference: {fileID: 8300000, guid: f4367acf8ccb6074381c424e619b36ee, type: 3}
+    - target: {fileID: 4644952146009421158, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
+      propertyPath: skillPointPurchase
+      value: 
+      objectReference: {fileID: 8300000, guid: 759b24ea9a8aa5e42a31866a96c1d953, type: 3}
     - target: {fileID: 6717449105027503392, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
       propertyPath: m_Name
       value: Sound Controller
