@@ -22,6 +22,7 @@ public class XPManager : MonoBehaviour
     private static int skillPoints = 50; // Skill points that the player can use
     public List<Button> upgradeButtons; // List of upgrade buttons
     public List<TextMeshProUGUI> upgradeCostTexts; // List of upgrade cost texts
+    private float xpMultiplier = 1.0f;
 
     private List<Upgrade> upgrades = new List<Upgrade>(); // List of available upgrades
     private Dictionary<System.Type, List<Upgrade>> upgradesByType = new Dictionary<System.Type, List<Upgrade>>(); // Group upgrades by type
@@ -64,6 +65,10 @@ public class XPManager : MonoBehaviour
             upgrades.Add(new DurabilityUpgrade("Increase Durability I", 1, healthController, 10));
             upgrades.Add(new DurabilityUpgrade("Increase Durability II", 2, healthController, 15));
             upgrades.Add(new DurabilityUpgrade("Increase Durability III", 3, healthController, 25));
+
+            upgrades.Add(new XPGainUpgrade("Increase XP I", 1, this, 1.15f));
+            upgrades.Add(new XPGainUpgrade("Increase XP II", 2, this, 1.3f));
+            upgrades.Add(new XPGainUpgrade("Increase XP III", 3, this, 1.5f));
         }
         else
         {
@@ -76,10 +81,16 @@ public class XPManager : MonoBehaviour
         UpdateUpgradeButtons();
     }
 
+    public void SetXPMultiplier(float multiplier)
+    {
+        xpMultiplier = multiplier;
+    }
+
     public void AddXP(int amount)
     {
-        xp += amount;
-        Debug.Log("XP added: " + amount + ". Total XP: " + xp);
+        int adjustedXP = Mathf.RoundToInt(amount * xpMultiplier);
+        xp += adjustedXP;
+        Debug.Log("XP added: " + adjustedXP + " (original: " + amount + "). Total XP: " + xp);
         CheckLevelUp();
         UpdateXPSlider();
     }
@@ -94,10 +105,10 @@ public class XPManager : MonoBehaviour
         while (xp >= xpToNextLevel)
         {
             xp -= xpToNextLevel;
+            xpToNextLevel += level*10; // Increase the XP required for the next level
             level++;
             soundController.Play(soundController.levelUp, 0.3f);
             ShowLevelUpText();
-            xpToNextLevel += 50; // Increase the XP required for the next level
             AwardSkillPoints();
             UpdateLevelText();
         }
