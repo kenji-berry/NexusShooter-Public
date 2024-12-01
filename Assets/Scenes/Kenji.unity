@@ -32379,11 +32379,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671381111}
   m_CullTransparentMesh: 1
---- !u!224 &680315106 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2519039063389405561, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
-  m_PrefabInstance: {fileID: 1493490236}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &682388054
 GameObject:
   m_ObjectHideFlags: 0
@@ -67178,10 +67173,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4012676099326717679, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
-      propertyPath: m_Name
-      value: ArmourBarBackground
-      objectReference: {fileID: 0}
     - target: {fileID: 4149268918456244583, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -67365,10 +67356,6 @@ PrefabInstance:
     - target: {fileID: 7497325514376399620, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 2.4000244
-      objectReference: {fileID: 0}
-    - target: {fileID: 7650073636555218663, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
-      propertyPath: m_Name
-      value: ArmourBarFill
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -89873,10 +89860,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 941464417}
     - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
-      propertyPath: armourBarFill
-      value: 
-      objectReference: {fileID: 680315106}
-    - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: healthBarFill
       value: 
       objectReference: {fileID: 173035762}
@@ -89884,10 +89867,6 @@ PrefabInstance:
       propertyPath: heathBarBackground
       value: 
       objectReference: {fileID: 416673957}
-    - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
-      propertyPath: armourBarBackground
-      value: 
-      objectReference: {fileID: 1978423973}
     - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: healthBarRectTransform
       value: 
@@ -93657,11 +93636,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 312714963}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &1978423973 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2343964360216641640, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
-  m_PrefabInstance: {fileID: 1493490236}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1981222318
 GameObject:
   m_ObjectHideFlags: 0
