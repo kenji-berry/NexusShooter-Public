@@ -32,6 +32,8 @@ public class HealthController : MonoBehaviour
         { ArmourTier.Heavy, 0.25f }
     };
 
+    private float medkitEffectivenessMultiplier = 1.0f;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -123,9 +125,21 @@ public class HealthController : MonoBehaviour
     // Method to heal
     public void Heal(int amount)
     {
-        currentHealth += amount;
+        int effectiveAmount = Mathf.RoundToInt(amount * medkitEffectivenessMultiplier);
+        currentHealth += effectiveAmount;
         currentHealth = Mathf.Min(currentHealth, maxHealth);
-        UpdateHealthBar(currentHealth, maxHealth,0);
+        UpdateHealthBar(currentHealth, maxHealth, 0);
+    }
+
+    public void IncreaseMedkitEffectiveness(float multiplier)
+    {
+        medkitEffectivenessMultiplier *= multiplier;
+    }
+
+    // Method to set medkit effectiveness multiplier
+    public void SetMedkitEffectivenessMultiplier(float multiplier)
+    {
+        medkitEffectivenessMultiplier = multiplier;
     }
 
     // Method to change armour tier

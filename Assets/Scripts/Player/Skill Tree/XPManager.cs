@@ -60,8 +60,6 @@ public class XPManager : MonoBehaviour
             upgrades.Add(new HealthUpgrade("Increase Health II", 2, healthController, 15));
             upgrades.Add(new HealthUpgrade("Increase Health III", 3, healthController, 25));
 
-            upgrades.Add(new SpeedUpgrade("Increase Speed I", 1, playerController, 1.0f));
-
             upgrades.Add(new DurabilityUpgrade("Increase Durability I", 1, healthController, 10));
             upgrades.Add(new DurabilityUpgrade("Increase Durability II", 2, healthController, 15));
             upgrades.Add(new DurabilityUpgrade("Increase Durability III", 3, healthController, 25));
@@ -69,6 +67,10 @@ public class XPManager : MonoBehaviour
             upgrades.Add(new XPGainUpgrade("Increase XP I", 1, this, 1.15f));
             upgrades.Add(new XPGainUpgrade("Increase XP II", 2, this, 1.3f));
             upgrades.Add(new XPGainUpgrade("Increase XP III", 3, this, 1.5f));
+
+            upgrades.Add(new MedkitUpgrade("Increase Medkit Effectiveness I", 1, healthController, 1.1f));
+            upgrades.Add(new MedkitUpgrade("Increase Medkit Effectiveness II", 2, healthController, 1.25f));
+            upgrades.Add(new MedkitUpgrade("Increase Medkit Effectiveness III", 3, healthController, 1.5f));
         }
         else
         {
