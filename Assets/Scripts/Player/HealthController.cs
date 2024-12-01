@@ -22,6 +22,8 @@ public class HealthController : MonoBehaviour
     public ArmourTier currentArmourTier = ArmourTier.None;
     public RectTransform healthBarFill;
     public RectTransform heathBarBackground;
+    public RectTransform armourBarFill;
+    public RectTransform armourBarBackground;
     private Dictionary<ArmourTier, float> armourMultipliers = new Dictionary<ArmourTier, float>
     {
         { ArmourTier.None, 1.0f },
@@ -65,8 +67,27 @@ public class HealthController : MonoBehaviour
     }
 
     // Method to update the armour text
-    public void UpdateArmourText(int damage, int adjustedDamage, int maxDurability){
-        armourDurability -= damage - adjustedDamage;     // armour absorbs rest of damage
+    public void UpdateArmourBar(int damage, int adjustedDamage, int maxDurability, int amount)
+    {
+        if (amount > 0)
+        {
+            // Calculate the new width based on the amount added
+            float newWidth = armourBarFill.sizeDelta.x + amount;
+            float newBackgroundWidth = armourBarBackground.sizeDelta.x + amount;
+
+            Debug.Log("New width: " + newWidth);
+            Debug.Log("New background width: " + newBackgroundWidth);
+            // Adjust the sizeDelta of the armour bar fill and background
+            armourBarFill.sizeDelta = new Vector2(newWidth, armourBarFill.sizeDelta.y);
+            armourBarBackground.sizeDelta = new Vector2(newBackgroundWidth, armourBarBackground.sizeDelta.y);
+
+            // Adjust the position to keep the armour bar aligned
+            Debug.Log("Amount: " + amount);
+            armourBarFill.localPosition = new Vector3(armourBarFill.localPosition.x + (amount / 2), armourBarFill.localPosition.y, armourBarFill.localPosition.z);
+            armourBarBackground.localPosition = new Vector3(armourBarBackground.localPosition.x + (amount / 2), armourBarBackground.localPosition.y, armourBarBackground.localPosition.z);
+        }
+        armourDurability -= damage - adjustedDamage; // armour absorbs rest of damage
+        armourBar.maxValue = maxDurability;
         armourBar.value = armourDurability;
         armourText.text = armourDurability + "/" + maxDurability;
     }
@@ -78,7 +99,7 @@ public class HealthController : MonoBehaviour
         int adjustedDamage = Mathf.RoundToInt(damage * damageMultiplier);
 
 
-        UpdateArmourText(damage, adjustedDamage, maxDurability);
+        UpdateArmourBar(damage, adjustedDamage, maxDurability,0);
         Debug.Log("Damage: " + damage + " Adjusted Damage: " + adjustedDamage);
 
         if (armourDurability <= 0)
@@ -128,7 +149,7 @@ public class HealthController : MonoBehaviour
     {
         maxDurability += amount;
         armourDurability = maxDurability;
-        UpdateArmourText(0, 0, maxDurability); // Pass dummy values for damage and adjustedDamage
+        UpdateArmourBar(0, 0, maxDurability, amount); // Pass dummy values for damage and adjustedDamage
         Debug.Log("Max durability increased. New max durability: " + maxDurability);
     }
 
