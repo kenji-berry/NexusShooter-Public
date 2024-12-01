@@ -58,12 +58,7 @@ public class XPManager : MonoBehaviour
             upgrades.Add(new HealthUpgrade("Increase Health I", 1, healthController, 10));
             upgrades.Add(new HealthUpgrade("Increase Health II", 2, healthController, 15));
             upgrades.Add(new HealthUpgrade("Increase Health III", 3, healthController, 25));
-
             upgrades.Add(new SpeedUpgrade("Increase Speed I", 1, playerController, 1.0f));
-
-            upgrades.Add(new DurabilityUpgrade("Increase Durability I", 1, healthController, 10));
-            upgrades.Add(new DurabilityUpgrade("Increase Durability II", 2, healthController, 15));
-            upgrades.Add(new DurabilityUpgrade("Increase Durability III", 3, healthController, 25));
         }
         else
         {
