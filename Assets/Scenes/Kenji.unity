@@ -42671,6 +42671,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: f4367acf8ccb6074381c424e619b36ee, type: 3}
     - target: {fileID: 4644952146009421158, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
+      propertyPath: buttonClick
+      value: 
+      objectReference: {fileID: 8300000, guid: b87fbe4ac336a8d44bb8e2e5b023c168, type: 3}
+    - target: {fileID: 4644952146009421158, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
       propertyPath: skillPointPurchase
       value: 
       objectReference: {fileID: 8300000, guid: 759b24ea9a8aa5e42a31866a96c1d953, type: 3}
@@ -46002,6 +46006,7 @@ MonoBehaviour:
   fovSlider: {fileID: 1182458150}
   colorBlindnessDropdown: {fileID: 2130420281}
   audioSource: {fileID: 586105066}
+  soundController: {fileID: 0}
   playerCamera: {fileID: 1565252058}
   postProcessVolume: {fileID: 992749663}
   normalProfile: {fileID: 11400000, guid: 88bd2d8ce00f6db40bc3b44e55e9fad9, type: 2}
@@ -69766,13 +69771,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 992749660}
+      - m_Target: {fileID: 992749659}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: MainMenu
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

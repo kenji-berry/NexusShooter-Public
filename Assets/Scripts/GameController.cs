@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
 
     // Audio
     public AudioSource audioSource;
+    public SoundController soundController;
 
     // Camera
     public Camera playerCamera;
@@ -50,6 +51,7 @@ public class GameController : MonoBehaviour
         settingsPanel.SetActive(false);
         mouseSensitivitySlider.value = playerController.mouseSensitivity;
         mouseSensitivitySlider.onValueChanged.AddListener(UpdateMouseSensitivity);
+        soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
     }
 
     void Start()
@@ -163,12 +165,14 @@ public class GameController : MonoBehaviour
         playerController.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        ButtonPressSound();
     }
 
     public void OpenSettingsMenu()
     {
         pauseMenu.SetActive(false);
         settingsPanel.SetActive(true);
+        ButtonPressSound();
         Debug.Log("Audio Source Volume: " + audioSource.volume);
     }
 
@@ -177,18 +181,21 @@ public class GameController : MonoBehaviour
         settingsPanel.SetActive(false);
         pauseMenu.SetActive(true);
         Debug.Log("Audio Source Volume: " + audioSource.volume);
+        ButtonPressSound();
     }
 
     public void OpenSkillTreeMenu()
     {
         pauseMenu.SetActive(false);
         skillTreePanel.SetActive(true);
+        ButtonPressSound();
     }
 
     public void CloseSkillTreeMenu()
     {
         skillTreePanel.SetActive(false);
         pauseMenu.SetActive(true);
+        ButtonPressSound();
     }
 
     public void MainMenu()
@@ -249,4 +256,10 @@ public class GameController : MonoBehaviour
 
         Debug.Log("Color blindness filter set to: " + colorBlindnessDropdown.options[index].text);
     }
+
+    public void ButtonPressSound()
+    {
+         soundController.Play(soundController.buttonClick, 0.2f);
+    }
+
 }
