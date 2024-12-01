@@ -17,11 +17,9 @@ public class XPManager : MonoBehaviour
     public PlayerController playerController; // Reference to the PlayerController script
     public SoundController soundController; // Reference to the SoundController script
     public TextMeshProUGUI insufficientSkillPointsText; 
-
     private int level = 1;
     private int xpToNextLevel = 10;
     private static int skillPoints = 50; // Skill points that the player can use
-
     public List<Button> upgradeButtons; // List of upgrade buttons
     public List<TextMeshProUGUI> upgradeCostTexts; // List of upgrade cost texts
 
@@ -209,6 +207,7 @@ public class XPManager : MonoBehaviour
                 {
                     upgrade.Purchase();
                     upgrade.ApplyUpgrade();
+                    soundController.Play(soundController.skillPointPurchase, 0.3f);
                     Debug.Log("Skill points used for " + upgrade.name);
                     UpdateUpgradeButtons(); // Update the button text and cost
                     insufficientSkillPointsText.text = ""; // Clear the message
