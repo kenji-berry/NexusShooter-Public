@@ -1,0 +1,301 @@
+{
+  "assetCategories": {
+    "imperfection": {
+      "metal": {
+        "scratched": {}
+      }
+    }
+  },
+  "averageColor": "#808080",
+  "categories": [
+    "surface",
+    "imperfections"
+  ],
+  "comp_version": 1,
+  "description": "",
+  "environment": {
+    "biome": "undefined",
+    "region": "undefined"
+  },
+  "highest_available_res": 8192,
+  "id": "sctkaelp",
+  "json": {
+    "contentLength": 6512,
+    "uri": "sctkaelp.json"
+  },
+  "maps": [
+    {
+      "averageColor": "#7E7E7E",
+      "bitDepth": 32,
+      "colorSpace": "Linear",
+      "contentLength": 132432919,
+      "maxIntensity": 216,
+      "mimeType": "image/x-exr",
+      "minIntensity": 0,
+      "name": "Gloss",
+      "physicalSize": "1x1",
+      "resolution": "8192x8192",
+      "type": "gloss",
+      "uri": "sctkaelp_8K_Gloss.exr"
+    },
+    {
+      "averageColor": "#7E7E7E",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 49395363,
+      "maxIntensity": 216,
+      "mimeType": "image/jpeg",
+      "minIntensity": 0,
+      "name": "Gloss",
+      "physicalSize": "1x1",
+      "resolution": "8192x8192",
+      "type": "gloss",
+      "uri": "sctkaelp_8K_Gloss.jpg"
+    },
+    {
+      "averageColor": "#D9D9D9",
+      "bitDepth": 16,
+      "colorSpace": "Linear",
+      "contentLength": 192848785,
+      "maxIntensity": 255,
+      "mimeType": "image/x-exr",
+      "minIntensity": 0,
+      "name": "Mask",
+      "physicalSize": "1x1",
+      "resolution": "8192x8192",
+      "type": "mask",
+      "uri": "sctkaelp_8K_Mask.exr"
+    },
+    {
+      "averageColor": "#D9D9D9",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 51022536,
+      "maxIntensity": 255,
+      "mimeType": "image/jpeg",
+      "minIntensity": 0,
+      "name": "Mask",
+      "physicalSize": "1x1",
+      "resolution": "8192x8192",
+      "type": "mask",
+      "uri": "sctkaelp_8K_Mask.jpg"
+    },
+    {
+      "averageColor": "#818181",
+      "bitDepth": 32,
+      "colorSpace": "Linear",
+      "contentLength": 118507273,
+      "maxIntensity": 255,
+      "mimeType": "image/x-exr",
+      "minIntensity": 39,
+      "name": "Roughness",
+      "physicalSize": "1x1",
+      "resolution": "8192x8192",
+      "type": "roughness",
+      "uri": "sctkaelp_8K_Roughness.exr"
+    },
+    {
+      "averageColor": "#818181",
+      "bitDepth": 8,
+      "colorSpace": "Linear",
+      "contentLength": 49384037,
+      "maxIntensity": 255,
+      "mimeType": "image/jpeg",
+      "minIntensity": 39,
+      "name": "Roughness",
+      "physicalSize": "1x1",
+      "resolution": "8192x8192",
+      "type": "roughness",
+      "uri": "sctkaelp_8K_Roughness.jpg"
+    }
+  ],
+  "meta": [
+    {
+      "key": "scanArea",
+      "name": "Scan Area",
+      "value": "1x1 m"
+    },
+    {
+      "key": "height",
+      "name": "Height",
+      "value": "20 m"
+    },
+    {
+      "key": "tileable",
+      "name": "Tileable",
+      "value": true
+    },
+    {
+      "key": "texelDensity",
+      "name": "Texel Density",
+      "value": "8192 px/m"
+    },
+    {
+      "key": "calibration",
+      "name": "Calibration",
+      "value": "GretagMacbeth ColorChecker Color Rendition Chart"
+    },
+    {
+      "key": "scanner",
+      "name": "Scanner",
+      "value": "MKX"
+    }
+  ],
+  "models": [],
+  "name": "Scratched Metal",
+  "pack": null,
+  "physicalSize": null,
+  "points": 1,
+  "previews": {
+    "images": [
+      {
+        "contentLength": 154036,
+        "resolution": "360x360",
+        "tags": [
+          "thumb"
+        ],
+        "uri": "sctkaelp_Grid_360.png"
+      },
+      {
+        "contentLength": 208932,
+        "resolution": "420x420",
+        "tags": [
+          "thumb"
+        ],
+        "uri": "sctkaelp_Grid_420.png"
+      },
+      {
+        "contentLength": 603304,
+        "resolution": "720x720",
+        "tags": [
+          "thumb",
+          "retina"
+        ],
+        "uri": "sctkaelp_Grid_720.png"
+      },
+      {
+        "contentLength": 820702,
+        "resolution": "840x840",
+        "tags": [
+          "thumb",
+          "retina"
+        ],
+        "uri": "sctkaelp_Grid_840.png"
+      },
+      {
+        "contentLength": 1587186,
+        "resolution": "1440x768",
+        "tags": [
+          "preview"
+        ],
+        "uri": "sctkaelp_Popup_1440.png"
+      },
+      {
+        "contentLength": 2958417,
+        "resolution": "1920x1080",
+        "tags": [
+          "preview"
+        ],
+        "uri": "sctkaelp_Popup_1920.png"
+      },
+      {
+        "contentLength": 6239796,
+        "resolution": "2880x1536",
+        "tags": [
+          "preview",
+          "retina"
+        ],
+        "uri": "sctkaelp_Popup_2880.png"
+      },
+      {
+        "contentLength": 11725612,
+        "resolution": "3840x2160",
+        "tags": [
+          "preview",
+          "retina"
+        ],
+        "uri": "sctkaelp_Popup_3840.png"
+      }
+    ],
+    "relativeSize": "1x1",
+    "scaleReferences": []
+  },
+  "process_date": "2024-04-18 09:49:12",
+  "properties": [],
+  "referencePreviews": {
+    "maps": [],
+    "models": []
+  },
+  "references": [],
+  "revised": false,
+  "semanticTags": {
+    "architectural_style": {},
+    "asset_type": "imperfection",
+    "contains": [
+      "deep scratches",
+      "textured"
+    ],
+    "environment": [],
+    "industry": [
+      "archviz",
+      "games",
+      "VFX"
+    ],
+    "interior_exterior": [
+      "interior",
+      "exterior"
+    ],
+    "latin_name": [],
+    "locations": {},
+    "maxSize": 1,
+    "minSize": 1,
+    "name": "Scratched Metal",
+    "resolution": 8192,
+    "season": [],
+    "subject_matter": "manmade",
+    "theme": [
+      "metal"
+    ]
+  },
+  "tags": [
+    "surface imperfection",
+    "archviz"
+  ],
+  "texelDensity": 8192,
+  "texture_type": "basic",
+  "ue_plugin_archives": [
+    {
+      "contentLength": 115255314,
+      "gltfVersion": "2.0",
+      "tier": 0,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_0/sctkaelp_tier_0.zip",
+      "version": 1
+    },
+    {
+      "contentLength": 34494751,
+      "gltfVersion": "2.0",
+      "tier": 1,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_1/sctkaelp_tier_1.zip",
+      "version": 1
+    },
+    {
+      "contentLength": 9047993,
+      "gltfVersion": "2.0",
+      "tier": 2,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_2/sctkaelp_tier_2.zip",
+      "version": 1
+    },
+    {
+      "contentLength": 2339940,
+      "gltfVersion": "2.0",
+      "tier": 3,
+      "type": "gltf",
+      "uri": "ue_plugin_archives/tier_3/sctkaelp_tier_3.zip",
+      "version": 1
+    }
+  ],
+  "version": 2
+}
