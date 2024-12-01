@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
     public Slider mouseSensitivitySlider;
     public Slider volumeSlider;
     public AudioSource audioSource;
+    public Camera playerCamera; // Reference to the player's camera
+    public Slider fovSlider; // Reference to the FOV slider
     private float startTime;
     private float endTime;
     private bool levelCompleted = false;
@@ -38,17 +40,25 @@ public class GameController : MonoBehaviour
     {
         startTime = Time.time;
 
-
         if (audioSource != null)
         {
             audioSource.volume = 1.0f; // Set volume to max
         }
 
-
         if (volumeSlider != null && audioSource != null)
         {
             volumeSlider.value = audioSource.volume * 10f; // Set slider to match audio source volume (convert 0-1 to 0-10)
             volumeSlider.onValueChanged.AddListener(UpdateVolume); // Add listener to slider
+        }
+
+        if (playerCamera != null && fovSlider != null)
+        {
+            Debug.Log("FOV: " + playerCamera.fieldOfView);
+            // Normalize FOV to 0-1 range
+            float normalizedFOV = (playerCamera.fieldOfView - 70f) / (120f - 70f);
+            // Set slider value to match normalized FOV
+            fovSlider.value = normalizedFOV * fovSlider.maxValue;
+            fovSlider.onValueChanged.AddListener(UpdateFOV);
         }
     }
 
@@ -181,6 +191,16 @@ public class GameController : MonoBehaviour
             audioSource.volume = volume / 10f; // Convert slider value to 0-1 range
             Debug.Log("Volume set to: " + audioSource.volume);
             Debug.Log("Slider value: " + volumeSlider.value);
+        }
+    }
+
+    public void UpdateFOV(float sliderValue)
+    {
+        if (playerCamera != null)
+        {
+            float fov = Mathf.Lerp(80f, 120f, sliderValue / fovSlider.maxValue);
+            playerCamera.fieldOfView = fov;
+            Debug.Log("FOV set to: " + fov);
         }
     }
 }
