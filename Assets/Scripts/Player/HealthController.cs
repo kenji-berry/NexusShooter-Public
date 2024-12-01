@@ -10,13 +10,18 @@ public class HealthController : MonoBehaviour
     public int maxHealth = 100;
 
     public Slider healthBar;
+    public TextMeshProUGUI healthText;
     public Slider armourBar;
+    public TextMeshProUGUI armourText;
 
     public int armourDurability;
+    public int maxDurability = 100;
 
     // Armour tiers and their corresponding damage multipliers
     public enum ArmourTier { None, Light, Medium, Heavy }
     public ArmourTier currentArmourTier = ArmourTier.None;
+    public RectTransform healthBarFill;
+    public RectTransform heathBarBackground;
     private Dictionary<ArmourTier, float> armourMultipliers = new Dictionary<ArmourTier, float>
     {
         { ArmourTier.None, 1.0f },
@@ -30,14 +35,40 @@ public class HealthController : MonoBehaviour
         currentHealth = maxHealth;
 
         // Initialize the health bar with the player's starting health
-        UpdateHealthBar(currentHealth, maxHealth);
+        UpdateHealthBar(currentHealth, maxHealth, 0);
         UpdateArmourUI(); // Initialize the armour text
     }
 
-    public void UpdateHealthBar(int currentHealth, int maxHealth)
+    // Method to update the health bar
+    public void UpdateHealthBar(int currentHealth, int maxHealth, int amount)
     {
+        if (amount > 0)
+        {
+            // Calculate the new width based on the amount added
+            float newWidth = healthBarFill.sizeDelta.x + amount;
+            float newBackgroundWidth = heathBarBackground.sizeDelta.x + amount;
+
+            Debug.Log("New width: " + newWidth);
+            Debug.Log("New background width: " + newBackgroundWidth);
+            // Adjust the sizeDelta of the health bar fill and background
+            healthBarFill.sizeDelta = new Vector2(newWidth, healthBarFill.sizeDelta.y);
+            heathBarBackground.sizeDelta = new Vector2(newBackgroundWidth, heathBarBackground.sizeDelta.y);
+
+            // Adjust the position to keep the health bar aligned
+            Debug.Log("Amount: " + amount);
+            healthBarFill.localPosition = new Vector3(healthBarFill.localPosition.x + (amount / 2), healthBarFill.localPosition.y, healthBarFill.localPosition.z);
+            heathBarBackground.localPosition = new Vector3(heathBarBackground.localPosition.x + (amount / 2), heathBarBackground.localPosition.y, heathBarBackground.localPosition.z);
+        }
         healthBar.maxValue = maxHealth;
         healthBar.value = currentHealth;
+        healthText.text = currentHealth + "/" + maxHealth;
+    }
+
+    // Method to update the armour text
+    public void UpdateArmourText(int damage, int adjustedDamage, int maxDurability){
+        armourDurability -= damage - adjustedDamage;     // armour absorbs rest of damage
+        armourBar.value = armourDurability;
+        armourText.text = armourDurability + "/" + maxDurability;
     }
 
     // Method to take damage
@@ -46,8 +77,9 @@ public class HealthController : MonoBehaviour
         float damageMultiplier = armourMultipliers[currentArmourTier];
         int adjustedDamage = Mathf.RoundToInt(damage * damageMultiplier);
 
-        armourDurability -= damage - adjustedDamage;     // armour absorbs rest of damage
-        armourBar.value = armourDurability;
+
+        UpdateArmourText(damage, adjustedDamage, maxDurability);
+        Debug.Log("Damage: " + damage + " Adjusted Damage: " + adjustedDamage);
 
         if (armourDurability <= 0)
         {
@@ -58,7 +90,7 @@ public class HealthController : MonoBehaviour
 
         currentHealth -= adjustedDamage;
         currentHealth = Mathf.Max(currentHealth, 0);
-        UpdateHealthBar(currentHealth, maxHealth);
+        UpdateHealthBar(currentHealth, maxHealth, 0);
 
         if (currentHealth <= 0) 
         {
@@ -72,7 +104,7 @@ public class HealthController : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Min(currentHealth, maxHealth);
-        UpdateHealthBar(currentHealth, maxHealth);
+        UpdateHealthBar(currentHealth, maxHealth,0);
     }
 
     // Method to change armour tier
@@ -88,8 +120,16 @@ public class HealthController : MonoBehaviour
     {
         maxHealth += amount;
         currentHealth = maxHealth; // Heal the player to full health
-        UpdateHealthBar(currentHealth, maxHealth);
-        Debug.Log("Max health increased. New max health: " + maxHealth);
+        UpdateHealthBar(currentHealth, maxHealth, amount);
+    }
+
+    // Method to increase armour durability
+    public void IncreaseArmourDurability(int amount)
+    {
+        maxDurability += amount;
+        armourDurability = maxDurability;
+        UpdateArmourText(0, 0, maxDurability); // Pass dummy values for damage and adjustedDamage
+        Debug.Log("Max durability increased. New max durability: " + maxDurability);
     }
 
     // Method to update the armour text
