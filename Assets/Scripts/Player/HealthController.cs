@@ -12,6 +12,8 @@ public class HealthController : MonoBehaviour
     public Slider healthBar;
     public Slider armourBar;
 
+    public int armourDurability;
+
     // Armour tiers and their corresponding damage multipliers
     public enum ArmourTier { None, Light, Medium, Heavy }
     public ArmourTier currentArmourTier = ArmourTier.None;
@@ -44,6 +46,16 @@ public class HealthController : MonoBehaviour
         float damageMultiplier = armourMultipliers[currentArmourTier];
         int adjustedDamage = Mathf.RoundToInt(damage * damageMultiplier);
 
+        armourDurability -= damage - adjustedDamage;     // armour absorbs rest of damage
+        armourBar.value = armourDurability;
+
+        if (armourDurability <= 0)
+        {
+            armourDurability = 0;
+            currentArmourTier = ArmourTier.None;
+            UpdateArmourUI();
+        }
+
         currentHealth -= adjustedDamage;
         currentHealth = Mathf.Max(currentHealth, 0);
         UpdateHealthBar(currentHealth, maxHealth);
@@ -67,7 +79,17 @@ public class HealthController : MonoBehaviour
     public void SetArmourTier(ArmourTier newArmourTier)
     {
         currentArmourTier = newArmourTier;
+        armourBar.value = armourDurability = 100;
         UpdateArmourUI(); // Update the armour text when the tier changes
+    }
+
+    // Method to increase max health
+    public void IncreaseMaxHealth(int amount)
+    {
+        maxHealth += amount;
+        currentHealth = maxHealth; // Heal the player to full health
+        UpdateHealthBar(currentHealth, maxHealth);
+        Debug.Log("Max health increased. New max health: " + maxHealth);
     }
 
     // Method to update the armour text
@@ -77,7 +99,7 @@ public class HealthController : MonoBehaviour
         {
             case ArmourTier.None:
                 armourBar.gameObject.SetActive(false);
-                break;
+                return;
 
             case ArmourTier.Light:
                 armourBar.fillRect.GetComponent<Image>().color = new Color(0.804f, 0.498f, 0.196f);

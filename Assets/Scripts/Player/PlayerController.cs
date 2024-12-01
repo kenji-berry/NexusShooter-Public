@@ -238,4 +238,10 @@ public class PlayerController : MonoBehaviour
         mouseSensitivity = sensitivity; // Update sensitivity
         Debug.Log($"Mouse Sensitivity set to: {mouseSensitivity}");
     }
+
+    public void IncreaseSpeed(float amount)
+    {
+        speed += amount;
+        Debug.Log($"Player speed increased by {amount}. New speed: {speed}");
+    }
 }

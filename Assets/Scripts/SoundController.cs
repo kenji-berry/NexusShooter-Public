@@ -9,8 +9,10 @@ public class SoundController : MonoBehaviour
     public AudioClip melee;
     public AudioClip hit;
     public AudioClip jump;
+    public AudioClip levelUp;
+    public AudioClip skillPointPurchase;
 
-    private static bool isSoundEnabled = false; // Global sound state
+    private static bool isSoundEnabled = true; // Global sound state
 
     public void Play(AudioClip clip, float volume = 1f)
     {
