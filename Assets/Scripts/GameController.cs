@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        playerController = FindObjectOfType<PlayerController>();
+        playerController = FindFirstObjectByType<PlayerController>();
         pauseMenu.SetActive(false);
         settingsPanel.SetActive(false);
         mouseSensitivitySlider.value = playerController.mouseSensitivity;
@@ -141,7 +141,7 @@ public class GameController : MonoBehaviour
         playerController.inventoryOpen = true;
         playerController.enabled = false;
 
-        var weaponsManager = FindObjectOfType<WeaponsManager>();
+        var weaponsManager = FindFirstObjectByType<WeaponsManager>();
         if (weaponsManager != null && weaponsManager.inventoryUI.activeInHierarchy)
         {
             weaponsManager.inventoryUI.SetActive(false);

@@ -92,7 +92,7 @@ public class WeaponsManager : MonoBehaviour
     void OnShoot(InputValue value)
     {
 
-        if (selectedGun == -1 || isInventoryOpen || FindObjectOfType<GameController>().isPaused)
+        if (selectedGun == -1 || isInventoryOpen || FindFirstObjectByType<GameController>().isPaused)
         {
             return;
         }
