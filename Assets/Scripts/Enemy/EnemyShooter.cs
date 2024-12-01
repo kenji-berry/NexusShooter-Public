@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyShooter : MonoBehaviour
 {
     public GameObject player;
     public Animator animator;
+    public Transform firePoint;
 
     private float detectionRange = 10f;
     public Transform[] patrolPoints;
@@ -12,6 +13,7 @@ public class EnemyAI : MonoBehaviour
     public float deaggroRange = 15f;
     public float deaggroTimer = 5f; // Time to maintain aggro after taking damage
     private float currentDeaggroTime;
+    private float shootCooldown = 2f;
     private NavMeshAgent agent;
     private int currentPatrolIndex = 0;
     private bool isWaiting = false;
@@ -21,6 +23,11 @@ public class EnemyAI : MonoBehaviour
     private float stopDistance = 1f;
     public bool isDead = false;
     public bool isAttacking = false;
+    public float shootingRange = 10f;  // Range within which the enemy can shoot
+    public float fireRate = 1f; // Time between shots
+    public GameObject bulletPrefab; // Bullet prefab to shoot
+    public float bulletSpeed = 20f; // Speed of the bullet
+    private float nextFireTime = 0f;  // Time to fire next bullet
 
     private void Start()
     {
@@ -36,37 +43,31 @@ public class EnemyAI : MonoBehaviour
         {
             SetNextPatrolPoint();
         }
-
-        agent.stoppingDistance = 0f; // Set initial stopping distance to 0
     }
 
     private void Update()
     {
         if (isDead) { return; }
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        animator.SetFloat("Speed", agent.velocity.magnitude / agent.speed);
 
-        // Changed aggro check to use detectionRange
-        if (distanceToPlayer < detectionRange)
-        {
-            isAggro = true;
-            currentDeaggroTime = Time.time + deaggroTimer;
-        }
-        else if (distanceToPlayer > deaggroRange && Time.time > currentDeaggroTime)
-        {
-            ResetAggro();
-        }
+        bool inSightRange = Vector3.Distance(transform.position, player.transform.position) < detectionRange;
+        bool inAttackRange = Vector3.Distance(transform.position, player.transform.position) < shootingRange;
 
-        if (isAggro)
+        if (inAttackRange)
         {
-            if (!isAttacking) ChasePlayer();
+            FaceTarget();
+            Shoot();
+        }
+        else if (inSightRange)
+        {
+            FaceTarget();
+            ChasePlayer();
         }
         else
         {
             Patrol();
         }
-
-
     }
 
     private void Patrol()
@@ -93,6 +94,34 @@ public class EnemyAI : MonoBehaviour
                 isWaiting = false;
                 SetNextPatrolPoint();
             }
+        }
+    }
+
+    void Shoot()
+    {
+        if (bulletPrefab == null) return;
+
+        if (Time.time >= nextFireTime)
+        {
+            Debug.Log("SHOOTING");
+            animator.SetTrigger("shoot");
+            animator.SetBool("isRunning", false);
+
+            float distanceToPlayer = (player.transform.position - firePoint.position).magnitude;
+            float timeToPlayer = Mathf.Min(distanceToPlayer / bulletSpeed, 0.2f);
+
+            Vector3 predictedPosition = player.transform.position + player.GetComponent<PlayerController>().characterVelocity * timeToPlayer;
+            Vector3 directionToPlayer = (predictedPosition - firePoint.position).normalized;
+
+            // Spawn bullet
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(directionToPlayer));
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+
+            rb.velocity = directionToPlayer * bulletSpeed;
+
+            Destroy(bullet, 5f);
+
+            nextFireTime = Time.time + shootCooldown;
         }
     }
 
