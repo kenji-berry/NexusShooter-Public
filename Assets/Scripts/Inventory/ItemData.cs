@@ -12,12 +12,5 @@ public class ItemData : ScriptableObject
 
     public GameObject prefab;
 
-    public ItemType type;
     public int maxStackSize;
-}
-
-public enum ItemType 
-{
-    GUN,
-    MELEE
 }
