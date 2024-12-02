@@ -152,6 +152,15 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleItemInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""30b04b97-0a7a-438e-928a-1c3158c2bf67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -352,6 +361,17 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""TooglePauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9767ad43-000d-4742-b16b-7c77375176e2"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleItemInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -374,6 +394,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Player_SelectWeaponTwo = m_Player.FindAction("SelectWeaponTwo", throwIfNotFound: true);
         m_Player_SelectWeaponThree = m_Player.FindAction("SelectWeaponThree", throwIfNotFound: true);
         m_Player_TooglePauseMenu = m_Player.FindAction("TooglePauseMenu", throwIfNotFound: true);
+        m_Player_ToggleItemInventory = m_Player.FindAction("ToggleItemInventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -449,6 +470,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SelectWeaponTwo;
     private readonly InputAction m_Player_SelectWeaponThree;
     private readonly InputAction m_Player_TooglePauseMenu;
+    private readonly InputAction m_Player_ToggleItemInventory;
     public struct PlayerActions
     {
         private @InputManager m_Wrapper;
@@ -467,6 +489,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         public InputAction @SelectWeaponTwo => m_Wrapper.m_Player_SelectWeaponTwo;
         public InputAction @SelectWeaponThree => m_Wrapper.m_Player_SelectWeaponThree;
         public InputAction @TooglePauseMenu => m_Wrapper.m_Player_TooglePauseMenu;
+        public InputAction @ToggleItemInventory => m_Wrapper.m_Player_ToggleItemInventory;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -518,6 +541,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @TooglePauseMenu.started += instance.OnTooglePauseMenu;
             @TooglePauseMenu.performed += instance.OnTooglePauseMenu;
             @TooglePauseMenu.canceled += instance.OnTooglePauseMenu;
+            @ToggleItemInventory.started += instance.OnToggleItemInventory;
+            @ToggleItemInventory.performed += instance.OnToggleItemInventory;
+            @ToggleItemInventory.canceled += instance.OnToggleItemInventory;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -564,6 +590,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @TooglePauseMenu.started -= instance.OnTooglePauseMenu;
             @TooglePauseMenu.performed -= instance.OnTooglePauseMenu;
             @TooglePauseMenu.canceled -= instance.OnTooglePauseMenu;
+            @ToggleItemInventory.started -= instance.OnToggleItemInventory;
+            @ToggleItemInventory.performed -= instance.OnToggleItemInventory;
+            @ToggleItemInventory.canceled -= instance.OnToggleItemInventory;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -597,5 +626,6 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         void OnSelectWeaponTwo(InputAction.CallbackContext context);
         void OnSelectWeaponThree(InputAction.CallbackContext context);
         void OnTooglePauseMenu(InputAction.CallbackContext context);
+        void OnToggleItemInventory(InputAction.CallbackContext context);
     }
 }

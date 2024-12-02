@@ -125,7 +125,7 @@ public class WeaponsManager : MonoBehaviour
         gunSlots[pos] = gunInstance;
 
         // Add to UI inventory
-        inventorySlots[pos].item = gunPrefab.gameObject.GetComponent<Item>().itemData;
+        inventorySlots[pos].item = gunPrefab.gameObject.GetComponent<ItemInstance>().itemData;
         inventorySlots[pos].ammoCountText.text = gunInstance.GetComponent<Gun>().currentAmmo.ToString();
         inventorySlots[pos].UpdateSlot();
 
