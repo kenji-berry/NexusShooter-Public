@@ -3342,7 +3342,7 @@ GameObject:
   - component: {fileID: 4338086263071626164}
   - component: {fileID: 5561204573448384678}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: SensitivitySlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10427,7 +10427,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7472680963023532486}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: SettingsOptions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
