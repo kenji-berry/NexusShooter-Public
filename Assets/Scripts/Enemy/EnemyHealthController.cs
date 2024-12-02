@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyHealthController : MonoBehaviour
 {
-    public EnemyMelee enemy; 
+    public Enemy enemy; 
     public int maxHealth = 100;
     private int currentHealth;
     public int xpReward = 10; // Amount of XP to reward when this enemy is defeated
@@ -12,7 +12,7 @@ public class EnemyHealthController : MonoBehaviour
 
     void Awake()
     {
-        enemy = GetComponent<EnemyMelee>();
+        enemy = GetComponent<Enemy>();
     }
 
     void Start()
