@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class EnemyHealthController : MonoBehaviour
 {
+    public EnemyMelee enemy; 
     public int maxHealth = 100;
     private int currentHealth;
-    public Animator animator;
     public int xpReward = 10; // Amount of XP to reward when this enemy is defeated
     public event System.Action<int> onDamageTaken; // event to notify subscribers when damage is taken
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
+        enemy = GetComponent<EnemyMelee>();
     }
 
     void Start()
@@ -29,8 +29,7 @@ public class EnemyHealthController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            animator.SetTrigger("death");
-            GetComponent<EnemyAI>().isDead = true;
+            enemy.SetDead();
             gameObject.GetComponent<Collider>().enabled = false;
 
             // Reward XP when the enemy is defeated

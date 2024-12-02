@@ -147,6 +147,13 @@ public class EnemyMelee : MonoBehaviour
         isAggro = true;
     }
 
+    public void SetDead()
+    {
+        animator.SetTrigger("death");
+        agent.isStopped = true;
+        isDead = true;
+    }
+
     public void ResetAggro()
     {
         isAggro = false;
