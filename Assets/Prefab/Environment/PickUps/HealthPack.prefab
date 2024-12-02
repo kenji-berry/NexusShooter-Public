@@ -119,8 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0367c4c83f343f44094268e270251b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIndex: 1
-  healthAmount: 50
+  healthAmount: 10
   bounceHeight: 0.1
   bounceSpeed: 3
 --- !u!1 &7665355328211122241

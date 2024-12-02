@@ -47,7 +47,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 5729134728157833572}
   shoot: {fileID: 8300000, guid: 7636ab8197918f849bf4d107d9f76739, type: 3}
+  melee: {fileID: 8300000, guid: f03f007992a5e034287c857a7487ac56, type: 3}
   hit: {fileID: 8300000, guid: 4bc8a53829f103d44ae0b08279e49b5c, type: 3}
+  jump: {fileID: 8300000, guid: 226d5fa311132b94fb09f77349d82767, type: 3}
+  levelUp: {fileID: 8300000, guid: f4367acf8ccb6074381c424e619b36ee, type: 3}
+  skillPointPurchase: {fileID: 8300000, guid: 759b24ea9a8aa5e42a31866a96c1d953, type: 3}
+  buttonClick: {fileID: 8300000, guid: b87fbe4ac336a8d44bb8e2e5b023c168, type: 3}
 --- !u!82 &5729134728157833572
 AudioSource:
   m_ObjectHideFlags: 0
