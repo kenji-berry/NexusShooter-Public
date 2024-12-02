@@ -41,10 +41,13 @@ public class CrosshairColorSelector : MonoBehaviour
                 selectedColor = Color.cyan;
                 break;
             case 6:
-                selectedColor = Color.magenta; // Purple? close enough
+                selectedColor = Color.magenta; // Purple
                 break;
         }
 
-        gameController.ChangeCrosshairColor(selectedColor);
+        gameController.crosshairVerticalTopLine.color = selectedColor;
+        gameController.crosshairVerticalBottomLine.color = selectedColor;
+        gameController.crosshairHorizontalLeftLine.color = selectedColor;
+        gameController.crosshairHorizontalRightLine.color = selectedColor;
     }
 }
