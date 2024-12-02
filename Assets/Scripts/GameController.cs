@@ -15,10 +15,13 @@ public class GameController : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject settingsPanel;
     public GameObject skillTreePanel;
+    public GameObject crosshairPanel;
     public Slider mouseSensitivitySlider;
     public Slider volumeSlider;
     public Slider fovSlider;
     public TMP_Dropdown colorBlindnessDropdown;
+    public Image crosshairVerticalLine;
+    public Image crosshairHorizontalLine;
 
     // Audio
     public AudioSource audioSource;
@@ -198,6 +201,21 @@ public class GameController : MonoBehaviour
         ButtonPressSound();
     }
 
+    public void OpenCrosshairMenu()
+    {
+        settingsPanel.SetActive(false);
+        crosshairPanel.SetActive(true);
+        ButtonPressSound();
+    }
+
+    public void CloseCrosshairMenu()
+    {
+        crosshairPanel.SetActive(false);
+        settingsPanel.SetActive(true);
+        ButtonPressSound();
+    }
+
+
     public void MainMenu()
     {
         Debug.Log("Loading Main Menu...");
@@ -262,4 +280,12 @@ public class GameController : MonoBehaviour
          soundController.Play(soundController.buttonClick, 0.2f);
     }
 
+    public void ChangeCrosshairColor(Color newColor)
+    {
+        if (crosshairVerticalLine != null && crosshairHorizontalLine != null)
+        {
+            crosshairVerticalLine.color = newColor;
+            crosshairHorizontalLine.color = newColor;
+        }
+    }
 }
