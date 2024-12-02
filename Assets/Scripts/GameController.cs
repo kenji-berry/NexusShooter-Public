@@ -22,6 +22,10 @@ public class GameController : MonoBehaviour
     public TMP_Dropdown colorBlindnessDropdown;
     public Image crosshairVerticalLine;
     public Image crosshairHorizontalLine;
+    public Image crosshairVerticalTopLine;
+    public Image crosshairVerticalBottomLine;
+    public Image crosshairHorizontalLeftLine;
+    public Image crosshairHorizontalRightLine;
 
     // Audio
     public AudioSource audioSource;
@@ -278,14 +282,5 @@ public class GameController : MonoBehaviour
     public void ButtonPressSound()
     {
          soundController.Play(soundController.buttonClick, 0.2f);
-    }
-
-    public void ChangeCrosshairColor(Color newColor)
-    {
-        if (crosshairVerticalLine != null && crosshairHorizontalLine != null)
-        {
-            crosshairVerticalLine.color = newColor;
-            crosshairHorizontalLine.color = newColor;
-        }
     }
 }
