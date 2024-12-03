@@ -109,8 +109,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ToggleInventory"",
-                    ""type"": ""Button"",
+                    ""name"": ""ToggleWeaponInventory"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""4df7f42f-2a39-4736-9364-006397a777a2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -343,11 +343,11 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9364e18d-aaa1-49c2-98db-9c299091e25a"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ToggleInventory"",
+                    ""action"": ""ToggleWeaponInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -365,7 +365,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9767ad43-000d-4742-b16b-7c77375176e2"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -389,7 +389,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Player_ToggleShootMode = m_Player.FindAction("ToggleShootMode", throwIfNotFound: true);
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
         m_Player_MeleeAttack = m_Player.FindAction("MeleeAttack", throwIfNotFound: true);
-        m_Player_ToggleInventory = m_Player.FindAction("ToggleInventory", throwIfNotFound: true);
+        m_Player_ToggleWeaponInventory = m_Player.FindAction("ToggleWeaponInventory", throwIfNotFound: true);
         m_Player_SelectWeaponOne = m_Player.FindAction("SelectWeaponOne", throwIfNotFound: true);
         m_Player_SelectWeaponTwo = m_Player.FindAction("SelectWeaponTwo", throwIfNotFound: true);
         m_Player_SelectWeaponThree = m_Player.FindAction("SelectWeaponThree", throwIfNotFound: true);
@@ -465,7 +465,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ToggleShootMode;
     private readonly InputAction m_Player_Use;
     private readonly InputAction m_Player_MeleeAttack;
-    private readonly InputAction m_Player_ToggleInventory;
+    private readonly InputAction m_Player_ToggleWeaponInventory;
     private readonly InputAction m_Player_SelectWeaponOne;
     private readonly InputAction m_Player_SelectWeaponTwo;
     private readonly InputAction m_Player_SelectWeaponThree;
@@ -484,7 +484,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         public InputAction @ToggleShootMode => m_Wrapper.m_Player_ToggleShootMode;
         public InputAction @Use => m_Wrapper.m_Player_Use;
         public InputAction @MeleeAttack => m_Wrapper.m_Player_MeleeAttack;
-        public InputAction @ToggleInventory => m_Wrapper.m_Player_ToggleInventory;
+        public InputAction @ToggleWeaponInventory => m_Wrapper.m_Player_ToggleWeaponInventory;
         public InputAction @SelectWeaponOne => m_Wrapper.m_Player_SelectWeaponOne;
         public InputAction @SelectWeaponTwo => m_Wrapper.m_Player_SelectWeaponTwo;
         public InputAction @SelectWeaponThree => m_Wrapper.m_Player_SelectWeaponThree;
@@ -526,9 +526,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @MeleeAttack.started += instance.OnMeleeAttack;
             @MeleeAttack.performed += instance.OnMeleeAttack;
             @MeleeAttack.canceled += instance.OnMeleeAttack;
-            @ToggleInventory.started += instance.OnToggleInventory;
-            @ToggleInventory.performed += instance.OnToggleInventory;
-            @ToggleInventory.canceled += instance.OnToggleInventory;
+            @ToggleWeaponInventory.started += instance.OnToggleWeaponInventory;
+            @ToggleWeaponInventory.performed += instance.OnToggleWeaponInventory;
+            @ToggleWeaponInventory.canceled += instance.OnToggleWeaponInventory;
             @SelectWeaponOne.started += instance.OnSelectWeaponOne;
             @SelectWeaponOne.performed += instance.OnSelectWeaponOne;
             @SelectWeaponOne.canceled += instance.OnSelectWeaponOne;
@@ -575,9 +575,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @MeleeAttack.started -= instance.OnMeleeAttack;
             @MeleeAttack.performed -= instance.OnMeleeAttack;
             @MeleeAttack.canceled -= instance.OnMeleeAttack;
-            @ToggleInventory.started -= instance.OnToggleInventory;
-            @ToggleInventory.performed -= instance.OnToggleInventory;
-            @ToggleInventory.canceled -= instance.OnToggleInventory;
+            @ToggleWeaponInventory.started -= instance.OnToggleWeaponInventory;
+            @ToggleWeaponInventory.performed -= instance.OnToggleWeaponInventory;
+            @ToggleWeaponInventory.canceled -= instance.OnToggleWeaponInventory;
             @SelectWeaponOne.started -= instance.OnSelectWeaponOne;
             @SelectWeaponOne.performed -= instance.OnSelectWeaponOne;
             @SelectWeaponOne.canceled -= instance.OnSelectWeaponOne;
@@ -621,7 +621,7 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         void OnToggleShootMode(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
         void OnMeleeAttack(InputAction.CallbackContext context);
-        void OnToggleInventory(InputAction.CallbackContext context);
+        void OnToggleWeaponInventory(InputAction.CallbackContext context);
         void OnSelectWeaponOne(InputAction.CallbackContext context);
         void OnSelectWeaponTwo(InputAction.CallbackContext context);
         void OnSelectWeaponThree(InputAction.CallbackContext context);

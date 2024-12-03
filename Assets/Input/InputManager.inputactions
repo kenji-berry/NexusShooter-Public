@@ -87,8 +87,8 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ToggleInventory",
-                    "type": "Button",
+                    "name": "ToggleWeaponInventory",
+                    "type": "PassThrough",
                     "id": "4df7f42f-2a39-4736-9364-006397a777a2",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -321,11 +321,11 @@
                 {
                     "name": "",
                     "id": "9364e18d-aaa1-49c2-98db-9c299091e25a",
-                    "path": "<Keyboard>/tab",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ToggleInventory",
+                    "action": "ToggleWeaponInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -343,7 +343,7 @@
                 {
                     "name": "",
                     "id": "9767ad43-000d-4742-b16b-7c77375176e2",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

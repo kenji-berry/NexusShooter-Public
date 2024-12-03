@@ -16,8 +16,11 @@ public class RecipeSlot : MonoBehaviour, IPointerClickHandler
 
     void Awake()
     {
-        recipeName.text = recipe.name;
-        icon.sprite = recipe.result.itemData.icon;
+        if (recipe != null)
+        {
+            recipeName.text = recipe.name;
+            icon.sprite = recipe.result.itemData.icon;
+        }
 
         inventoryManager = FindFirstObjectByType<InventoryManager>();
     }

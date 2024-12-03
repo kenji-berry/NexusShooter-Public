@@ -92,16 +92,12 @@ public class InventoryManager : MonoBehaviour
                 {
                     leftToRemove = Math.Min(slots[i].amount, leftToRemove);
                     slots[i].amount -= Math.Min(slots[i].amount, leftToRemove);
+                    slots[i].UpdateSlot();
 
                     if (leftToRemove == 0)
                     {
-                        slots[i].item = null;
-                        slots[i].icon = null;
-                        slots[i].amountText.text = "";
                         return;
                     }
-
-                    slots[i].UpdateSlot();
                 }
             }
         }
