@@ -18,6 +18,8 @@ public abstract class Gun : MonoBehaviour
 
     protected int shootableMask; // Layer mask for objects we can shoot
 
+    private bool isShooting = false;
+
     void Awake()
     {
         soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
@@ -28,6 +30,52 @@ public abstract class Gun : MonoBehaviour
         Debug.Log($"Shootable Layer Mask: {shootableMask}");
 
         currentAmmo = gunData.maxAmmo;
+    }
+
+    public void StartShooting()
+    {
+        isShooting = true;
+
+        switch (gunData.shootingType)
+        {
+            case GunData.ShootingType.Single:
+                TryShoot();
+                break;
+
+            case GunData.ShootingType.Auto:
+                StartCoroutine(AutoShoot());
+                break;
+
+            case GunData.ShootingType.SemiAuto:
+                StartCoroutine(BurstShoot());
+                break;
+        }
+    }
+        
+    public void StopShooting()
+    {
+        isShooting = false; // Stop any ongoing shooting
+    }
+
+    private IEnumerator AutoShoot()
+    {
+        while (isShooting && currentAmmo > 0)
+        {
+            TryShoot();
+            yield return new WaitForSeconds(1 / gunData.fireRate);
+        }
+    }
+    
+    private IEnumerator BurstShoot()
+    {
+        int shotsFired = 0;
+
+        while (shotsFired < gunData.burstCount && currentAmmo > 0)
+        {
+            TryShoot();
+            shotsFired++;
+            yield return new WaitForSeconds(1 / gunData.fireRate);
+        }
     }
 
     public void TryShoot()

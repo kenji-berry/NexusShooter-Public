@@ -5,6 +5,14 @@ using UnityEngine;
 [CreateAssetMenu]
 public class GunData : ScriptableObject
 {
+
+    public enum ShootingType
+    {
+        Single,
+        Auto,
+        SemiAuto // e.g., burst fire
+    }
+
     public string gunName;
 
     public int maxAmmo;
@@ -14,4 +22,7 @@ public class GunData : ScriptableObject
     public int damage;
 
     public AudioClip shootSound;
+
+    public ShootingType shootingType; // New field for firing mode
+    public int burstCount = 3; // Used for SemiAuto guns
 }

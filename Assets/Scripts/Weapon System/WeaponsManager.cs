@@ -98,7 +98,14 @@ public class WeaponsManager : MonoBehaviour
         }
 
         Gun gun = gunSlots[selectedGun];
-        gun.TryShoot();
+        if (value.isPressed)
+        {
+            gun.StartShooting();
+        }
+        else
+        {
+            gun.StopShooting();
+        }
     }
 
     public bool AddGun(Gun gunPrefab)
