@@ -14,10 +14,22 @@ public class ItemInventorySlot : MonoBehaviour
 
     public void UpdateSlot()
     {
-        icon.sprite = item.icon;
-        icon.color = new Color(1f, 1f, 1f);
+        if (amount == 0)
+        {
+            ClearSlot();
+        } else {
+            icon.sprite = item.icon;
+            icon.color = new Color(1f, 1f, 1f);
+            amountText.text = $"{amount}x";
+        }
+    }
 
-        amountText.text = $"{amount}x";
+    public void ClearSlot()
+    {
+        item = null;
+        icon.sprite = null;
+        icon.color = new Color(1f, 1f, 1f);
+        amountText.text = "";
     }
 
     public bool RoomLeftInStack(int amount)
@@ -41,5 +53,4 @@ public class ItemInventorySlot : MonoBehaviour
     {
         this.amount -= amount;
     }
-
 }

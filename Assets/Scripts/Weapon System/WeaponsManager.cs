@@ -37,17 +37,9 @@ public class WeaponsManager : MonoBehaviour
         }
     }
 
-    void OnToggleInventory(InputValue value)
+    void OnToggleWeaponInventory(InputValue value)
     {
-        if (inventoryUI.activeInHierarchy)
-        {
-            inventoryUI.SetActive(false);
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            gameObject.GetComponent<PlayerController>().inventoryOpen = false;
-            isInventoryOpen = false;
-        }
-        else
+        if (value.isPressed)
         {
             UpdateInventoryUI();
             inventoryUI.SetActive(true);
@@ -55,6 +47,13 @@ public class WeaponsManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             gameObject.GetComponent<PlayerController>().inventoryOpen = true;
             isInventoryOpen = true;
+        } else
+        {
+            inventoryUI.SetActive(false);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            gameObject.GetComponent<PlayerController>().inventoryOpen = false;
+            isInventoryOpen = false;
         }
     }
 

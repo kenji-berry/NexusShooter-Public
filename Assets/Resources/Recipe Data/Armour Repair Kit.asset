@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52a37575d48b2ab47b519f3a517cbb40, type: 3}
-  m_Name: Armour Patch Kit
+  m_Name: Armour Repair Kit
   m_EditorClassIdentifier: 
+  recipeName: Armour Repair Kit
   requirements:
   - itemData: {fileID: 11400000, guid: 0ec0be02e4970434c97c9b79a2f65d35, type: 2}
-    amount: 1
+    amount: 2
   result:
-    itemData: {fileID: 0}
-    amount: 0
+    itemData: {fileID: 11400000, guid: e7fcdf6acf369554da3c86b3577557e2, type: 2}
+    amount: 1
