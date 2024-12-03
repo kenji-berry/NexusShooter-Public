@@ -4,7 +4,7 @@ public class GrenadeLauncher : Gun
 {
     public GameObject grenadePrefab; // Prefab for the grenade
     public Transform launchPoint; // Point from which the grenade is launched
-    public float launchForce = 10f; // Initial force applied to the grenade
+    public float launchForce = 20f; // Initial force applied to the grenade
 
     public override void Shoot()
     {

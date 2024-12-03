@@ -5,13 +5,22 @@ public class Grenade : MonoBehaviour
     public float explosionRadius = 5f; // Radius of the explosion
     public float explosionForce = 700f; // Force applied to nearby objects
     public int damage = 50; // Damage dealt to enemies
+
+    public float explosionDelay = 40f; // Delay before the grenade explodes
     public GameObject explosionEffect; // Optional particle effect for explosion
 
-    private void OnCollisionEnter(Collision collision)
+
+   void Start()
     {
-        // Perform the explosion
-        Explode();
+        // Start the countdown timer
+        Invoke(nameof(Explode), explosionDelay);
     }
+
+//    private void OnCollisionEnter(Collision collision)
+//     {
+//         // Explode on collision
+//         Explode();
+//     }
 
     private void Explode()
     {
@@ -41,6 +50,6 @@ public class Grenade : MonoBehaviour
         }
 
         // Destroy the grenade object
-        Destroy(gameObject);
+        Destroy(gameObject, 2f);
     }
 }
