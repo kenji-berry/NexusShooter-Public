@@ -74198,7 +74198,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36180
+  m_Name: pb_Mesh30818
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -90487,8 +90487,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1023381880}
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
-      propertyPath: startingGuns.Array.size
+      propertyPath: gunSlots.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: startingGuns.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: inventorySlots.Array.size
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: 'startingGuns.Array.data[0]'
@@ -90501,6 +90509,18 @@ PrefabInstance:
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: 'startingGuns.Array.data[2]'
       value: 
+      objectReference: {fileID: 8957422448262130010, guid: daf6e8babfc364afd9ae16671df38a18, type: 3}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: 'startingGuns.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8957422448262130010, guid: daf6e8babfc364afd9ae16671df38a18, type: 3}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: 'startingGuns.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8502061310869606832, guid: c9c77d9beed334357871a2335c15496a, type: 3}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: 'startingGuns.Array.data[5]'
+      value: 
       objectReference: {fileID: 8502061310869606832, guid: c9c77d9beed334357871a2335c15496a, type: 3}
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: 'inventorySlots.Array.data[0]'
@@ -90512,6 +90532,14 @@ PrefabInstance:
       objectReference: {fileID: 1639795735}
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: 'inventorySlots.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1014953720}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: 'inventorySlots.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1014953720}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: 'inventorySlots.Array.data[4]'
       value: 
       objectReference: {fileID: 1014953720}
     - target: {fileID: 9107121375138173511, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
@@ -99108,79 +99136,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1001 &872769817565304296
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1169273300214076926, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: 'm_Bones.Array.data[2]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1550107821561349820, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: 'm_Bones.Array.data[2]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2663650151693496029, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: 'm_Bones.Array.data[2]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4934638759407434964, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: m_Name
-      value: ak47
-      objectReference: {fileID: 0}
-    - target: {fileID: 5113936380872570276, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: 'm_Bones.Array.data[2]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7220306467857592769, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 119.472664
-      objectReference: {fileID: 0}
-    - target: {fileID: 7220306467857592769, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 17.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 7220306467857592769, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 153.45189
-      objectReference: {fileID: 0}
-    - target: {fileID: 7220306467857592769, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7220306467857592769, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7220306467857592769, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7220306467857592769, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7220306467857592769, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7220306467857592769, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7220306467857592769, guid: c9c77d9beed334357871a2335c15496a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c9c77d9beed334357871a2335c15496a, type: 3}
 --- !u!1001 &4255754844961733430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99696,5 +99651,4 @@ SceneRoots:
   - {fileID: 9222689353361871834}
   - {fileID: 2135809235}
   - {fileID: 1507951350}
-  - {fileID: 872769817565304296}
   - {fileID: 1054444844}
