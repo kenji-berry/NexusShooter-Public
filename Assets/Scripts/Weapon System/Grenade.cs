@@ -1,0 +1,46 @@
+using UnityEngine;
+
+public class Grenade : MonoBehaviour
+{
+    public float explosionRadius = 5f; // Radius of the explosion
+    public float explosionForce = 700f; // Force applied to nearby objects
+    public int damage = 50; // Damage dealt to enemies
+    public GameObject explosionEffect; // Optional particle effect for explosion
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Perform the explosion
+        Explode();
+    }
+
+    private void Explode()
+    {
+        // Instantiate explosion effect
+        if (explosionEffect != null)
+        {
+            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        }
+
+        // Detect nearby objects
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+
+        foreach (Collider nearbyObject in colliders)
+        {
+            Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            }
+
+            // Apply damage to enemies
+            EnemyHealthController enemy = nearbyObject.GetComponent<EnemyHealthController>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
+        }
+
+        // Destroy the grenade object
+        Destroy(gameObject);
+    }
+}
