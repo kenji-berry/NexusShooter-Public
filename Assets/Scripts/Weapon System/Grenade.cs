@@ -27,7 +27,7 @@ public class Grenade : MonoBehaviour
         // Instantiate explosion effect
         if (explosionEffect != null)
         {
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            Instantiate(explosionEffect, transform.position, Quaternion.Euler(-90, 0, 0));
         }
 
         // Detect nearby objects
