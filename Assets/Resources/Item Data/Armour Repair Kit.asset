@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6502e6e8c151c44999fc05a660b3d37c, type: 3}
-  m_Name: Armour Patch Kit
+  m_Name: Armour Repair Kit
   m_EditorClassIdentifier: 
   id: 4
-  itemName: Armour Patch Kit
+  itemName: Armour Repair Kit
   description: 'An item which restores armour durability
 
 '
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 19f81d5e7c193ed41a43d6c47f62a182, type: 3}
   prefab: {fileID: 3569408993548698860, guid: 7fdc02b4c42f5e64b92541b16bb3d796, type: 3}
-  type: 0
   maxStackSize: 1

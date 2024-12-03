@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2468235477325065163}
   - component: {fileID: 20905452625121269}
   m_Layer: 0
-  m_Name: ArmourPatchKit
+  m_Name: ArmourRepairKit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

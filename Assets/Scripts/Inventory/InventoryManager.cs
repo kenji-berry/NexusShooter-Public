@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 { 
@@ -46,6 +46,63 @@ public class InventoryManager : MonoBehaviour
                 slots[i].UpdateSlot();
                 Destroy(item.gameObject);
                 return;
+            }
+        }
+    }
+
+    public bool HasItem(ItemData item, int amount)
+    {
+        int itemCount = 0;
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == item)
+            {
+                itemCount += slots[i].amount;
+            }
+        }
+
+        return itemCount >= amount;
+    }
+
+    public void AddItem(ItemData item, int amount)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null)
+            {
+                slots[i].item = item;
+                slots[i].amount = amount;
+
+                slots[i].UpdateSlot();
+                return;
+            }
+        }
+    }
+
+    public void RemoveItem(ItemData item, int amount)
+    {
+        int leftToRemove = amount;
+
+        if (HasItem(item, amount))
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i].item == item)
+                {
+                    leftToRemove = Math.Min(slots[i].amount, leftToRemove);
+                    slots[i].amount -= Math.Min(slots[i].amount, leftToRemove);
+
+                    if (leftToRemove == 0)
+                    {
+                        slots[i].item = null;
+                        slots[i].icon = null;
+                        slots[i].amountText.text = "";
+                        return;
+                    }
+
+                    slots[i].UpdateSlot();
+                }
             }
         }
     }
