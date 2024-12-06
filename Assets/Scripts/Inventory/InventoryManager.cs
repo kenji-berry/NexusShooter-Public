@@ -40,9 +40,9 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < slots.Length; i++)
         {
             // if inventory contains item being picked up
-            if (slots[i].item == item.itemData)
+            if (slots[i].item == item.itemData && slots[i].amount < slots[i].item.maxStackSize)
             {
-                if (item.amount <= slots[i].item.maxStackSize)
+                if (item.amount <= slots[i].item.maxStackSize - slots[i].amount)
                 {
                     slots[i].amount += item.amount;
                     slots[i].UpdateSlot();
@@ -108,8 +108,16 @@ public class InventoryManager : MonoBehaviour
             {
                 if (slots[i].item == item)
                 {
-                    leftToRemove = Math.Min(slots[i].amount, leftToRemove);
-                    slots[i].amount -= Math.Min(slots[i].amount, leftToRemove);
+                    if (leftToRemove >= slots[i].amount)
+                    {
+                        leftToRemove -= slots[i].amount;
+                        slots[i].amount = 0;
+                    } else 
+                    {
+                        slots[i].amount -= leftToRemove;
+                        leftToRemove = 0;
+                    }
+
                     slots[i].UpdateSlot();
 
                     if (leftToRemove == 0)
