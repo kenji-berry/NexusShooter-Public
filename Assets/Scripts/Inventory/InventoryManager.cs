@@ -108,8 +108,16 @@ public class InventoryManager : MonoBehaviour
             {
                 if (slots[i].item == item)
                 {
-                    leftToRemove = Math.Min(slots[i].amount, leftToRemove);
-                    slots[i].amount -= Math.Min(slots[i].amount, leftToRemove);
+                    if (leftToRemove >= slots[i].amount)
+                    {
+                        leftToRemove -= slots[i].amount;
+                        slots[i].amount = 0;
+                    } else 
+                    {
+                        slots[i].amount -= leftToRemove;
+                        leftToRemove = 0;
+                    }
+
                     slots[i].UpdateSlot();
 
                     if (leftToRemove == 0)
