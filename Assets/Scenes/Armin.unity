@@ -56385,6 +56385,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1356857835 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7378064546625396807, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
+  m_PrefabInstance: {fileID: 486917806}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1371997905
 GameObject:
   m_ObjectHideFlags: 0
@@ -79340,7 +79345,7 @@ PrefabInstance:
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 237139392}
+      objectReference: {fileID: 1356857835}
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: 'inventorySlots.Array.data[0]'
       value: 
