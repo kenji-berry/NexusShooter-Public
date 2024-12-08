@@ -10,7 +10,7 @@ public abstract class Enemy : MonoBehaviour
     public NavMeshAgent agent;
     private EnemyHealthController healthController;
 
-    private float detectionRange = 10f;
+    private float detectionRange = 20f;
     public Transform[] patrolPoints;
     public float patrolWaitTime = 2f;
     public float deaggroRange = 15f;

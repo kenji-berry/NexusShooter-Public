@@ -21,6 +21,7 @@ public class SlidingDoor : MonoBehaviour
 
     public Vector3 SlideDirection = Vector3.left;
 
+    /*
     void OnUse(InputValue value)
     {
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, 1f))
@@ -32,6 +33,7 @@ public class SlidingDoor : MonoBehaviour
             }
         }
     }
+    */
 
     private void Awake()
     {
