@@ -17,4 +17,4 @@ MonoBehaviour:
   description: A small piece of metal.
   icon: {fileID: 21300000, guid: 50e143f5af49df141bcb1b7f62db7844, type: 3}
   prefab: {fileID: 5577465886318698139, guid: 43f5d69dab7159648b99324294978103, type: 3}
-  maxStackSize: 1
+  maxStackSize: 2

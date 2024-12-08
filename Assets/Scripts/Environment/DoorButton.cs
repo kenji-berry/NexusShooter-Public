@@ -11,7 +11,7 @@ public class DoorButton : MonoBehaviour
     void OnUse(InputValue value)
     {
         Debug.Log("using");
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, 1f))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, 2f))
         {
             if (hit.collider.gameObject == this.gameObject)
             {
