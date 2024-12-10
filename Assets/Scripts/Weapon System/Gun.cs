@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using System;
 
 public abstract class Gun : MonoBehaviour
 {
@@ -117,6 +118,12 @@ public abstract class Gun : MonoBehaviour
 
 
         GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>().text = currentAmmo.ToString();
+    }
+
+    public void AddAmmo(int amount)
+    {
+        currentAmmo = Math.Min(currentAmmo + amount, gunData.maxAmmo);
+        UpdateAmmoUI();
     }
 
     public abstract void Shoot();
