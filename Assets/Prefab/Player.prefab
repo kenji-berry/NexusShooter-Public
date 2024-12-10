@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 7737322128915003395}
   - component: {fileID: 9107121375138173511}
   - component: {fileID: 8293783295006834422}
-  - component: {fileID: 8914843758452594630}
+  - component: {fileID: 110489471054742326}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -125,7 +125,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8555940104404659830}
   m_Enabled: 1
---- !u!114 &8914843758452594630
+--- !u!114 &110489471054742326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 7737322128915003395}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
@@ -179,8 +179,8 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 1
-  m_ShowCustomSorter: 1
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
@@ -450,11 +450,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingGuns:
   - {fileID: 8439105584519137549, guid: 1a9dd4a441bb1794d9c87e1477d3e0d9, type: 3}
+  - {fileID: 4254197456236569658, guid: 6c69ad05ef03b994990a9fbb0c0054d0, type: 3}
   inventorySlots:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   inventoryUI: {fileID: 0}
+  weaponName: {fileID: 0}
   weaponHolder: {fileID: 9111381679490720939}
   ammoPanel: {fileID: 0}
   ammoText: {fileID: 0}
