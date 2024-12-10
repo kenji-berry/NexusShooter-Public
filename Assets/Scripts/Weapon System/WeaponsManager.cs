@@ -164,4 +164,14 @@ public class WeaponsManager : MonoBehaviour
             }
         }
     }
+
+    public void PickUpAmmo(int ammoCount)
+    {
+        if (selectedGun == -1)
+        {
+            return;
+        }
+
+        gunSlots[selectedGun].GetComponent<Gun>().AddAmmo(ammoCount);
+    }
 }
