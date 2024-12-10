@@ -79576,14 +79576,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1782949567}
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
-      propertyPath: startingGuns.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
-      propertyPath: 'startingGuns.Array.data[1]'
-      value: 
-      objectReference: {fileID: 4254197456236569658, guid: 6c69ad05ef03b994990a9fbb0c0054d0, type: 3}
-    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: 'inventorySlots.Array.data[0]'
       value: 
       objectReference: {fileID: 1160380007}
@@ -79635,22 +79627,14 @@ PrefabInstance:
       propertyPath: 'slots.Array.data[8]'
       value: 
       objectReference: {fileID: 566218029}
-    - target: {fileID: 8914843758452594630, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
-      propertyPath: volumeLayer.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9163355570464354571, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8914843758452594630, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8555940104404659830, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2144326967}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
 --- !u!20 &1926846844 stripped
 Camera:
@@ -87976,76 +87960,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &2144326963 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8555940104404659830, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
-  m_PrefabInstance: {fileID: 1926846843}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2144326966 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7737322128915003395, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
-  m_PrefabInstance: {fileID: 1926846843}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2144326967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2144326963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 2144326966}
-  volumeLayer:
-    serializedVersion: 2
-    m_Bits: 32
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 0
-  antialiasingMode: 0
-  temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
 --- !u!1001 &4255754844961733430
 PrefabInstance:
   m_ObjectHideFlags: 0
