@@ -10,6 +10,7 @@ public class EnemyHealthController : MonoBehaviour
     private int currentHealth;
     public int xpReward = 10; // Amount of XP to reward when this enemy is defeated
     public event System.Action<int> onDamageTaken; // event to notify subscribers when damage is taken
+    public GameObject bloodSprayPrefab;
 
     public GameObject damageNumberPrefab; // Reference to the damage number prefab
     private Transform playerTransform; // Reference to the player's transform
@@ -31,6 +32,8 @@ public class EnemyHealthController : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
         onDamageTaken?.Invoke(damage); // Notify subscribers
+        // Spawn blood effect
+        SpawnBloodEffect(transform.position, Vector3.up);
 
         // Show damage number
         ShowDamageNumber(damage);
@@ -74,5 +77,13 @@ public class EnemyHealthController : MonoBehaviour
         {
             Debug.LogError("Damage number prefab or player transform is null.");
         }
+    }
+
+    void SpawnBloodEffect(Vector3 hitPosition, Vector3 hitNormal)
+    {
+        // Instantiate the blood spray at the hit position
+        GameObject bloodSpray = Instantiate(bloodSprayPrefab, hitPosition, Quaternion.LookRotation(hitNormal));
+        bloodSpray.layer = LayerMask.NameToLayer("Default");
+        Destroy(bloodSpray, 2f);
     }
 }
