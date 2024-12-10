@@ -13,6 +13,7 @@ public class WeaponsManager : MonoBehaviour
     public InventorySlot[] inventorySlots = new InventorySlot[WEAPON_INVENTORY_SIZE];
 
     public GameObject inventoryUI;
+    public TextMeshProUGUI weaponName;
     public Transform weaponHolder;
 
     public GameObject ammoPanel;
@@ -57,7 +58,7 @@ public class WeaponsManager : MonoBehaviour
         }
     }
 
-    void SwitchWeapon(int pos)
+    public void SwitchWeapon(int pos)
     {
         if (gunSlots[pos] == null)
         {
@@ -83,6 +84,8 @@ public class WeaponsManager : MonoBehaviour
             gunSlots[selectedGun].gameObject.SetActive(true);
             inventorySlots[selectedGun].GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f);
         }
+
+        weaponName.text = gunSlots[selectedGun].GetComponent<Gun>().gunData.gunName;
 
         // initialise ammo text
         ammoText.text = gunSlots[selectedGun].gameObject.GetComponent<Gun>().currentAmmo.ToString();
