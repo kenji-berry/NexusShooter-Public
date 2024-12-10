@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyHealthController : MonoBehaviour
 {
@@ -11,9 +12,13 @@ public class EnemyHealthController : MonoBehaviour
     public event System.Action<int> onDamageTaken; // event to notify subscribers when damage is taken
     public GameObject bloodSprayPrefab;
 
+    public GameObject damageNumberPrefab; // Reference to the damage number prefab
+    private Transform playerTransform; // Reference to the player's transform
+
     void Awake()
     {
         enemy = GetComponent<Enemy>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Start()
@@ -30,6 +35,9 @@ public class EnemyHealthController : MonoBehaviour
         // Spawn blood effect
         SpawnBloodEffect(transform.position, Vector3.up);
 
+        // Show damage number
+        ShowDamageNumber(damage);
+
         if (currentHealth <= 0)
         {
             enemy.SetDead();
@@ -45,6 +53,30 @@ public class EnemyHealthController : MonoBehaviour
     {
         currentHealth += amount;
         currentHealth = Mathf.Min(currentHealth, maxHealth);
+    }
+
+    // Method to show damage number when enemy is hit
+    private void ShowDamageNumber(int damage)
+    {
+        if (damageNumberPrefab != null && playerTransform != null)
+        {
+            // Random offset for variance in positioning of number
+            Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), Random.Range(0.5f, 1.5f), Random.Range(-1f, 1f));
+            Vector3 spawnPosition = transform.position + randomOffset;
+
+            GameObject damageNumber = Instantiate(damageNumberPrefab, spawnPosition, Quaternion.identity);
+            TextMeshPro textMeshPro = damageNumber.GetComponentInChildren<TextMeshPro>();
+            textMeshPro.text = damage.ToString();
+
+            // Make the damage number face the player
+            damageNumber.transform.LookAt(playerTransform);
+            damageNumber.transform.Rotate(0, 180, 0); // Adjust rotation to face the player correctly
+
+        }
+        else
+        {
+            Debug.LogError("Damage number prefab or player transform is null.");
+        }
     }
 
     void SpawnBloodEffect(Vector3 hitPosition, Vector3 hitNormal)
