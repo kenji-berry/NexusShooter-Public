@@ -29,7 +29,7 @@ public class VoiceLineTypewriter : MonoBehaviour
 
             // Calculate typing speed based on voice line length and number of words
             string[] words = fullTexts[j].Split(' ');
-            float typingSpeed = (voiceLines[j].length / words.Length) * 0.5f; // 20% faster
+            float typingSpeed = (voiceLines[j].length / words.Length) * 0.5f;
 
             // Display the text gradually, word by word
             string currentText = "";
