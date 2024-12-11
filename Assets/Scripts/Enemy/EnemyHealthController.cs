@@ -15,7 +15,7 @@ public class EnemyHealthController : MonoBehaviour
 
     public GameObject damageNumberPrefab; // Reference to the damage number prefab
     public int critChance = 5; // 5% chance for a critical hit
-    public int critMultiplier = 15;  // 1.5x damage for a critical hit
+    public int critMultiplier = 150;  // 1.5x damage for a critical hit
     
     public SoundController soundController;
 
@@ -37,9 +37,10 @@ public class EnemyHealthController : MonoBehaviour
         int randomValue = Random.Range(0, 100);
         bool isCrit = randomValue < critChance;
         Debug.Log("Is crit: " + isCrit);
+        Debug.Log(critChance);
         if (isCrit)
         {
-            damage = (critMultiplier * damage)/10; 
+            damage = (critMultiplier * damage)/100; 
             soundController.Play(soundController.criticalHit, 0.5f);
         }
         Debug.Log("Damage: " + damage);
@@ -107,4 +108,15 @@ public class EnemyHealthController : MonoBehaviour
         bloodSpray.layer = LayerMask.NameToLayer("Default");
         Destroy(bloodSpray, 2f);
     }
+
+    public void increaseCritChance(int amount)
+    {
+        critChance = amount;
+    }
+
+    public void increaseCritDamage(int amount)
+    {
+        critMultiplier = amount;
+    }
+
 }
