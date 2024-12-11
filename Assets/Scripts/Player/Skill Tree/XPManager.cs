@@ -14,6 +14,7 @@ public class XPManager : MonoBehaviour
     public TextMeshProUGUI skillPointsText; // Reference to the Skill Points Text
     public TextMeshProUGUI levelUpText; // Reference to the Level Up Text
     public HealthController healthController; // Reference to the HealthController script
+    public EnemyHealthController enemyHealthController; // Reference to the EnemyHealthController script
     public PlayerController playerController; // Reference to the PlayerController script
     public SoundController soundController; // Reference to the SoundController script
     public TextMeshProUGUI insufficientSkillPointsText; 
@@ -71,6 +72,14 @@ public class XPManager : MonoBehaviour
             upgrades.Add(new MedkitUpgrade("Increase Medkit Effectiveness I", 1, healthController, 1.1f));
             upgrades.Add(new MedkitUpgrade("Increase Medkit Effectiveness II", 2, healthController, 1.25f));
             upgrades.Add(new MedkitUpgrade("Increase Medkit Effectiveness III", 3, healthController, 1.5f));
+
+            upgrades.Add(new CritChanceUpgrade("Increase Crit Chance I", 1, enemyHealthController, 10));
+            upgrades.Add(new CritChanceUpgrade("Increase Crit Chance II", 1, enemyHealthController, 17));
+            upgrades.Add(new CritChanceUpgrade("Increase Crit Chance III", 1, enemyHealthController, 27));
+
+            upgrades.Add(new CritDamageUpgrade("Increase Crit Damage I", 1, enemyHealthController, 175));
+            upgrades.Add(new CritDamageUpgrade("Increase Crit Damage II", 1, enemyHealthController, 200));
+            upgrades.Add(new CritDamageUpgrade("Increase Crit Damage III", 1, enemyHealthController, 225));
         }
         else
         {
