@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1359465e094eebc4ca06f2cce9a5e54e, type: 3}
   m_Name: MP5
   m_EditorClassIdentifier: 
-  gunName: Mp5
+  gunName: MP5
   maxAmmo: 40
   fireRate: 8
   damage: 20
-  shootSound: {fileID: 8300000, guid: 8f92505560243414db6b5fcd71126c5f, type: 3}
+  shootSound: {fileID: 8300000, guid: 7636ab8197918f849bf4d107d9f76739, type: 3}
   shootingType: 2
   burstCount: 5

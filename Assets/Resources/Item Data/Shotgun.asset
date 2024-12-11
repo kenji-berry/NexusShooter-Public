@@ -16,6 +16,5 @@ MonoBehaviour:
   itemName: Shotgun
   description: 
   icon: {fileID: 21300000, guid: 9e4e303c9bdd15442bf4b191210ac53a, type: 3}
-  prefab: {fileID: 3319393084368905693, guid: 6c69ad05ef03b994990a9fbb0c0054d0, type: 3}
-  type: 0
+  prefab: {fileID: 6324139332919346263, guid: 6c69ad05ef03b994990a9fbb0c0054d0, type: 3}
   maxStackSize: 1
