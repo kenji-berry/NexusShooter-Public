@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class EnemyMelee : Enemy
 {
+    public SoundController soundController;
     void Awake()
     {
         damage = 10;
@@ -22,6 +23,7 @@ public class EnemyMelee : Enemy
             if (playerController != null)
             {
                 playerController.GetComponent<HealthController>().TakeDamage(damage);
+                soundController.Play(soundController.getHit, 0.5f);
             }
 
             nextAttackTime = Time.time + attackCooldown; // Set next attack time
