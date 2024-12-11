@@ -19,6 +19,7 @@ public class SoundController : MonoBehaviour
     public AudioClip playerDamage5;
     public AudioClip playerDamage6;
     public AudioClip getHit;
+    public AudioClip criticalHit;
 
 
 
