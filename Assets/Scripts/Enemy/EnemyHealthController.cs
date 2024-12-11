@@ -5,15 +5,19 @@ using TMPro;
 
 public class EnemyHealthController : MonoBehaviour
 {
-    public Enemy enemy; 
+    private Enemy enemy;
+    private Transform playerTransform;
     public int maxHealth = 100;
     private int currentHealth;
-    public int xpReward = 10; // Amount of XP to reward when this enemy is defeated
+    public int xpReward = 50; // Amount of XP to reward when this enemy is defeated
     public event System.Action<int> onDamageTaken; // event to notify subscribers when damage is taken
     public GameObject bloodSprayPrefab;
 
     public GameObject damageNumberPrefab; // Reference to the damage number prefab
-    private Transform playerTransform; // Reference to the player's transform
+    public int critChance = 5; // 5% chance for a critical hit
+    public int critMultiplier = 15;  // 1.5x damage for a critical hit
+    
+    public SoundController soundController;
 
     void Awake()
     {
@@ -29,14 +33,25 @@ public class EnemyHealthController : MonoBehaviour
     // Method to take damage
     public void TakeDamage(int damage)
     {
+        // Check for critical hit if random value rolls a number less than critChance
+        int randomValue = Random.Range(0, 100);
+        bool isCrit = randomValue < critChance;
+        Debug.Log("Is crit: " + isCrit);
+        if (isCrit)
+        {
+            damage = (critMultiplier * damage)/10; 
+            soundController.Play(soundController.criticalHit, 0.5f);
+        }
+        Debug.Log("Damage: " + damage);
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
         onDamageTaken?.Invoke(damage); // Notify subscribers
-        // Spawn blood effect
-        SpawnBloodEffect(transform.position, Vector3.up);
+
+        // Spawn blood effect   
+        SpawnBloodEffect(transform.position, Vector3.up, isCrit);
 
         // Show damage number
-        ShowDamageNumber(damage);
+        ShowDamageNumber(damage, isCrit);
 
         if (currentHealth <= 0)
         {
@@ -56,7 +71,7 @@ public class EnemyHealthController : MonoBehaviour
     }
 
     // Method to show damage number when enemy is hit
-    private void ShowDamageNumber(int damage)
+    private void ShowDamageNumber(int damage, bool isCrit)
     {
         if (damageNumberPrefab != null && playerTransform != null)
         {
@@ -65,8 +80,14 @@ public class EnemyHealthController : MonoBehaviour
             Vector3 spawnPosition = transform.position + randomOffset;
 
             GameObject damageNumber = Instantiate(damageNumberPrefab, spawnPosition, Quaternion.identity);
+            DamageNumber damageNumberScript = damageNumber.GetComponent<DamageNumber>();
+            if (damageNumberScript != null)
+            {
+                damageNumberScript.Setup(isCrit);
+            }
             TextMeshPro textMeshPro = damageNumber.GetComponentInChildren<TextMeshPro>();
             textMeshPro.text = damage.ToString();
+            textMeshPro.color = isCrit ? Color.yellow : Color.white;
 
             // Make the damage number face the player
             damageNumber.transform.LookAt(playerTransform);
@@ -79,7 +100,7 @@ public class EnemyHealthController : MonoBehaviour
         }
     }
 
-    void SpawnBloodEffect(Vector3 hitPosition, Vector3 hitNormal)
+    void SpawnBloodEffect(Vector3 hitPosition, Vector3 hitNormal, bool isCrit)
     {
         // Instantiate the blood spray at the hit position
         GameObject bloodSpray = Instantiate(bloodSprayPrefab, hitPosition, Quaternion.LookRotation(hitNormal));
