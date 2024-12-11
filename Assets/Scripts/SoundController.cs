@@ -12,6 +12,15 @@ public class SoundController : MonoBehaviour
     public AudioClip levelUp;
     public AudioClip skillPointPurchase;
     public AudioClip buttonClick;
+    public AudioClip playerDamage1;
+    public AudioClip playerDamage2;
+    public AudioClip playerDamage3;
+    public AudioClip playerDamage4;
+    public AudioClip playerDamage5;
+    public AudioClip playerDamage6;
+    public AudioClip getHit;
+
+
 
     private static bool isSoundEnabled = true; // Global sound state
 

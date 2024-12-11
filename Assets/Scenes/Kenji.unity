@@ -9389,6 +9389,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2083047778361222229, guid: e6e495c195cd53848b75adc34d41034d, type: 3}
+      propertyPath: soundController
+      value: 
+      objectReference: {fileID: 293748130}
     - target: {fileID: 2179974959511564201, guid: e6e495c195cd53848b75adc34d41034d, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -52547,6 +52551,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4644952146009421158, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
+      propertyPath: getHit
+      value: 
+      objectReference: {fileID: 8300000, guid: 74c79ac2da3cf8243b50a3f813f45d5e, type: 3}
+    - target: {fileID: 4644952146009421158, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
+      propertyPath: playerDamage1
+      value: 
+      objectReference: {fileID: 8300000, guid: 812005ba88ef8454b8e603ef9c0e79f7, type: 3}
+    - target: {fileID: 4644952146009421158, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
+      propertyPath: playerDamage2
+      value: 
+      objectReference: {fileID: 8300000, guid: f5ee68cd5bc836e4e8ccaa43781e8986, type: 3}
+    - target: {fileID: 4644952146009421158, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
+      propertyPath: playerDamage3
+      value: 
+      objectReference: {fileID: 8300000, guid: 424bce8bd2df606479de350aaf290a5d, type: 3}
+    - target: {fileID: 4644952146009421158, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
+      propertyPath: playerDamage4
+      value: 
+      objectReference: {fileID: 8300000, guid: 85802a2504be01f4f80bf44145d7e00b, type: 3}
+    - target: {fileID: 4644952146009421158, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
+      propertyPath: playerDamage5
+      value: 
+      objectReference: {fileID: 8300000, guid: 9cabe30871d3c254fa133dec9f4df627, type: 3}
+    - target: {fileID: 4644952146009421158, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
+      propertyPath: playerDamage6
+      value: 
+      objectReference: {fileID: 8300000, guid: 6db67a086c2affe499ec6f7a9a16b8ff, type: 3}
     - target: {fileID: 6717449105027503392, guid: 60725ef12056b544685dfea30b39d9b2, type: 3}
       propertyPath: m_Name
       value: Sound Controller
@@ -54553,8 +54585,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   postProcessVolume: {fileID: 1636212350}
-  fadeDuration: 2
-  blurDuration: 5
 --- !u!1 &998417683
 GameObject:
   m_ObjectHideFlags: 0
@@ -105094,6 +105124,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 173035762}
     - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: soundController
+      value: 
+      objectReference: {fileID: 293748130}
+    - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: heathBarBackground
       value: 
       objectReference: {fileID: 416673957}
@@ -105141,6 +105175,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5468063413020576701, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: soundController
+      value: 
+      objectReference: {fileID: 293748130}
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: ammoText
       value: 
