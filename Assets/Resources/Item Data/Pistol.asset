@@ -15,7 +15,6 @@ MonoBehaviour:
   id: 1
   itemName: Pistol
   description: 
-  icon: {fileID: 21300000, guid: 1376c4b97ab6cbf44867a016d1af0776, type: 3}
-  prefab: {fileID: 4739855536523141813, guid: 1a9dd4a441bb1794d9c87e1477d3e0d9, type: 3}
-  type: 0
+  icon: {fileID: 21300000, guid: 4180e54ca12c28845ae152c36c3d9958, type: 3}
+  prefab: {fileID: 5989015876759085459, guid: 1a9dd4a441bb1794d9c87e1477d3e0d9, type: 3}
   maxStackSize: 1

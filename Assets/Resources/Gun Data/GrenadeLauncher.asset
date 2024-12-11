@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1359465e094eebc4ca06f2cce9a5e54e, type: 3}
   m_Name: GrenadeLauncher
   m_EditorClassIdentifier: 
-  gunName: Ak47
+  gunName: Grenade Launcher
   maxAmmo: 30
   fireRate: 7
   damage: 20

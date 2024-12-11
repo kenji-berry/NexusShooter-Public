@@ -19,10 +19,10 @@ public class WeaponsManager : MonoBehaviour
     public GameObject ammoPanel;
     public TextMeshProUGUI ammoText;
 
-    public int selectedGun = -1;
+    private int selectedGun = -1;
     private bool isInventoryOpen = false;
 
-    public Gun[] gunSlots = new Gun[WEAPON_INVENTORY_SIZE];
+    private Gun[] gunSlots = new Gun[WEAPON_INVENTORY_SIZE];
 
     void OnSelectWeaponOne(InputValue value) { SwitchWeapon(0); }
 
