@@ -34,6 +34,9 @@ public class HealthController : MonoBehaviour
 
     private float medkitEffectivenessMultiplier = 1.0f;
 
+    public SoundController soundController;
+    private int lastDamageSoundIndex = -1; // Store the last played sound index
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -100,9 +103,19 @@ public class HealthController : MonoBehaviour
         float damageMultiplier = armourMultipliers[currentArmourTier];
         int adjustedDamage = Mathf.RoundToInt(damage * damageMultiplier);
 
-
-        UpdateArmourBar(damage, adjustedDamage, maxDurability,0);
+        UpdateArmourBar(damage, adjustedDamage, maxDurability, 0);
         Debug.Log("Damage: " + damage + " Adjusted Damage: " + adjustedDamage);
+
+        // Play a random player damage sound that is not the same as the last one
+        int randomIndex;
+        do
+        {
+            randomIndex = Random.Range(1, 7);
+        } while (randomIndex == lastDamageSoundIndex);
+
+        lastDamageSoundIndex = randomIndex;
+        AudioClip randomDamageSound = (AudioClip)soundController.GetType().GetField($"playerDamage{randomIndex}").GetValue(soundController);
+        soundController.Play(randomDamageSound, 0.5f);
 
         if (armourDurability <= 0)
         {
