@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 5506214948778264027}
   - component: {fileID: 8663952948621088285}
   m_Layer: 5
-  m_Name: Slot
+  m_Name: WeaponSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
