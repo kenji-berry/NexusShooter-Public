@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class ItemPickUp : MonoBehaviour
+public class WeaponPickUp : MonoBehaviour
 {
     public Gun prefab;
 

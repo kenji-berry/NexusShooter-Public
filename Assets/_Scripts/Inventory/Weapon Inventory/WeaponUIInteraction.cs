@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class WeaponSlotUIInteraction : MonoBehaviour, IPointerClickHandler
+public class WeaponUIInteraction : MonoBehaviour, IPointerClickHandler
 {
     private WeaponsManager weaponsManager;
 

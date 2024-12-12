@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class InventorySlot : MonoBehaviour
+public class WeaponSlot : MonoBehaviour
 {
     public ItemData item;
     public TextMeshProUGUI ammoCountText;

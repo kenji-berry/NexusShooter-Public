@@ -7,10 +7,8 @@ using UnityEngine.InputSystem;
 
 public class InventoryManager : MonoBehaviour
 { 
-    [SerializeField] public ItemInventorySlot[] slots = new ItemInventorySlot[9];
-    [SerializeField] public GameObject inventoryUI;
-
-    public UnityAction<InventorySlot> OnInventorySlotUpdated;
+    public ItemInventorySlot[] slots = new ItemInventorySlot[9];
+    public GameObject inventoryUI;
 
     void Awake()
     {

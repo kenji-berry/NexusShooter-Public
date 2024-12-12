@@ -10,7 +10,7 @@ public class WeaponsManager : MonoBehaviour
     const int WEAPON_INVENTORY_SIZE = 3;
 
     public List<Gun> startingGuns = new List<Gun>();
-    public InventorySlot[] inventorySlots = new InventorySlot[WEAPON_INVENTORY_SIZE];
+    public WeaponSlot[] weaponSlots = new WeaponSlot[WEAPON_INVENTORY_SIZE];
 
     public GameObject inventoryUI;
     public TextMeshProUGUI weaponName;
@@ -70,7 +70,7 @@ public class WeaponsManager : MonoBehaviour
         {
             selectedGun = pos;
             gunSlots[selectedGun].gameObject.SetActive(true);
-            inventorySlots[selectedGun].GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f);
+            weaponSlots[selectedGun].GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f);
 
             // show ammo count
             ammoPanel.SetActive(true);
@@ -78,11 +78,11 @@ public class WeaponsManager : MonoBehaviour
         else
         {
             gunSlots[selectedGun].gameObject.SetActive(false);
-            inventorySlots[selectedGun].GetComponent<Image>().color = new Color(0.12f, 0.12f, 0.12f);
+            weaponSlots[selectedGun].GetComponent<Image>().color = new Color(0.12f, 0.12f, 0.12f);
 
             selectedGun = pos;
             gunSlots[selectedGun].gameObject.SetActive(true);
-            inventorySlots[selectedGun].GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f);
+            weaponSlots[selectedGun].GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f);
         }
 
         weaponName.text = gunSlots[selectedGun].GetComponent<Gun>().gunData.gunName;
@@ -134,9 +134,9 @@ public class WeaponsManager : MonoBehaviour
         gunSlots[pos] = gunInstance;
 
         // Add to UI inventory
-        inventorySlots[pos].item = gunPrefab.gameObject.GetComponent<ItemInstance>().itemData;
-        inventorySlots[pos].ammoCountText.text = gunInstance.GetComponent<Gun>().currentAmmo.ToString();
-        inventorySlots[pos].UpdateSlot();
+        weaponSlots[pos].item = gunPrefab.gameObject.GetComponent<ItemInstance>().itemData;
+        weaponSlots[pos].ammoCountText.text = gunInstance.GetComponent<Gun>().currentAmmo.ToString();
+        weaponSlots[pos].UpdateSlot();
 
         SwitchWeapon(pos);
         return true;
@@ -160,7 +160,7 @@ public class WeaponsManager : MonoBehaviour
         {
             if (gunSlots[i] != null)
             {
-                inventorySlots[i].ammoCountText.text = gunSlots[i].GetComponent<Gun>().currentAmmo.ToString();
+                weaponSlots[i].ammoCountText.text = gunSlots[i].GetComponent<Gun>().currentAmmo.ToString();
             }
         }
     }
