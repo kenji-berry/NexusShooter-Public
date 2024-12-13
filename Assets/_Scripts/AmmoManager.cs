@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AmmoManager : MonoBehaviour
 {
+    [System.Serializable]
     public class Ammo
     {
         public GunData.AmmoType type;

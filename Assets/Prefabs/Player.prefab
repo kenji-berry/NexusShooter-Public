@@ -460,10 +460,10 @@ MonoBehaviour:
   inventoryUI: {fileID: 0}
   weaponName: {fileID: 0}
   weaponHolder: {fileID: 9111381679490720939}
+  isInventoryOpen: 0
   ammoPanel: {fileID: 0}
   ammoIcon: {fileID: 0}
   ammoText: {fileID: 0}
-  isInventoryOpen: 0
   bulletSprite: {fileID: 21300000, guid: 826c5aab28cf48e40997acba2d99c6a1, type: 3}
   shellSprite: {fileID: 21300000, guid: 8aac6e72f46145d4fb2692a242afcedd, type: 3}
   grenadeSprite: {fileID: 1950353129, guid: 0dba4ff95eabbb4409d30e27662b30bf, type: 3}
@@ -502,3 +502,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe60c76127be2d4b96d9be1c96c456f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoInventory:
+  - type: 0
+    maxAmount: 200
+    currAmount: 50
+  - type: 1
+    maxAmount: 100
+    currAmount: 30
+  - type: 2
+    maxAmount: 20
+    currAmount: 5
