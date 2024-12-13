@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GrenadeLauncher
   m_EditorClassIdentifier: 
   gunName: Grenade Launcher
+  ammoType: 2
   maxAmmo: 30
   fireRate: 7
   damage: 20

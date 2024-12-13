@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using TMPro;
 using System;
 
@@ -10,12 +11,13 @@ public abstract class Gun : MonoBehaviour
     public GunData gunData;
     public Camera playerCamera;
     public ParticleSystem muzzleFlash;
-    public TextMeshProUGUI ammoText;
 
     private float nextTimeToFire = 0f;
-    public int currentAmmo;
 
     public SoundController soundController;
+    private AmmoManager ammoManager;
+
+    public TextMeshProUGUI ammoText;
 
     protected int shootableMask; // Layer mask for objects we can shoot
 
@@ -24,13 +26,13 @@ public abstract class Gun : MonoBehaviour
     void Awake()
     {
         soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
+        ammoManager = GameObject.FindFirstObjectByType<AmmoManager>();
+
         // Include both Default and Enemy layers
         shootableMask = LayerMask.GetMask("Default", "Enemy");
         
         // Debug log to verify layer mask
         Debug.Log($"Shootable Layer Mask: {shootableMask}");
-
-        currentAmmo = gunData.maxAmmo;
     }
 
     public void StartShooting()
@@ -60,7 +62,7 @@ public abstract class Gun : MonoBehaviour
 
     private IEnumerator AutoShoot()
     {
-        while (isShooting && currentAmmo > 0)
+        while (isShooting && ammoManager.GetAmmo(gunData.ammoType) > 0)
         {
             TryShoot();
             yield return new WaitForSeconds(1 / gunData.fireRate);
@@ -71,7 +73,7 @@ public abstract class Gun : MonoBehaviour
     {
         int shotsFired = 0;
 
-        while (shotsFired < gunData.burstCount && currentAmmo > 0)
+        while (shotsFired < gunData.burstCount && ammoManager.GetAmmo(gunData.ammoType) > 0)
         {
             TryShoot();
             shotsFired++;
@@ -81,7 +83,7 @@ public abstract class Gun : MonoBehaviour
 
     public void TryShoot()
     {
-        if (Time.time >= nextTimeToFire && currentAmmo > 0)
+        if (Time.time >= nextTimeToFire && ammoManager.GetAmmo(gunData.ammoType) > 0)
         {
             nextTimeToFire = Time.time + (1 / gunData.fireRate);
             HandleShoot();
@@ -93,7 +95,7 @@ public abstract class Gun : MonoBehaviour
         muzzleFlash.Play();
         soundController.Play(gunData.shootSound);
         Shoot();
-        currentAmmo--;
+        ammoManager.UseAmmo(gunData.ammoType, 1);
         UpdateAmmoUI();
     }
 
@@ -114,16 +116,7 @@ public abstract class Gun : MonoBehaviour
 
     private void UpdateAmmoUI()
     {
-        //ammoText.text = currentAmmo.ToString();
-
-
-        GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>().text = currentAmmo.ToString();
-    }
-
-    public void AddAmmo(int amount)
-    {
-        currentAmmo = Math.Min(currentAmmo + amount, gunData.maxAmmo);
-        UpdateAmmoUI();
+        ammoText.text = ammoManager.GetAmmo(gunData.ammoType).ToString();
     }
 
     public abstract void Shoot();

@@ -13,7 +13,16 @@ public class GunData : ScriptableObject
         SemiAuto // e.g., burst fire
     }
 
+    public enum AmmoType
+    {
+        BULLETS,
+        SHELLS,
+        GRENADES
+    }
+
     public string gunName;
+
+    public AmmoType ammoType;
 
     public int maxAmmo;
 
