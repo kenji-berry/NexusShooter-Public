@@ -52044,6 +52044,10 @@ PrefabInstance:
       value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 1432463735437910968, guid: e6e495c195cd53848b75adc34d41034d, type: 3}
+      propertyPath: soundController
+      value: 
+      objectReference: {fileID: 293748130}
+    - target: {fileID: 1432463735437910968, guid: e6e495c195cd53848b75adc34d41034d, type: 3}
       propertyPath: bloodSprayPrefab
       value: 
       objectReference: {fileID: 9207897780854203301, guid: fe09ef16fb7d2c94786ebe08eb68dd3b, type: 3}

@@ -9,6 +9,7 @@ public abstract class Enemy : MonoBehaviour
     public Animator animator;
     public NavMeshAgent agent;
     private EnemyHealthController healthController;
+    public SoundController soundController;
 
     private float detectionRange = 20f;
     public Transform[] patrolPoints;
