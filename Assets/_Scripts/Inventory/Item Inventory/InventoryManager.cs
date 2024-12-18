@@ -23,6 +23,7 @@ public class InventoryManager : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             gameObject.GetComponent<PlayerController>().inventoryOpen = false;
+            gameObject.GetComponent<WeaponsManager>().isInventoryOpen = false;
         }
         else
         {
@@ -30,6 +31,7 @@ public class InventoryManager : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             gameObject.GetComponent<PlayerController>().inventoryOpen = true;
+            gameObject.GetComponent<WeaponsManager>().isInventoryOpen = true;
         }
     }
 

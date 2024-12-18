@@ -79758,6 +79758,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1493490239 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1491384895102417147, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
+  m_PrefabInstance: {fileID: 1493490236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1493490241 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4946099882962394049, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
@@ -106167,6 +106178,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 293748130}
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: ammoIcon
+      value: 
+      objectReference: {fileID: 1493490239}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: ammoText
       value: 
       objectReference: {fileID: 1995270356}
@@ -106194,6 +106209,18 @@ PrefabInstance:
       propertyPath: startingGuns.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: 'weaponSlots.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1240131701}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: 'weaponSlots.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1296825287}
+    - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: 'weaponSlots.Array.data[2]'
+      value: 
+      objectReference: {fileID: 528496028}
     - target: {fileID: 6027300963214750294, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: 'startingGuns.Array.data[0]'
       value: 

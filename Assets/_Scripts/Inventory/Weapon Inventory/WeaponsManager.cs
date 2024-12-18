@@ -7,6 +7,8 @@ using TMPro;
 
 public class WeaponsManager : MonoBehaviour
 {
+    private AmmoManager ammoManager;
+
     const int WEAPON_INVENTORY_SIZE = 3;
 
     public List<Gun> startingGuns = new List<Gun>();
@@ -16,11 +18,18 @@ public class WeaponsManager : MonoBehaviour
     public TextMeshProUGUI weaponName;
     public Transform weaponHolder;
 
+    private int selectedGun = -1;
+    public bool isInventoryOpen = false;
+
+    [Header("Ammo Panel")]
     public GameObject ammoPanel;
+    public Image ammoIcon;
     public TextMeshProUGUI ammoText;
 
-    private int selectedGun = -1;
-    private bool isInventoryOpen = false;
+    [Header("Ammo Icons")]
+    public Sprite bulletSprite;
+    public Sprite shellSprite;
+    public Sprite grenadeSprite;
 
     private Gun[] gunSlots = new Gun[WEAPON_INVENTORY_SIZE];
 
@@ -29,6 +38,15 @@ public class WeaponsManager : MonoBehaviour
     void OnSelectWeaponTwo(InputValue value) { SwitchWeapon(1); }
 
     void OnSelectWeaponThree(InputValue value) { SwitchWeapon(2); }
+
+    void Awake()
+    {
+        ammoManager = GameObject.FindFirstObjectByType<AmmoManager>();
+        if (ammoManager == null)
+        {
+            Debug.LogError("Ammo manager not found.");
+        }
+    }
 
     void Start()
     {
@@ -87,8 +105,7 @@ public class WeaponsManager : MonoBehaviour
 
         weaponName.text = gunSlots[selectedGun].GetComponent<Gun>().gunData.gunName;
 
-        // initialise ammo text
-        ammoText.text = gunSlots[selectedGun].gameObject.GetComponent<Gun>().currentAmmo.ToString();
+        UpdateAmmoPanel();
     }
 
     void OnShoot(InputValue value)
@@ -130,12 +147,13 @@ public class WeaponsManager : MonoBehaviour
         // spawn a gun as a child of the weapon holder
         Gun gunInstance = Instantiate(gunPrefab, weaponHolder);
         gunInstance.playerCamera = Camera.main;
+        gunInstance.ammoText = ammoText;
         gunInstance.gameObject.SetActive(false);
         gunSlots[pos] = gunInstance;
 
         // Add to UI inventory
         weaponSlots[pos].item = gunPrefab.gameObject.GetComponent<ItemInstance>().itemData;
-        weaponSlots[pos].ammoCountText.text = gunInstance.GetComponent<Gun>().currentAmmo.ToString();
+        weaponSlots[pos].ammoCountText.text = ammoManager.GetAmmo(gunInstance.GetComponent<Gun>().gunData.ammoType).ToString();
         weaponSlots[pos].UpdateSlot();
 
         SwitchWeapon(pos);
@@ -154,24 +172,48 @@ public class WeaponsManager : MonoBehaviour
         return -1;
     }
 
+    void UpdateAmmoPanel()
+    {
+        ammoText.text = ammoManager.GetAmmo(gunSlots[selectedGun].gameObject.GetComponent<Gun>().gunData.ammoType).ToString();
+
+        switch (gunSlots[selectedGun].GetComponent<Gun>().gunData.ammoType)
+        {
+            case GunData.AmmoType.BULLETS:
+                ammoIcon.sprite = bulletSprite;
+                break;
+
+            case GunData.AmmoType.SHELLS:
+                ammoIcon.sprite = shellSprite;
+                break;
+
+            case GunData.AmmoType.GRENADES:
+                ammoIcon.sprite = grenadeSprite;
+                break;
+        }
+    }
+
     void UpdateInventoryUI()
     {
         for (int i = 0; i < gunSlots.Length; i++)
         {
             if (gunSlots[i] != null)
             {
-                weaponSlots[i].ammoCountText.text = gunSlots[i].GetComponent<Gun>().currentAmmo.ToString();
+                weaponSlots[i].ammoCountText.text = ammoManager.GetAmmo(gunSlots[i].GetComponent<Gun>().gunData.ammoType).ToString();
             }
         }
     }
 
     public void PickUpAmmo(int ammoCount)
     {
+        return;
+        /*
         if (selectedGun == -1)
         {
             return;
         }
 
-        gunSlots[selectedGun].GetComponent<Gun>().AddAmmo(ammoCount);
+        ammoManager.AddAmmo(gunSlots[selectedGun].GetComponent<Gun>().gunData.ammoType, ammoCount);
+        UpdateAmmoPanel();
+        */
     }
 }

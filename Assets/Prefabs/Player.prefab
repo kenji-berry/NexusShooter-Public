@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 1631874739560321578}
   - component: {fileID: 6027300963214750294}
   - component: {fileID: 6217051005435140724}
+  - component: {fileID: 2180806489942642737}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -436,6 +437,7 @@ MonoBehaviour:
   heathBarBackground: {fileID: 0}
   armourBarFill: {fileID: 0}
   armourBarBackground: {fileID: 0}
+  soundController: {fileID: 0}
 --- !u!114 &6027300963214750294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,22 +451,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingGuns:
-  - {fileID: 8439105584519137549, guid: 1a9dd4a441bb1794d9c87e1477d3e0d9, type: 3}
-  - {fileID: 4254197456236569658, guid: 6c69ad05ef03b994990a9fbb0c0054d0, type: 3}
-  inventorySlots:
+  - {fileID: 5918432275890725950, guid: 1a9dd4a441bb1794d9c87e1477d3e0d9, type: 3}
+  - {fileID: 5991769660722351569, guid: 6c69ad05ef03b994990a9fbb0c0054d0, type: 3}
+  weaponSlots:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   inventoryUI: {fileID: 0}
   weaponName: {fileID: 0}
   weaponHolder: {fileID: 9111381679490720939}
+  isInventoryOpen: 0
   ammoPanel: {fileID: 0}
+  ammoIcon: {fileID: 0}
   ammoText: {fileID: 0}
-  selectedGun: -1
-  gunSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  bulletSprite: {fileID: 21300000, guid: 826c5aab28cf48e40997acba2d99c6a1, type: 3}
+  shellSprite: {fileID: 21300000, guid: 8aac6e72f46145d4fb2692a242afcedd, type: 3}
+  grenadeSprite: {fileID: 1950353129, guid: 0dba4ff95eabbb4409d30e27662b30bf, type: 3}
 --- !u!114 &6217051005435140724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,3 +490,25 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   inventoryUI: {fileID: 0}
+--- !u!114 &2180806489942642737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163355570464354571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe60c76127be2d4b96d9be1c96c456f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoInventory:
+  - type: 0
+    maxAmount: 200
+    currAmount: 50
+  - type: 1
+    maxAmount: 100
+    currAmount: 30
+  - type: 2
+    maxAmount: 20
+    currAmount: 5
