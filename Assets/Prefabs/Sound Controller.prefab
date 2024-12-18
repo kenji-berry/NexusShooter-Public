@@ -53,6 +53,16 @@ MonoBehaviour:
   levelUp: {fileID: 8300000, guid: f4367acf8ccb6074381c424e619b36ee, type: 3}
   skillPointPurchase: {fileID: 8300000, guid: 759b24ea9a8aa5e42a31866a96c1d953, type: 3}
   buttonClick: {fileID: 8300000, guid: b87fbe4ac336a8d44bb8e2e5b023c168, type: 3}
+  playerDamage1: {fileID: 8300000, guid: 812005ba88ef8454b8e603ef9c0e79f7, type: 3}
+  playerDamage2: {fileID: 8300000, guid: f5ee68cd5bc836e4e8ccaa43781e8986, type: 3}
+  playerDamage3: {fileID: 8300000, guid: 424bce8bd2df606479de350aaf290a5d, type: 3}
+  playerDamage4: {fileID: 8300000, guid: 85802a2504be01f4f80bf44145d7e00b, type: 3}
+  playerDamage5: {fileID: 8300000, guid: 9cabe30871d3c254fa133dec9f4df627, type: 3}
+  playerDamage6: {fileID: 8300000, guid: 6db67a086c2affe499ec6f7a9a16b8ff, type: 3}
+  getHit: {fileID: 8300000, guid: 74c79ac2da3cf8243b50a3f813f45d5e, type: 3}
+  criticalHit: {fileID: 8300000, guid: b4bfe41a0c0215944b30f5d8ceea1cd6, type: 3}
+  doorButtonPress: {fileID: 8300000, guid: 3dacdb1c05ca12a4db0728e313defc7d, type: 3}
+  slidingDoor: {fileID: 8300000, guid: 0f9cb2cf18b97204d88d6e7b0b49c53c, type: 3}
 --- !u!82 &5729134728157833572
 AudioSource:
   m_ObjectHideFlags: 0

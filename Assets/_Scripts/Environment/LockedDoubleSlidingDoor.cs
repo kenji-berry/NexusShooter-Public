@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
+using System.Diagnostics;
 
-public class SlidingDoor : MonoBehaviour
+public class LockedDoubleSlidingDoor : MonoBehaviour
 {
+    public SoundController soundController;
+
     public Camera playerCamera;
     public GameObject leftDoor;
     public GameObject rightDoor;
+    public TextMeshProUGUI instructionText;
 
     public bool isOpen = false;
 
     public float speed = 1f;
     public float slideAmount = 1.9f;
+    public float interactRange = 2f;
 
     private Coroutine AnimationCoroutine;
 
@@ -21,22 +28,35 @@ public class SlidingDoor : MonoBehaviour
 
     public Vector3 SlideDirection = Vector3.left;
 
-    /*
-    void OnUse(InputValue value)
+    void Update()
     {
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, 1f))
+        RaycastHit hit;
+
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactRange))
         {
             if (hit.collider.gameObject == leftDoor || hit.collider.gameObject == rightDoor)
             {
-                if (isOpen) Close();
-                else Open();
+                instructionText.text = "LOCKED";
+                instructionText.gameObject.SetActive(true);
+            }
+            else
+            {
+                instructionText.gameObject.SetActive(false);
+                instructionText.text = "";
             }
         }
+        else
+        {
+            instructionText.gameObject.SetActive(false);
+            instructionText.text = "";
+        }
     }
-    */
 
     private void Awake()
     {
+        soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
+        playerCamera = Camera.main;
+
         leftDoorStartPos = leftDoor.transform.position;
         rightDoorStartPos = rightDoor.transform.position;
     }
@@ -50,6 +70,7 @@ public class SlidingDoor : MonoBehaviour
                 StopCoroutine(AnimationCoroutine);
             }
 
+            this.gameObject.GetComponent<AudioSource>().Play();
             AnimationCoroutine = StartCoroutine(OpenSlidingDoor());
         }
     }

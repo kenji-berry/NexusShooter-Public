@@ -3,9 +3,10 @@ using UnityEngine.AI;
 
 public class EnemyMelee : Enemy
 {
-    public SoundController soundController;
     void Awake()
     {
+        soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
+
         damage = 10;
         attackRange = 2f;
     }
