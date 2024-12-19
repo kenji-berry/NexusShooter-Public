@@ -174,11 +174,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cacafa9fdf0fa0348bc71344f90ea87d, type: 3}
       propertyPath: m_Name
-      value: New_Enemy_Melee
+      value: enemy_melee
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cacafa9fdf0fa0348bc71344f90ea87d, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1249068122247324499, guid: cacafa9fdf0fa0348bc71344f90ea87d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -402,15 +402,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   animator: {fileID: 0}
+  agent: {fileID: 0}
+  soundController: {fileID: 0}
   patrolPoints: []
   patrolWaitTime: 2
   deaggroRange: 15
   deaggroTimer: 5
-  meleeRange: 1.5
   damage: 20
+  nextAttackTime: 0
   attackCooldown: 2
   isDead: 0
   isAttacking: 0
+  attackRange: 0
 --- !u!114 &1432463735437910968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,8 +427,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  animator: {fileID: 0}
   xpReward: 10
+  bloodSprayPrefab: {fileID: 0}
+  damageNumberPrefab: {fileID: 0}
+  critChance: 5
+  critMultiplier: 150
+  soundController: {fileID: 0}
 --- !u!195 &3975756664023708557
 NavMeshAgent:
   m_ObjectHideFlags: 0
