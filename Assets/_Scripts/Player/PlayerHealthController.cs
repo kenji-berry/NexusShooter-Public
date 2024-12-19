@@ -74,6 +74,8 @@ public class HealthController : MonoBehaviour
     // Method to update the armour text
     public void UpdateArmourBar(int damage, int adjustedDamage, int maxDurability, int amount)
     {
+        if (currentArmourTier == ArmourTier.None) return;
+
         if (amount > 0)
         {
             // Calculate the new width based on the amount added
@@ -104,7 +106,6 @@ public class HealthController : MonoBehaviour
         int adjustedDamage = Mathf.RoundToInt(damage * damageMultiplier);
 
         UpdateArmourBar(damage, adjustedDamage, maxDurability, 0);
-        Debug.Log("Damage: " + damage + " Adjusted Damage: " + adjustedDamage);
 
         // Play a random player damage sound that is not the same as the last one
         int randomIndex;
