@@ -8,7 +8,7 @@ public class MovingPlatform : MonoBehaviour
 
     public Vector3 moveDirection = Vector3.down;
     public float moveAmount = 11f;
-    public float speed = 1f;
+    public float speed = 0.2f;
 
     private Coroutine AnimationCoroutine;
     private Vector3 startPos;

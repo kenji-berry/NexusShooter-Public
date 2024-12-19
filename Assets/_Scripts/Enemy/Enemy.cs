@@ -57,6 +57,7 @@ public abstract class Enemy : MonoBehaviour
 
         if (inAttackRange)
         {
+            FaceTarget();
             Attack();
         }
         else if (inSightRange)
@@ -121,7 +122,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    private void FaceTarget()
+    public void FaceTarget()
     {
         Vector3 direction = (player.transform.position - transform.position).normalized; // get direction towards player
         direction.y = 0;
