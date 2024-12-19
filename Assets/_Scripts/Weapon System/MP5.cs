@@ -8,7 +8,7 @@ public class MP5 : Gun
     public override void Shoot()
     {
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, Mathf.Infinity, shootableMask)) // Check if the raycast hits an enemy
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, Mathf.Infinity))
         { 
             EnemyHealthController enemyHealthController = hit.transform.GetComponent<EnemyHealthController>();
             if (enemyHealthController != null)

@@ -19,20 +19,12 @@ public abstract class Gun : MonoBehaviour
 
     public TextMeshProUGUI ammoText;
 
-    protected int shootableMask; // Layer mask for objects we can shoot
-
     private bool isShooting = false;
 
     void Awake()
     {
         soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
         ammoManager = GameObject.FindFirstObjectByType<AmmoManager>();
-
-        // Include both Default and Enemy layers
-        shootableMask = LayerMask.GetMask("Default", "Enemy");
-        
-        // Debug log to verify layer mask
-        Debug.Log($"Shootable Layer Mask: {shootableMask}");
     }
 
     public void StartShooting()

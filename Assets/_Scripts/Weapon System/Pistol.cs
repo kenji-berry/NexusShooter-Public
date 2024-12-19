@@ -8,7 +8,7 @@ public class Pistol : Gun
     public override void Shoot()
     {
         RaycastHit hit;
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, Mathf.Infinity, shootableMask))
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, Mathf.Infinity))
         {
             // Check for enemy
             EnemyHealthController enemyHealthController = hit.transform.GetComponent<EnemyHealthController>();
