@@ -283,4 +283,40 @@ public class GameController : MonoBehaviour
     {
          soundController.Play(soundController.buttonClick, 0.2f);
     }
+
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(playerController);
+        Debug.Log("SAVING PLAYER");
+    }
+
+    public void LoadPlayer()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+        Debug.Log("LOADING PLAYER");
+
+        GameObject player = playerController.gameObject;
+        player.SetActive(false);
+
+        player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+
+        player.GetComponent<HealthController>().UpdateHealthBar(data.health, data.maxHealth, 0);
+
+        playerController.characterVelocity = Vector3.zero;
+
+        player.SetActive(true);
+
+
+        if (isPaused)
+        {
+            isPaused = false;
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+            settingsPanel.SetActive(false);
+            playerController.inventoryOpen = false;
+            playerController.enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
 }

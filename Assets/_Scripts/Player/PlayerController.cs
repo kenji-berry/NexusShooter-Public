@@ -244,4 +244,14 @@ public class PlayerController : MonoBehaviour
         speed += amount;
         Debug.Log($"Player speed increased by {amount}. New speed: {speed}");
     }
+
+    public int getHealth()
+    {
+        return healthController.currentHealth;
+    }
+
+    public int getMaxHealth()
+    {
+        return healthController.maxHealth;
+    }
 }
