@@ -172,7 +172,7 @@ public class WeaponsManager : MonoBehaviour
         return -1;
     }
 
-    void UpdateAmmoPanel()
+    public void UpdateAmmoPanel()
     {
         ammoText.text = ammoManager.GetAmmo(gunSlots[selectedGun].gameObject.GetComponent<Gun>().gunData.ammoType).ToString();
 
@@ -201,19 +201,5 @@ public class WeaponsManager : MonoBehaviour
                 weaponSlots[i].ammoCountText.text = ammoManager.GetAmmo(gunSlots[i].GetComponent<Gun>().gunData.ammoType).ToString();
             }
         }
-    }
-
-    public void PickUpAmmo(int ammoCount)
-    {
-        return;
-        /*
-        if (selectedGun == -1)
-        {
-            return;
-        }
-
-        ammoManager.AddAmmo(gunSlots[selectedGun].GetComponent<Gun>().gunData.ammoType, ammoCount);
-        UpdateAmmoPanel();
-        */
     }
 }
