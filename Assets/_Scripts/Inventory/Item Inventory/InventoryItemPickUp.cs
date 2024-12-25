@@ -6,6 +6,7 @@ using UnityEngine;
 public class InventoryItemPickUp : MonoBehaviour
 {
     public InventoryManager inventoryManager;
+    public GameController gameController;
 
     public float PickUpRadius = 1f;
 
@@ -41,8 +42,10 @@ public class InventoryItemPickUp : MonoBehaviour
         CharacterController controller = other.transform.GetComponent<CharacterController>();
         if (controller != null)
         {
-            // if (weaponsManager.AddGun(prefab)) Destroy(gameObject);
-            inventoryManager.PickUpItem(gameObject.GetComponent<ItemInstance>());
+            if (inventoryManager.PickUpItem(gameObject.GetComponent<ItemInstance>()))
+            {
+                gameController.DisplayPickupMessage(gameObject.GetComponent<ItemInstance>());
+            }
         }
     }
 }
