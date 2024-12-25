@@ -9,7 +9,11 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class GameController : MonoBehaviour
 {
-    // UI Elements
+    [Header("References")]
+    private PlayerController playerController;
+    private InputManager inputManager;
+
+    [Header("UI")]
     public TextMeshProUGUI timer;
     public GameObject deathScreen;
     public GameObject pauseMenu;
@@ -27,29 +31,31 @@ public class GameController : MonoBehaviour
     public Image crosshairHorizontalLeftLine;
     public Image crosshairHorizontalRightLine;
 
-    // Audio
+    public GameObject itemPickupPanel;
+    public Image itemPickupIcon;
+    public TextMeshProUGUI itemPickupText;
+
+    [Header("Audio")]
     public AudioSource audioSource;
     public SoundController soundController;
 
-    // Camera
+    [Header("Camera")]
     public Camera playerCamera;
 
-    // Post Processing
+    [Header("Post Processing")]
     public PostProcessVolume postProcessVolume;
     public PostProcessProfile normalProfile;
     public PostProcessProfile deuteranopiaProfile;
     public PostProcessProfile protanopiaProfile;
     public PostProcessProfile tritanopiaProfile;
 
-    // Game State
+    [Header("Game State")]
     private float startTime;
     private float endTime;
     private bool levelCompleted = false;
     public bool isPaused = false;
 
-    // References
-    private PlayerController playerController;
-    private InputManager inputManager;
+    private float itemPickupHideTimer;
 
     void Awake()
     {
@@ -103,6 +109,15 @@ public class GameController : MonoBehaviour
         if (!levelCompleted && !isPaused) {
             float timeTaken = Time.time - startTime;
             timer.text = FormatTime(timeTaken);
+        }
+
+        if (itemPickupPanel.activeInHierarchy)
+        {
+            itemPickupHideTimer -= Time.deltaTime;
+            if (itemPickupHideTimer <= 0f)
+            {
+                HidePickupMessage();
+            }
         }
     }
 
@@ -318,5 +333,20 @@ public class GameController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+    }
+
+    public void DisplayPickupMessage(ItemInstance itemInstance) 
+    {
+        itemPickupIcon.sprite = itemInstance.itemData.icon;
+        itemPickupText.text = itemInstance.itemData.itemName;
+
+        itemPickupPanel.SetActive(true);
+
+        itemPickupHideTimer = 3f;
+    }
+
+    public void HidePickupMessage()
+    {
+        itemPickupPanel.SetActive(false);
     }
 }

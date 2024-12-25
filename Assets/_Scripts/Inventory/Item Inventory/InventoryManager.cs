@@ -35,7 +35,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void PickUpItem(ItemInstance item)
+    public bool PickUpItem(ItemInstance item)
     {
         for (int i = 0; i < slots.Length; i++)
         {
@@ -47,15 +47,14 @@ public class InventoryManager : MonoBehaviour
                     slots[i].amount += item.amount;
                     slots[i].UpdateSlot();
                     Destroy(item.gameObject);
-                    return;
+                    return true;
                 } else
                 {
                     int remaining = slots[i].item.maxStackSize - item.amount;
                     slots[i].amount += slots[i].item.maxStackSize - item.amount;
                     slots[i].UpdateSlot();
                     item.amount = remaining;
-                    PickUpItem(item);
-                    return;
+                    return PickUpItem(item) || true;
                 }
             } else if (slots[i].item == null)
             {
@@ -63,9 +62,11 @@ public class InventoryManager : MonoBehaviour
                 slots[i].amount += item.amount;
                 slots[i].UpdateSlot();
                 Destroy(item.gameObject);
-                return;
+                return true;
             }
         }
+
+        return false;
     }
 
     public bool HasItem(ItemData item, int amount)
