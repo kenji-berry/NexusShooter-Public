@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AmmoManager : MonoBehaviour
 {
+    private WeaponsManager weaponsManager;
+
     [System.Serializable]
     public class Ammo
     {
@@ -14,6 +16,15 @@ public class AmmoManager : MonoBehaviour
     }
 
     public List<Ammo> ammoInventory = new List<Ammo>();
+
+    void Awake()
+    {
+        weaponsManager = GameObject.FindFirstObjectByType<WeaponsManager>();
+        if (weaponsManager == null)
+        {
+            Debug.LogError("Weapons manager not found.");
+        }
+    }
 
     void Start()
     {
@@ -34,6 +45,7 @@ public class AmmoManager : MonoBehaviour
             if (ammoInventory[i].type == type)
             {
                 ammoInventory[i].currAmount = Math.Min(ammoInventory[i].currAmount + amount, ammoInventory[i].maxAmount);
+                weaponsManager.UpdateAmmoPanel();
                 return;
             }
         }
