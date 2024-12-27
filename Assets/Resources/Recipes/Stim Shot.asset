@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a37575d48b2ab47b519f3a517cbb40, type: 3}
+  m_Name: Stim Shot
+  m_EditorClassIdentifier: 
+  recipeName: Stim Shot
+  requirements:
+  - itemData: {fileID: 11400000, guid: c19c03bc0b73d29428a6f77bcd794bb4, type: 2}
+    amount: 1
+  - itemData: {fileID: 11400000, guid: 0ec0be02e4970434c97c9b79a2f65d35, type: 2}
+    amount: 1
+  result:
+    itemData: {fileID: 11400000, guid: c16593ad2cb97f944bf3a21e4954d1ee, type: 2}
+    amount: 1
