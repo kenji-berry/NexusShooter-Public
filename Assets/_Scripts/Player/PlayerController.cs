@@ -254,4 +254,21 @@ public class PlayerController : MonoBehaviour
     {
         return healthController.maxHealth;
     }
+
+    public void ActivateSpeedBoost(float boostAmount, float duration)
+    {
+        StartCoroutine(TemporarySpeedBoost(boostAmount, duration));
+    }
+
+    private IEnumerator TemporarySpeedBoost(float boostAmount, float duration)
+    {
+        float originalSpeed = speed;
+        speed *= boostAmount;
+        Debug.Log($"Speed boosted by {boostAmount}x. New speed: {speed}");
+
+        yield return new WaitForSeconds(duration); // Wait for the boost duration
+
+        speed = originalSpeed;
+        Debug.Log($"Speed boost ended. Speed reverted to: {speed}");
+    }
 }

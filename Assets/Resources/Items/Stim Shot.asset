@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6502e6e8c151c44999fc05a660b3d37c, type: 3}
-  m_Name: Metal Fragment
+  m_Name: Stim Shot
   m_EditorClassIdentifier: 
-  id: 3
-  itemName: Metal Fragment
-  description: A small piece of metal.
-  icon: {fileID: 21300000, guid: e1cbd25e78605e346b141322380cc966, type: 3}
-  maxStackSize: 2
+  id: 6
+  itemName: Stim Shot
+  description: A quick-use injection that restores 50 HP and briefly boost speed.
+  icon: {fileID: 21300000, guid: 5f6c7167851c81344988ce20a104a9fb, type: 3}
+  maxStackSize: 1

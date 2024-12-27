@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6502e6e8c151c44999fc05a660b3d37c, type: 3}
-  m_Name: Metal Fragment
+  m_Name: Serum Vial
   m_EditorClassIdentifier: 
-  id: 3
-  itemName: Metal Fragment
-  description: A small piece of metal.
-  icon: {fileID: 21300000, guid: e1cbd25e78605e346b141322380cc966, type: 3}
-  maxStackSize: 2
+  id: 5
+  itemName: Serum Vial
+  description: 'Serum Vial
+
+'
+  icon: {fileID: 21300000, guid: 9e8e9789dd821ce4a8a368e9219b4671, type: 3}
+  maxStackSize: 1

@@ -10,7 +10,5 @@ public class ItemData : ScriptableObject
     [TextArea(3, 3)] public string description;
     public Sprite icon;
 
-    public GameObject prefab;
-
     public int maxStackSize;
 }

@@ -8,8 +8,6 @@ public class InventoryItemPickUp : MonoBehaviour
     public InventoryManager inventoryManager;
     public GameController gameController;
 
-    public float PickUpRadius = 1f;
-
     private float bounceHeight = 0.1f;
     private float bounceSpeed = 3f;
     private Vector3 originalPosition;
@@ -20,7 +18,6 @@ public class InventoryItemPickUp : MonoBehaviour
     {
         myCollider = GetComponent<SphereCollider>();
         myCollider.isTrigger = true;
-        myCollider.radius = PickUpRadius;
     }
 
     void Start()
@@ -30,9 +27,6 @@ public class InventoryItemPickUp : MonoBehaviour
 
     void Update()
     {
-        /* Rotate and bob item up and down
-         */
-        transform.Rotate(0, 40 * Time.deltaTime, 0);
         float newY = originalPosition.y + Mathf.Sin(Time.time * bounceSpeed) * bounceHeight;
         transform.position = new Vector3(originalPosition.x, newY, originalPosition.z);
     }
