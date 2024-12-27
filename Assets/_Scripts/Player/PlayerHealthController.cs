@@ -206,4 +206,12 @@ public class HealthController : MonoBehaviour
                 break;
         }
     }
+
+    public void RepairArmour()
+    {
+        armourDurability = maxDurability;
+
+        armourBar.value = maxDurability;
+        armourText.text = armourDurability + "/" + maxDurability;
+    }
 }

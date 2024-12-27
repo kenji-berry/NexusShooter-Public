@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemUIInteraction : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ItemUIInteraction : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public GameObject hoveredItemUI;
 
@@ -23,5 +23,15 @@ public class ItemUIInteraction : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OnPointerExit(PointerEventData eventData)
     {
         hoveredItemUI.SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.pointerEnter.GetComponentInParent<ItemInventorySlot>().item == null)
+        {
+            return;
+        }
+
+        FindFirstObjectByType<ItemManager>().UseItem(eventData.pointerEnter.GetComponentInParent<ItemInventorySlot>().item.id);
     }
 }
