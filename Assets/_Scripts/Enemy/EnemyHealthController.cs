@@ -8,7 +8,7 @@ public class EnemyHealthController : MonoBehaviour
     private Enemy enemy;
     private Transform playerTransform;
     public int maxHealth = 100;
-    private int currentHealth;
+    public int currentHealth;
     public int xpReward = 50; // Amount of XP to reward when this enemy is defeated
     public event System.Action<int> onDamageTaken; // event to notify subscribers when damage is taken
     public GameObject bloodSprayPrefab;
