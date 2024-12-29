@@ -37,6 +37,12 @@ public class HealthController : MonoBehaviour
     public SoundController soundController;
     private int lastDamageSoundIndex = -1; // Store the last played sound index
 
+    [Header("Damage Feedback")]
+    [SerializeField] private Image lowHealthOverlay;
+    [SerializeField] private float lowHealthThreshold = 20f; // Percentage
+    [SerializeField] private float pulseSpeed = 2f;
+    [SerializeField] private float maxAlpha = 0.7f;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -44,6 +50,11 @@ public class HealthController : MonoBehaviour
         // Initialize the health bar with the player's starting health
         UpdateHealthBar(currentHealth, maxHealth, 0);
         UpdateArmourUI(); // Initialize the armour text
+    }
+
+    private void Update()
+    {
+        UpdateLowHealthEffect();
     }
 
     // Method to update the health bar
@@ -218,5 +229,22 @@ public class HealthController : MonoBehaviour
 
         armourBar.value = maxDurability;
         armourText.text = armourDurability + "/" + maxDurability;
+    }
+
+    private void UpdateLowHealthEffect()
+    {
+        float healthPercentage = (float)currentHealth / maxHealth * 100f;
+        
+        if (healthPercentage <= lowHealthThreshold)
+        {
+            // Pulse effect when health is low
+            float alpha = (Mathf.Sin(Time.time * pulseSpeed) + 1f) / 2f;
+            alpha *= maxAlpha * (1 - (healthPercentage / lowHealthThreshold));
+            lowHealthOverlay.color = new Color(1, 0, 0, alpha);
+        }
+        else
+        {
+            lowHealthOverlay.color = new Color(1, 0, 0, 0);
+        }
     }
 }
