@@ -2324,6 +2324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 50
+  playerDamageMultiplier: 4
 --- !u!1 &49688794
 GameObject:
   m_ObjectHideFlags: 0
@@ -7986,7 +7987,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-116714
+  m_Name: pb_Mesh-1764
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2

@@ -102,10 +102,15 @@ public class HealthController : MonoBehaviour
     // Method to take damage
     public void TakeDamage(int damage)
     {
-        float damageMultiplier = armourMultipliers[currentArmourTier];
-        int adjustedDamage = Mathf.RoundToInt(damage * damageMultiplier);
+        // Apply difficulty multiplier first
+        float difficultyMultiplier = DifficultyManager.Instance.GetDamageMultiplier();
+        int difficultyAdjustedDamage = Mathf.RoundToInt(damage * difficultyMultiplier);
+        
+        // Then apply armor multiplier
+        float armourMultiplier = armourMultipliers[currentArmourTier];
+        int finalDamage = Mathf.RoundToInt(difficultyAdjustedDamage * armourMultiplier);
 
-        UpdateArmourBar(damage, adjustedDamage, maxDurability, 0);
+        UpdateArmourBar(difficultyAdjustedDamage, finalDamage, maxDurability, 0);
 
         // Play a random player damage sound that is not the same as the last one
         int randomIndex;
@@ -125,7 +130,7 @@ public class HealthController : MonoBehaviour
             UpdateArmourUI();
         }
 
-        currentHealth -= adjustedDamage;
+        currentHealth -= finalDamage;
         currentHealth = Mathf.Max(currentHealth, 0);
         UpdateHealthBar(currentHealth, maxHealth, 0);
 
