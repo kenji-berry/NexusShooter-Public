@@ -401,9 +401,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
   xpReward: 10
-  bloodSprayPrefab: {fileID: 0}
-  damageNumberPrefab: {fileID: 0}
+  bloodSprayPrefab: {fileID: 9207897780854203301, guid: fe09ef16fb7d2c94786ebe08eb68dd3b, type: 3}
+  damageNumberPrefab: {fileID: 3941199437708740795, guid: eae1841ff9c41784dbd1eaeb33eb857e, type: 3}
   critChance: 5
   critMultiplier: 150
   soundController: {fileID: 0}
