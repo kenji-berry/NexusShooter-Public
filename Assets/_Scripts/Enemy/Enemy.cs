@@ -11,16 +11,19 @@ public abstract class Enemy : MonoBehaviour
     private EnemyHealthController healthController;
     public SoundController soundController;
 
-    private float detectionRange = 20f;
+    public float sightRange = 20f;
+    public bool playerInSightRange, playerInAttackRange;
+
+    [Header("Patrol")]
     public Transform[] patrolPoints;
     public float patrolWaitTime = 2f;
+    private int currentPatrolIndex = 0;
+
+    [Header("temp")]
     public float deaggroRange = 15f;
     public float deaggroTimer = 5f; // Time to maintain aggro after taking damage
     public int damage;
-    public float nextAttackTime;
-    public float attackCooldown = 2f;
     private float currentDeaggroTime;
-    private int currentPatrolIndex = 0;
     private bool isWaiting = false;
     private float waitTimer = 0f;
     private bool isAggro = false;
@@ -28,7 +31,11 @@ public abstract class Enemy : MonoBehaviour
     public bool isDead = false;
     public bool isAttacking = false;
 
+    [Header("Attack")]
+    public float nextAttackTime;
+    public float attackCooldown;
     public float attackRange;
+    public bool alreadyAttacked;
 
     private void Start()
     {
@@ -50,24 +57,15 @@ public abstract class Enemy : MonoBehaviour
     {
         if (isDead) { return; }
 
-        animator.SetFloat("Speed", agent.velocity.magnitude / agent.speed);
+        playerInSightRange = Vector3.Distance(transform.position, player.transform.position) < sightRange;
+        playerInAttackRange = Vector3.Distance(transform.position, player.transform.position) < attackRange;
 
-        bool inSightRange = Vector3.Distance(transform.position, player.transform.position) < detectionRange;
-        bool inAttackRange = Vector3.Distance(transform.position, player.transform.position) < attackRange;
+        if (!playerInSightRange && !playerInAttackRange) Patrol();
+        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+        if (playerInAttackRange && playerInSightRange) Attack();
 
-        if (inAttackRange)
-        {
-            FaceTarget();
-            Attack();
-        }
-        else if (inSightRange)
-        {
-            ChasePlayer();
-        }
-        else
-        {
-            Patrol();
-        }
+        animator.SetBool("attacking", playerInAttackRange);
+        animator.SetFloat("speed", agent.desiredVelocity.sqrMagnitude);
     }
 
     private void Patrol()
@@ -107,8 +105,6 @@ public abstract class Enemy : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.transform.position);
-        animator.SetBool("isRunning", true);
-        FaceTarget();
     }
 
     private void FaceMovementDirection()
@@ -145,7 +141,6 @@ public abstract class Enemy : MonoBehaviour
     public void ResetAggro()
     {
         isAggro = false;
-        animator.SetBool("isRunning", false);
     }
 
     private void OnDestroy()

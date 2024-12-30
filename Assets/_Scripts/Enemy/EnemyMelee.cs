@@ -9,6 +9,7 @@ public class EnemyMelee : Enemy
 
         damage = 10;
         attackRange = 2f;
+        attackCooldown = 2f;
     }
 
     public override void Attack()
@@ -17,9 +18,6 @@ public class EnemyMelee : Enemy
 
         if (Time.time >= nextAttackTime)
         {
-            animator.SetBool("isRunning", false);
-            animator.SetTrigger("punch");
-
             PlayerController playerController = player.GetComponent<PlayerController>();
             if (playerController != null)
             {
@@ -27,6 +25,7 @@ public class EnemyMelee : Enemy
                 soundController.Play(soundController.getHit, 0.5f);
             }
 
+            animator.SetBool("attacking", false);
             nextAttackTime = Time.time + attackCooldown; // Set next attack time
         }
     }

@@ -7,23 +7,22 @@ public class EnemyShooter : Enemy
     public GameObject bulletPrefab;
 
     public float bulletSpeed = 200f;
-    public float shootCooldown = 2f;
 
     void Awake()
     {
         damage = 15;
         attackRange = 10f;
+        attackCooldown = 2f;
     }
 
     public override void Attack()
     {
         if (bulletPrefab == null) return;
 
+        FaceTarget();
+        
         if (Time.time >= nextAttackTime)
         {
-            animator.SetTrigger("shoot");
-            animator.SetBool("isRunning", false);
-
             float distanceToPlayer = (player.transform.position - firePoint.position).magnitude;
             float timeToPlayer = Mathf.Min(distanceToPlayer / bulletSpeed, 0.2f);
 
@@ -38,7 +37,8 @@ public class EnemyShooter : Enemy
 
             Destroy(bullet, 5f);
 
-            nextAttackTime = Time.time + shootCooldown;
+            animator.SetBool("attacking", false);
+            nextAttackTime = Time.time + attackCooldown;
         }
     }
 }
