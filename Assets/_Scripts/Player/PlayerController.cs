@@ -271,4 +271,23 @@ public class PlayerController : MonoBehaviour
         speed = originalSpeed;
         Debug.Log($"Speed boost ended. Speed reverted to: {speed}");
     }
+
+
+    public void ForceDirectionalLaunch(float upwardForce, float horizontalBoostMultiplier)
+    {
+        StartCoroutine(ForceDirectionalLaunchRoutine(upwardForce, horizontalBoostMultiplier));
+    }
+
+    private IEnumerator ForceDirectionalLaunchRoutine(float upwardForce, float horizontalBoostMultiplier)
+    {
+        isGrounded = false;
+        Vector3 horizontalVelocity = new Vector3(characterVelocity.x, 0f, characterVelocity.z);
+        horizontalVelocity *= horizontalBoostMultiplier;
+
+        characterVelocity.x = horizontalVelocity.x;
+        characterVelocity.z = horizontalVelocity.z;
+        characterVelocity.y = upwardForce;
+
+        yield return null;
+    }
 }
