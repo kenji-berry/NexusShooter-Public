@@ -26,6 +26,14 @@ public class Pistol : Gun
                 soundController.Play(soundController.hit);
                 barrel.TakeDamage(gunData.damage);
             }
+
+            BreakableWall wall = hit.transform.GetComponent<BreakableWall>();
+
+            if (wall != null)
+            {
+                soundController.Play(soundController.hit);
+                wall.TakeDamage(gunData.damage);
+            }
         }
     }
 }
