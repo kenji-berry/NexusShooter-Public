@@ -62,7 +62,11 @@ public abstract class Enemy : MonoBehaviour
 
         if (!playerInSightRange && !playerInAttackRange) Patrol();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) Attack();
+        if (playerInAttackRange && playerInSightRange) 
+        {
+            agent.SetDestination(transform.position);
+            FaceTarget();
+        }
 
         animator.SetBool("attacking", playerInAttackRange);
         animator.SetFloat("speed", agent.desiredVelocity.sqrMagnitude);
