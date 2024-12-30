@@ -17,6 +17,7 @@ public class TutorialGuide : MonoBehaviour
             { "Crouch", "Press C to crouch." },
             { "Interact", "Press E to interact with objects." },
             { "Melee", "Press ? to melee enemives" },
+            { "Shoot", "Press LMB to shoot enemies" },
             { "Clear", "" }
         };
 
