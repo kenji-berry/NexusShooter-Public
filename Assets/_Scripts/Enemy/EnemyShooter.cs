@@ -29,6 +29,12 @@ public class EnemyShooter : Enemy
         {
             Debug.DrawLine(shootPoint.position, shootPoint.position + direction * 10f, Color.red, 1f);
 
+            HealthController healthController = hit.collider.GetComponent<HealthController>();
+            if (healthController != null)
+            {
+                healthController.TakeDamage(damage);
+            }
+
             TrailRenderer trail = Instantiate(bulletTrail, gunPoint.position, Quaternion.identity);
             StartCoroutine(SpawnTrail(trail, hit));
         }

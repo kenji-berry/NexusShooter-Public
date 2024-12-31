@@ -113,7 +113,6 @@ public class HealthController : MonoBehaviour
     // Method to take damage
     public void TakeDamage(int damage)
     {
-        /*
         // Apply difficulty multiplier first
         float difficultyMultiplier = DifficultyManager.Instance.GetDamageMultiplier();
         int difficultyAdjustedDamage = Mathf.RoundToInt(damage * difficultyMultiplier);
@@ -151,7 +150,6 @@ public class HealthController : MonoBehaviour
             FindFirstObjectByType<GameController>().Die();
             gameObject.GetComponent<PlayerController>().SetDead();
         }
-        */
     }
 
     // Method to heal
