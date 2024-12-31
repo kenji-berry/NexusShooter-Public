@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2450248285088752216}
   - component: {fileID: 4644952146009421158}
   - component: {fileID: 5729134728157833572}
+  - component: {fileID: 3967754559189060683}
   m_Layer: 0
   m_Name: Sound Controller
   m_TagString: Audio
@@ -62,7 +63,6 @@ MonoBehaviour:
   getHit: {fileID: 8300000, guid: 74c79ac2da3cf8243b50a3f813f45d5e, type: 3}
   criticalHit: {fileID: 8300000, guid: b4bfe41a0c0215944b30f5d8ceea1cd6, type: 3}
   doorButtonPress: {fileID: 8300000, guid: 3dacdb1c05ca12a4db0728e313defc7d, type: 3}
-  slidingDoor: {fileID: 8300000, guid: 0f9cb2cf18b97204d88d6e7b0b49c53c, type: 3}
 --- !u!82 &5729134728157833572
 AudioSource:
   m_ObjectHideFlags: 0
@@ -159,3 +159,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3967754559189060683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6717449105027503392}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ae7e09e6ef8a244a0aceff30e5d3c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voiceLines:
+  - {fileID: 8300000, guid: f666377da325d9343843b4bf50db5633, type: 3}
+  - {fileID: 8300000, guid: 06539e479e0dd6d44af8ded6c81f00e4, type: 3}
+  fullTexts:
+  - Where am I... is this hell?
+  - I didn't end up here by accident... Someone, or something, wanted me in this
+    place. And if they brought me here, there's a way out.
+  textComponent: {fileID: 0}
+  ellipsisPause: 1
+  commaPause: 0.5
+  fullStopPause: 0.6

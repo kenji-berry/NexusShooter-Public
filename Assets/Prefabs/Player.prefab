@@ -140,7 +140,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 7737322128915003395}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 32
+    m_Bits: 4294967295
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
@@ -205,6 +205,8 @@ GameObject:
   - component: {fileID: 6217051005435140724}
   - component: {fileID: 2180806489942642737}
   - component: {fileID: 9086214098291143881}
+  - component: {fileID: 1439787713730097206}
+  - component: {fileID: 4956999108715934683}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -439,6 +441,10 @@ MonoBehaviour:
   armourBarFill: {fileID: 0}
   armourBarBackground: {fileID: 0}
   soundController: {fileID: 0}
+  lowHealthOverlay: {fileID: 0}
+  lowHealthThreshold: 90
+  pulseSpeed: 2
+  maxAlpha: 0.7
 --- !u!114 &6027300963214750294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,10 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59fc9483092b8846bf0b42c3700cc39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingGuns:
-  - {fileID: 5918432275890725950, guid: 1a9dd4a441bb1794d9c87e1477d3e0d9, type: 3}
-  - {fileID: 5991769660722351569, guid: 6c69ad05ef03b994990a9fbb0c0054d0, type: 3}
-  - {fileID: 2910700331770387811, guid: 0acbc0ddfe8274e9b8b34d89ef6cb7dd, type: 3}
+  startingGuns: []
   weaponSlots:
   - {fileID: 0}
   - {fileID: 0}
@@ -526,3 +529,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeda3d31547adc644a1f820a03749cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1439787713730097206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163355570464354571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a68ab57e07e48b4188e9baef6f4042f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialText: {fileID: 0}
+--- !u!114 &4956999108715934683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9163355570464354571}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 481aa5fb2135f2a49b324b6ae63992ec, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0

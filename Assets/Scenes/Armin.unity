@@ -8817,6 +8817,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &261552235 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 898750523020162821, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
+  m_PrefabInstance: {fileID: 486917806}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &265058939
 Mesh:
   m_ObjectHideFlags: 0
@@ -9163,7 +9174,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1318
+  m_Name: pb_Mesh-52624
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -32887,14 +32898,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 271536636435165016, guid: 7068676b056f19244959a8892e2e3319, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 114.58
-      objectReference: {fileID: 0}
-    - target: {fileID: 271536636435165016, guid: 7068676b056f19244959a8892e2e3319, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 143.69
-      objectReference: {fileID: 0}
+    - target: {fileID: 507071967379383137, guid: 7068676b056f19244959a8892e2e3319, type: 3}
+      propertyPath: postProcessVolume
+      value: 
+      objectReference: {fileID: 1926846856}
     - target: {fileID: 1346741220847626849, guid: 7068676b056f19244959a8892e2e3319, type: 3}
       propertyPath: m_Name
       value: GameController
@@ -33035,10 +33042,6 @@ PrefabInstance:
       propertyPath: colorDropdown
       value: 
       objectReference: {fileID: 1709399824}
-    - target: {fileID: 4968472540166146567, guid: 7068676b056f19244959a8892e2e3319, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5230818341388732278, guid: 7068676b056f19244959a8892e2e3319, type: 3}
       propertyPath: 'recipeSlots.Array.data[0]'
       value: 
@@ -33051,14 +33054,6 @@ PrefabInstance:
       propertyPath: 'recipeSlots.Array.data[2]'
       value: 
       objectReference: {fileID: 1818702938}
-    - target: {fileID: 5230818341388732278, guid: 7068676b056f19244959a8892e2e3319, type: 3}
-      propertyPath: startingRecipes.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5230818341388732278, guid: 7068676b056f19244959a8892e2e3319, type: 3}
-      propertyPath: 'startingRecipes.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 52361338d7da84d449dfe360b637a6d0, type: 2}
     - target: {fileID: 7057444660174134421, guid: 7068676b056f19244959a8892e2e3319, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -33085,13 +33080,24 @@ PrefabInstance:
       objectReference: {fileID: 269440455}
     - target: {fileID: 8442026603629891611, guid: 7068676b056f19244959a8892e2e3319, type: 3}
       propertyPath: m_VersionIndex
-      value: 208
+      value: 211
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7068676b056f19244959a8892e2e3319, type: 3}
+--- !u!114 &693957746 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 423121807813470203, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
+  m_PrefabInstance: {fileID: 486917806}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &700439140
 GameObject:
   m_ObjectHideFlags: 0
@@ -102379,6 +102385,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1439787713730097206, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: tutorialText
+      value: 
+      objectReference: {fileID: 693957746}
     - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: armourBar
       value: 
@@ -102410,7 +102420,7 @@ PrefabInstance:
     - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: lowHealthOverlay
       value: 
-      objectReference: {fileID: 1409032087}
+      objectReference: {fileID: 261552235}
     - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: heathBarBackground
       value: 
@@ -102596,6 +102606,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f59fc9483092b8846bf0b42c3700cc39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1926846856 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4956999108715934683, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+  m_PrefabInstance: {fileID: 1926846843}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31938582}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1927419323
@@ -117227,6 +117248,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1926846845}
     - target: {fileID: 2903673468277017575, guid: 2d50066a34dcfa84e88e66e6bd18ee4b, type: 3}
+      propertyPath: upgradeButtons.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903673468277017575, guid: 2d50066a34dcfa84e88e66e6bd18ee4b, type: 3}
       propertyPath: insufficientSkillPointsText
       value: 
       objectReference: {fileID: 2138807475}
@@ -117488,6 +117513,7 @@ SceneRoots:
   - {fileID: 693128818}
   - {fileID: 917629287}
   - {fileID: 486917806}
+  - {fileID: 5463456369640800614}
   - {fileID: 1816980205}
   - {fileID: 1926846843}
   - {fileID: 776871133}
@@ -117508,7 +117534,6 @@ SceneRoots:
   - {fileID: 5501735866725138523}
   - {fileID: 5464652822137931422}
   - {fileID: 1748574057}
-  - {fileID: 5463456369640800614}
   - {fileID: 3733684135123405348}
   - {fileID: 1682149223}
   - {fileID: 1985956458}
