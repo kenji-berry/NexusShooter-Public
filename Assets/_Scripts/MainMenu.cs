@@ -6,16 +6,17 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject playPanel;
     [SerializeField] private GameObject difficultyPanel;
 
+    private void Awake()
+    {
+        playPanel = GameObject.Find("PlayScreen");
+        difficultyPanel = GameObject.Find("DifficultyScreen");
+        difficultyPanel.SetActive(false);
+    }
+
     public void StartGame()
     {
-        if (playPanel != null)
-        {
-            playPanel.SetActive(false);
-        }
-        if (difficultyPanel != null)
-        {
-            difficultyPanel.SetActive(true);
-        }
+        playPanel.SetActive(false);
+        difficultyPanel.SetActive(true);
     }
 
     public void LoadEasy()
