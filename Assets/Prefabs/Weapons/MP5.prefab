@@ -101,10 +101,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b542206a4e84445dae44ea6f0fa5208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunData: {fileID: 11400000, guid: 60ca9f430713d4cdd9c0668d0fd24e66, type: 2}
+  weaponData: {fileID: 11400000, guid: 777464066f84e8a46ae90694b8f8bc99, type: 2}
   playerCamera: {fileID: 0}
-  muzzleFlash: {fileID: 5794842786985512379}
   soundController: {fileID: 0}
+  gunData: {fileID: 11400000, guid: 60ca9f430713d4cdd9c0668d0fd24e66, type: 2}
+  muzzleFlash: {fileID: 5794842786985512379}
   ammoText: {fileID: 0}
 --- !u!114 &7371534385965174964
 MonoBehaviour:

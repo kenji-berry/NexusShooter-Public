@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MeleeWeapon : MonoBehaviour
+public class MeleeWeapon : Weapon
 {
-    public SoundController soundController;
-    public Camera playerCamera;
-
     public int damage = 30;
     public float attackRange = 3f;
 
@@ -16,15 +13,9 @@ public class MeleeWeapon : MonoBehaviour
         soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
     }
 
-    void OnMeleeAttack(InputValue value)
+    public override void BeginAttacking()
     {
-        soundController.Play(soundController.melee, 0.1f);
-        Attack();
-    }
-
-    void Attack()
-    {
-        Debug.Log("Performing melee attack");
+        soundController.Play(soundController.melee);
         
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, attackRange))
@@ -35,5 +26,10 @@ public class MeleeWeapon : MonoBehaviour
                 enemyHealthController.TakeDamage(damage);
             }
         }
+    }
+
+    public override void StopAttacking()
+    {
+        return;
     }
 }
