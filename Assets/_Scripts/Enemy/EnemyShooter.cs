@@ -8,6 +8,7 @@ public class EnemyShooter : Enemy
     public Transform shootPoint;
     public Transform gunPoint;
     public GameObject bulletPrefab;
+    public ParticleSystem muzzleFlash;
 
     [Header("Gun")]
     public Vector3 spread = new Vector3(0.05f, 0.05f, 0.05f);
@@ -28,6 +29,8 @@ public class EnemyShooter : Enemy
         if (Physics.Raycast(shootPoint.position, direction, out hit))
         {
             Debug.DrawLine(shootPoint.position, shootPoint.position + direction * 10f, Color.red, 1f);
+
+            // muzzleFlash.Play();
 
             HealthController healthController = hit.collider.GetComponent<HealthController>();
             if (healthController != null)

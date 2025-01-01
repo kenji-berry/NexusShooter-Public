@@ -49,6 +49,7 @@ MonoBehaviour:
   skillPointsText: {fileID: 0}
   levelUpText: {fileID: 0}
   healthController: {fileID: 0}
+  enemyHealthController: {fileID: 0}
   playerController: {fileID: 0}
   soundController: {fileID: 0}
   insufficientSkillPointsText: {fileID: 0}
@@ -56,9 +57,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   upgradeCostTexts:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
