@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 7040351352866676787}
   - component: {fileID: 6715982856361855716}
   - component: {fileID: 5254505819951008255}
+  - component: {fileID: 7339448429518770179}
   m_Layer: 0
   m_Name: MediumArmour
   m_TagString: Untagged
@@ -193,9 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d0a4da79dd0834bb8ed8e322169c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armourTier: 2
-  bounceSpeed: 3
-  bounceHeight: 0.1
+  armourTier: 0
 --- !u!135 &5254505819951008255
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -217,3 +216,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.02745278
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7339448429518770179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8841874698877829606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d0a4da79dd0834bb8ed8e322169c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armourTier: 2

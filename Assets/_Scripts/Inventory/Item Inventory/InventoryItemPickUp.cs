@@ -16,6 +16,9 @@ public class InventoryItemPickUp : MonoBehaviour
 
     private void Awake()
     {
+        inventoryManager = FindFirstObjectByType<InventoryManager>();
+        gameController = FindFirstObjectByType<GameController>();
+
         myCollider = GetComponent<SphereCollider>();
         myCollider.isTrigger = true;
     }

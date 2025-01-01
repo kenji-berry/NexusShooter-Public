@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1354120578740431165}
   - component: {fileID: 8062466274314668752}
   - component: {fileID: 9101412499964037618}
+  - component: {fileID: 7921720151319106163}
   m_Layer: 0
   m_Name: HeavyArmour
   m_TagString: Untagged
@@ -28,14 +29,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705430227172526312}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.6977837, y: 0.71630853, z: 0.00000002601151, w: 0.00000008005976}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 422.943, y: 1.223, z: 22.926752}
   m_LocalScale: {x: 1.8929955, y: 18.414661, z: 18.694101}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6319799228215659383}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!33 &3832064328032214519
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -99,9 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d0a4da79dd0834bb8ed8e322169c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armourTier: 3
-  bounceSpeed: 3
-  bounceHeight: 0.1
+  armourTier: 0
 --- !u!135 &9101412499964037618
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -123,6 +122,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.02745278
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7921720151319106163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705430227172526312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d0a4da79dd0834bb8ed8e322169c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armourTier: 3
 --- !u!1 &8407000294902378294
 GameObject:
   m_ObjectHideFlags: 0

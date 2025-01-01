@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +37,9 @@ public abstract class Enemy : MonoBehaviour
     public float attackCooldown;
     public float attackRange;
     public bool alreadyAttacked;
+
+    [Header("Loot")]
+    public List<LootItem> lootTable = new List<LootItem>();
 
     private void Start()
     {
@@ -135,13 +139,6 @@ public abstract class Enemy : MonoBehaviour
         isAggro = true;
     }
 
-    public void SetDead()
-    {
-        animator.SetTrigger("death");
-        agent.isStopped = true;
-        isDead = true;
-    }
-
     public void ResetAggro()
     {
         isAggro = false;
@@ -160,6 +157,30 @@ public abstract class Enemy : MonoBehaviour
     {
         isAggro = true;
         currentDeaggroTime = Time.time + deaggroTimer; // Reset deaggro timer when taking damage
+    }
+
+    public void Die()
+    {
+        foreach (LootItem lootItem in lootTable)
+        {
+            if (UnityEngine.Random.Range(0f, 100f) <= lootItem.dropChance)
+            {
+                InstantiateLoot(lootItem.itemPrefab);
+            }
+        }
+
+        animator.SetTrigger("death");
+        agent.isStopped = true;
+        isDead = true;
+        gameObject.GetComponent<Collider>().enabled = false;
+    }
+
+    void InstantiateLoot(GameObject loot)
+    {
+        if (loot)
+        {
+            GameObject droppedLoot = Instantiate(loot, transform.position, Quaternion.identity);
+        }
     }
 
     public abstract void Attack();

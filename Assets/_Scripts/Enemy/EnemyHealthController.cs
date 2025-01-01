@@ -57,9 +57,8 @@ public class EnemyHealthController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            enemy.SetDead();
-            gameObject.GetComponent<Collider>().enabled = false;
-
+            enemy.Die();
+            
             // Reward XP when the enemy is defeated
             XPManager.instance.AddXP(xpReward);
         }
