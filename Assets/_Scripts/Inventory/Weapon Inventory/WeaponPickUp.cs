@@ -28,7 +28,7 @@ public class WeaponPickUp : MonoBehaviour
         CharacterController controller = other.transform.GetComponent<CharacterController>();
         if (controller != null)
         {
-            if (weaponsManager.AddGun(prefab)) Destroy(gameObject);
+            if (weaponsManager.AddWeapon(prefab)) Destroy(gameObject);
         }
     }
 }

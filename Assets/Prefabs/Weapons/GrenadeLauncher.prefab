@@ -5071,12 +5071,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de76818ff26440039074292d4ca727d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunData: {fileID: 11400000, guid: 3007b9d1b3539486abe3012a1ae6420c, type: 2}
+  weaponData: {fileID: 11400000, guid: 87a24e5e7d9ceb54696371ab8edf1e80, type: 2}
   playerCamera: {fileID: 0}
+  soundController: {fileID: 0}
+  gunData: {fileID: 11400000, guid: 3007b9d1b3539486abe3012a1ae6420c, type: 2}
   muzzleFlash: {fileID: 7105088723088196493}
   ammoText: {fileID: 0}
-  currentAmmo: 0
-  soundController: {fileID: 0}
   grenadePrefab: {fileID: 6930579414806223541, guid: 516a665f9749249e6b3b5be6a5659f01, type: 3}
   launchPoint: {fileID: 3987706044260735702}
   launchForce: 20

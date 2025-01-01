@@ -11,14 +11,14 @@ public class WeaponsManager : MonoBehaviour
 
     const int WEAPON_INVENTORY_SIZE = 3;
 
-    public List<Gun> startingGuns = new List<Gun>();
+    public List<Weapon> startingWeapons = new List<Weapon>();
     public WeaponSlot[] weaponSlots = new WeaponSlot[WEAPON_INVENTORY_SIZE];
 
     public GameObject inventoryUI;
     public TextMeshProUGUI weaponName;
     public Transform weaponHolder;
 
-    private int selectedGun = -1;
+    private int selectedWeapon = -1;
     public bool isInventoryOpen = false;
 
     [Header("Ammo Panel")]
@@ -31,7 +31,7 @@ public class WeaponsManager : MonoBehaviour
     public Sprite shellSprite;
     public Sprite grenadeSprite;
 
-    private Gun[] gunSlots = new Gun[WEAPON_INVENTORY_SIZE];
+    private Weapon[] gunSlots = new Weapon[WEAPON_INVENTORY_SIZE];
 
     void OnSelectWeaponOne(InputValue value) { SwitchWeapon(0); }
 
@@ -50,9 +50,9 @@ public class WeaponsManager : MonoBehaviour
 
     void Start()
     {
-        foreach (Gun gun in startingGuns)
+        foreach (Weapon weapon in startingWeapons)
         {
-            AddGun(gun);
+            AddWeapon(weapon);
         }
     }
 
@@ -84,53 +84,52 @@ public class WeaponsManager : MonoBehaviour
         }
 
         // if no guns exist yet 
-        if (selectedGun == -1)
+        if (selectedWeapon == -1)
         {
-            selectedGun = pos;
-            gunSlots[selectedGun].gameObject.SetActive(true);
-            weaponSlots[selectedGun].GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f);
+            selectedWeapon = pos;
+            gunSlots[selectedWeapon].gameObject.SetActive(true);
+            weaponSlots[selectedWeapon].GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f);
 
             // show ammo count
             ammoPanel.SetActive(true);
         }
         else
         {
-            gunSlots[selectedGun].gameObject.SetActive(false);
-            weaponSlots[selectedGun].GetComponent<Image>().color = new Color(0.12f, 0.12f, 0.12f);
+            gunSlots[selectedWeapon].gameObject.SetActive(false);
+            weaponSlots[selectedWeapon].GetComponent<Image>().color = new Color(0.12f, 0.12f, 0.12f);
 
-            selectedGun = pos;
-            gunSlots[selectedGun].gameObject.SetActive(true);
-            weaponSlots[selectedGun].GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f);
+            selectedWeapon = pos;
+            gunSlots[selectedWeapon].gameObject.SetActive(true);
+            weaponSlots[selectedWeapon].GetComponent<Image>().color = new Color(0.7f, 0.7f, 0.7f);
         }
 
-        weaponName.text = gunSlots[selectedGun].GetComponent<Gun>().gunData.gunName;
+        weaponName.text = gunSlots[selectedWeapon].GetComponent<Weapon>().weaponData.weaponName;
 
         UpdateAmmoPanel();
     }
 
-    void OnShoot(InputValue value)
+    void OnAttack(InputValue value)
     {
-
-        if (selectedGun == -1 || isInventoryOpen || FindFirstObjectByType<GameController>().isPaused)
+        if (selectedWeapon == -1 || isInventoryOpen || FindFirstObjectByType<GameController>().isPaused)
         {
             return;
         }
 
-        Gun gun = gunSlots[selectedGun];
+        Weapon weapon = gunSlots[selectedWeapon];
         if (value.isPressed)
         {
-            gun.StartShooting();
+            weapon.BeginAttacking();
         }
         else
         {
-            gun.StopShooting();
+            weapon.StopAttacking();
         }
     }
 
-    public bool AddGun(Gun gunPrefab)
+    public bool AddWeapon(Weapon weaponPrefab)
     {
-        foreach (Gun gun in gunSlots) {
-            if (gun != null && gun.GetComponent<Gun>().gunData.gunName == gunPrefab.gameObject.GetComponent<Gun>().gunData.gunName)
+        foreach (Weapon weapon in gunSlots) {
+            if (weapon != null && weapon.GetComponent<Weapon>().weaponData.weaponName == weaponPrefab.gameObject.GetComponent<Weapon>().weaponData.weaponName)
             {
                 return false;
             }
@@ -145,15 +144,35 @@ public class WeaponsManager : MonoBehaviour
         }
 
         // spawn a gun as a child of the weapon holder
-        Gun gunInstance = Instantiate(gunPrefab, weaponHolder);
-        gunInstance.playerCamera = Camera.main;
-        gunInstance.ammoText = ammoText;
-        gunInstance.gameObject.SetActive(false);
-        gunSlots[pos] = gunInstance;
+        Weapon weaponInstance = Instantiate(weaponPrefab, weaponHolder);
+        weaponInstance.playerCamera = Camera.main;
+
+        switch (weaponPrefab.GetComponent<Weapon>().weaponData.weaponType)
+        {
+            case WeaponData.WeaponType.MELEE:
+                break;
+
+            case WeaponData.WeaponType.GUN:
+                weaponInstance.GetComponent<Gun>().ammoText = ammoText;
+                break;
+        }
+
+        weaponInstance.gameObject.SetActive(false);
+        gunSlots[pos] = weaponInstance;
 
         // Add to UI inventory
-        weaponSlots[pos].item = gunPrefab.gameObject.GetComponent<ItemInstance>().itemData;
-        weaponSlots[pos].ammoCountText.text = ammoManager.GetAmmo(gunInstance.GetComponent<Gun>().gunData.ammoType).ToString();
+        weaponSlots[pos].item = weaponPrefab.gameObject.GetComponent<ItemInstance>().itemData;
+        if (weaponInstance.GetComponent<Weapon>().weaponData.weaponType == WeaponData.WeaponType.GUN)
+        {
+            weaponSlots[pos].ammoCountText.text = ammoManager.GetAmmo(weaponInstance.GetComponent<Gun>().gunData.ammoType).ToString();
+        }
+
+        /*else
+        {
+            gunSlots[pos].ammoCountText.text = "";
+        }
+        */
+
         weaponSlots[pos].UpdateSlot();
 
         SwitchWeapon(pos);
@@ -174,9 +193,16 @@ public class WeaponsManager : MonoBehaviour
 
     public void UpdateAmmoPanel()
     {
-        ammoText.text = ammoManager.GetAmmo(gunSlots[selectedGun].gameObject.GetComponent<Gun>().gunData.ammoType).ToString();
+        if (gunSlots[selectedWeapon].GetComponent<Weapon>().weaponData.weaponType == WeaponData.WeaponType.MELEE)
+        {
+            ammoPanel.SetActive(false);
+            return;
+        }
 
-        switch (gunSlots[selectedGun].GetComponent<Gun>().gunData.ammoType)
+        ammoPanel.SetActive(true);
+        ammoText.text = ammoManager.GetAmmo(gunSlots[selectedWeapon].gameObject.GetComponent<Gun>().gunData.ammoType).ToString();
+
+        switch (gunSlots[selectedWeapon].GetComponent<Gun>().gunData.ammoType)
         {
             case GunData.AmmoType.BULLETS:
                 ammoIcon.sprite = bulletSprite;
@@ -196,7 +222,7 @@ public class WeaponsManager : MonoBehaviour
     {
         for (int i = 0; i < gunSlots.Length; i++)
         {
-            if (gunSlots[i] != null)
+            if (gunSlots[i] != null && gunSlots[i].GetComponent<Weapon>().weaponData.weaponType != WeaponData.WeaponType.MELEE)
             {
                 weaponSlots[i].ammoCountText.text = ammoManager.GetAmmo(gunSlots[i].GetComponent<Gun>().gunData.ammoType).ToString();
             }

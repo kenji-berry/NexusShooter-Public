@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class GunData : ScriptableObject
 {
-
     public enum ShootingType
     {
         Single,
@@ -19,8 +18,6 @@ public class GunData : ScriptableObject
         SHELLS,
         GRENADES
     }
-
-    public string gunName;
 
     public AmmoType ammoType;
 

@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shoot",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "99fdd5a5-1968-414e-9047-943a0d616d27",
                     "expectedControlType": "Button",
@@ -72,15 +72,6 @@
                     "name": "Use",
                     "type": "Button",
                     "id": "5a94c5fc-df13-4711-9a8e-c3d667a36e0d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "MeleeAttack",
-                    "type": "Button",
-                    "id": "dea40486-b127-4bae-9a5c-f7834a65f8b0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -248,7 +239,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -271,17 +262,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Use",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1ee7dea8-2a9f-4854-81f5-cb4074227384",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MeleeAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

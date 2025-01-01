@@ -6,17 +6,14 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public abstract class Gun : MonoBehaviour
+public abstract class Gun : Weapon
 {
     public GunData gunData;
-    public Camera playerCamera;
     public ParticleSystem muzzleFlash;
 
     private float nextTimeToFire = 0f;
 
-    public SoundController soundController;
     private AmmoManager ammoManager;
-
     public TextMeshProUGUI ammoText;
 
     private bool isShooting = false;
@@ -27,7 +24,7 @@ public abstract class Gun : MonoBehaviour
         ammoManager = GameObject.FindFirstObjectByType<AmmoManager>();
     }
 
-    public void StartShooting()
+    public override void BeginAttacking()
     {
         isShooting = true;
 
@@ -47,7 +44,7 @@ public abstract class Gun : MonoBehaviour
         }
     }
         
-    public void StopShooting()
+    public override void StopAttacking()
     {
         isShooting = false; // Stop any ongoing shooting
     }

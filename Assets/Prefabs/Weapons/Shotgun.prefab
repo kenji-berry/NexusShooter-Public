@@ -153,10 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6694e8719eb9454ebf472fd5fa60996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunData: {fileID: 11400000, guid: 6b75b08178cdfbe45863cf420170fab8, type: 2}
+  weaponData: {fileID: 11400000, guid: 45a598227c77ed14fa948195614f1568, type: 2}
   playerCamera: {fileID: 0}
-  muzzleFlash: {fileID: 6828146356896220392}
   soundController: {fileID: 0}
+  gunData: {fileID: 11400000, guid: 6b75b08178cdfbe45863cf420170fab8, type: 2}
+  muzzleFlash: {fileID: 6828146356896220392}
   ammoText: {fileID: 0}
 --- !u!114 &75763419234845779
 MonoBehaviour:
