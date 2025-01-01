@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 4383038001222507731}
   - component: {fileID: 4508756971587075007}
   - component: {fileID: 9077590354489619725}
+  - component: {fileID: 5013984187218133338}
   m_Layer: 0
   m_Name: LightArmour
   m_TagString: Untagged
@@ -193,9 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d0a4da79dd0834bb8ed8e322169c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armourTier: 1
-  bounceSpeed: 3
-  bounceHeight: 0.1
+  armourTier: 0
 --- !u!135 &9077590354489619725
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -217,3 +216,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.02745278
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5013984187218133338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2869727164415638790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d0a4da79dd0834bb8ed8e322169c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armourTier: 1
