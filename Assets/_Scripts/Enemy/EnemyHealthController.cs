@@ -23,6 +23,7 @@ public class EnemyHealthController : MonoBehaviour
     {
         enemy = GetComponent<Enemy>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
     }
 
     void Start()
