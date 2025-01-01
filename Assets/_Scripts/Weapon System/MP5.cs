@@ -15,6 +15,10 @@ public class MP5 : Gun
             {
                 soundController.Play(soundController.hit);
                 enemyHealthController.TakeDamage(gunData.damage);
+            } else
+            {
+                GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(impact, 0.5f);
             }
         }
     }

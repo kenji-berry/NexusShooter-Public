@@ -159,6 +159,9 @@ MonoBehaviour:
   gunData: {fileID: 11400000, guid: 6b75b08178cdfbe45863cf420170fab8, type: 2}
   muzzleFlash: {fileID: 6828146356896220392}
   ammoText: {fileID: 0}
+  pelletsPerShot: 20
+  spread: {x: 0.1, y: 0.1, z: 0.1}
+  hitEffect: {fileID: 1411045508206430806, guid: 9d1905700c0d9c241b5dc1e75e1dc2f1, type: 3}
 --- !u!114 &75763419234845779
 MonoBehaviour:
   m_ObjectHideFlags: 0
