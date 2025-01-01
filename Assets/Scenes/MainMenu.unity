@@ -598,11 +598,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 626171757}
-  - component: {fileID: 626171758}
   - component: {fileID: 626171759}
+  - component: {fileID: 626171760}
   m_Layer: 0
   m_Name: MainMenuSounds
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -622,18 +622,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &626171758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626171755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a721c276ed2ddc441b4d1dd8a83b02b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &626171759
 AudioSource:
   m_ObjectHideFlags: 0
@@ -646,9 +634,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 121a71c86e42db74d9b726a915c48115, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -730,6 +718,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &626171760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626171755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9495aa97cdf753346aeb5b86991fa6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 626171759}
+  shoot: {fileID: 0}
+  melee: {fileID: 0}
+  hit: {fileID: 0}
+  jump: {fileID: 0}
+  levelUp: {fileID: 0}
+  skillPointPurchase: {fileID: 0}
+  buttonClick: {fileID: 8300000, guid: b87fbe4ac336a8d44bb8e2e5b023c168, type: 3}
+  buttonHover: {fileID: 8300000, guid: ef2316eabbdad494895b3e58738a52e9, type: 3}
+  playerDamage1: {fileID: 0}
+  playerDamage2: {fileID: 0}
+  playerDamage3: {fileID: 0}
+  playerDamage4: {fileID: 0}
+  playerDamage5: {fileID: 0}
+  playerDamage6: {fileID: 0}
+  getHit: {fileID: 0}
+  criticalHit: {fileID: 0}
+  doorButtonPress: {fileID: 0}
 --- !u!1 &686805273
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +760,7 @@ GameObject:
   - component: {fileID: 686805277}
   - component: {fileID: 686805276}
   - component: {fileID: 686805275}
+  - component: {fileID: 686805278}
   m_Layer: 5
   m_Name: MediumButton
   m_TagString: Untagged
@@ -825,6 +844,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 853216870}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: buttonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &686805276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,6 +894,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686805273}
   m_CullTransparentMesh: 1
+--- !u!114 &686805278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686805273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 853216870}
+          m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+          m_MethodName: buttonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &849151209
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,6 +935,7 @@ GameObject:
   - component: {fileID: 849151213}
   - component: {fileID: 849151212}
   - component: {fileID: 849151211}
+  - component: {fileID: 849151214}
   m_Layer: 5
   m_Name: HardButton
   m_TagString: Untagged
@@ -958,6 +1019,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 853216870}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: buttonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &849151212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,6 +1069,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849151209}
   m_CullTransparentMesh: 1
+--- !u!114 &849151214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849151209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 853216870}
+          m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+          m_MethodName: buttonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &853216866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,8 +1203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7be9cea76934d48a7c4a7b5dd908ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playPanel: {fileID: 0}
-  difficultyPanel: {fileID: 0}
+  playPanel: {fileID: 299161413}
+  difficultyPanel: {fileID: 1121924042}
+  soundController: {fileID: 626171760}
 --- !u!1 &1121924042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,6 +1506,7 @@ GameObject:
   - component: {fileID: 1243399450}
   - component: {fileID: 1243399449}
   - component: {fileID: 1243399448}
+  - component: {fileID: 1243399451}
   m_Layer: 5
   m_Name: EasyButton
   m_TagString: Untagged
@@ -1486,6 +1590,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 853216870}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: buttonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1243399449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1524,6 +1640,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243399446}
   m_CullTransparentMesh: 1
+--- !u!114 &1243399451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243399446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 853216870}
+          m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+          m_MethodName: buttonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1586805827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,6 +1681,7 @@ GameObject:
   - component: {fileID: 1586805831}
   - component: {fileID: 1586805830}
   - component: {fileID: 1586805829}
+  - component: {fileID: 1586805832}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -1619,6 +1765,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 853216870}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: buttonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1586805830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1657,6 +1815,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1586805827}
   m_CullTransparentMesh: 1
+--- !u!114 &1586805832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586805827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 853216870}
+          m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+          m_MethodName: buttonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1616506361
 GameObject:
   m_ObjectHideFlags: 0

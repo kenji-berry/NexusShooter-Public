@@ -12,6 +12,7 @@ public class SoundController : MonoBehaviour
     public AudioClip levelUp;
     public AudioClip skillPointPurchase;
     public AudioClip buttonClick;
+    public AudioClip buttonHover;
     public AudioClip playerDamage1;
     public AudioClip playerDamage2;
     public AudioClip playerDamage3;
@@ -21,6 +22,7 @@ public class SoundController : MonoBehaviour
     public AudioClip getHit;
     public AudioClip criticalHit;
     public AudioClip doorButtonPress;
+
 
 
     private static bool isSoundEnabled = true; // Global sound state
