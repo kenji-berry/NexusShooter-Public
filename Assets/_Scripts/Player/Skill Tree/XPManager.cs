@@ -30,6 +30,8 @@ public class XPManager : MonoBehaviour
 
     void Awake()
     {
+        soundController = GameObject.FindGameObjectWithTag("Audio").GetComponent<SoundController>();
+
         if (instance == null)
         {
             instance = this;
