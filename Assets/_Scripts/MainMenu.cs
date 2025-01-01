@@ -5,18 +5,38 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject playPanel;
     [SerializeField] private GameObject difficultyPanel;
+    [SerializeField] private SoundController soundController;
 
     private void Awake()
     {
-        playPanel = GameObject.Find("PlayScreen");
-        difficultyPanel = GameObject.Find("DifficultyScreen");
-        difficultyPanel.SetActive(false);
+        ValidateReferences();
+        SetupInitialState();
+    }
+
+    private void ValidateReferences()
+    {
+        if (playPanel == null)
+            Debug.LogError($"Play Panel not assigned on {gameObject.name}");
+            
+        if (difficultyPanel == null)
+            Debug.LogError($"Difficulty Panel not assigned on {gameObject.name}");
+            
+        if (soundController == null)
+            Debug.LogError($"Sound Controller not assigned on {gameObject.name}");
+    }
+
+    private void SetupInitialState()
+    {
+        if (difficultyPanel != null)
+            difficultyPanel.SetActive(false);
     }
 
     public void StartGame()
     {
-        playPanel.SetActive(false);
-        difficultyPanel.SetActive(true);
+        if (playPanel != null)
+            playPanel.SetActive(false);
+        if (difficultyPanel != null)
+            difficultyPanel.SetActive(true);
     }
 
     public void LoadEasy()
@@ -44,5 +64,15 @@ public class MainMenu : MonoBehaviour
         {
             difficultyPanel.SetActive(false);
         }
+    }
+
+    public void buttonClick()
+    {
+        soundController.Play(soundController.buttonClick);
+    }
+
+    public void buttonHover()
+    {
+        soundController.Play(soundController.buttonHover);
     }
 }
