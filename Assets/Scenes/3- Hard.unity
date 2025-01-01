@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.47979134, g: 0.5240088, b: 0.5936238, a: 1}
+  m_IndirectSpecularColor: {r: 0.13015562, g: 0.09557039, b: 0.12492945, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10285,6 +10285,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6e495c195cd53848b75adc34d41034d, type: 3}
+--- !u!114 &329243300 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 898750523020162821, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
+  m_PrefabInstance: {fileID: 486917806}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &339429014
 GameObject:
   m_ObjectHideFlags: 0
@@ -28570,6 +28581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 150
+  playerDamageMultiplier: 1
 --- !u!43 &711947061
 Mesh:
   m_ObjectHideFlags: 0
@@ -88460,17 +88472,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 312714963}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &1890984638 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7815116457014564721, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
-  m_PrefabInstance: {fileID: 486917806}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1890984639 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7185057247727473221, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
@@ -88502,17 +88503,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1890984642 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2890060444357796240, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
-  m_PrefabInstance: {fileID: 486917806}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1890984643 stripped
@@ -90473,6 +90463,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1439787713730097206, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: tutorialText
+      value: 
+      objectReference: {fileID: 2075856084}
     - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: armourBar
       value: 
@@ -90501,6 +90495,10 @@ PrefabInstance:
       propertyPath: soundController
       value: 
       objectReference: {fileID: 917629288}
+    - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
+      propertyPath: lowHealthOverlay
+      value: 
+      objectReference: {fileID: 329243300}
     - target: {fileID: 1631874739560321578, guid: 39e496b0b7bfc2841979cea03473fc29, type: 3}
       propertyPath: heathBarBackground
       value: 
@@ -98598,6 +98596,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2075856084 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 423121807813470203, guid: a09b8a1c6a05d274bb3aaf3f90cf0d97, type: 3}
+  m_PrefabInstance: {fileID: 486917806}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &2078097341
 Mesh:
   m_ObjectHideFlags: 0
@@ -101869,7 +101878,7 @@ PrefabInstance:
     - target: {fileID: 2903673468277017575, guid: 2d50066a34dcfa84e88e66e6bd18ee4b, type: 3}
       propertyPath: 'upgradeButtons.Array.data[3]'
       value: 
-      objectReference: {fileID: 1890984642}
+      objectReference: {fileID: 0}
     - target: {fileID: 2903673468277017575, guid: 2d50066a34dcfa84e88e66e6bd18ee4b, type: 3}
       propertyPath: 'upgradeCostTexts.Array.data[0]'
       value: 
@@ -101885,7 +101894,7 @@ PrefabInstance:
     - target: {fileID: 2903673468277017575, guid: 2d50066a34dcfa84e88e66e6bd18ee4b, type: 3}
       propertyPath: 'upgradeCostTexts.Array.data[3]'
       value: 
-      objectReference: {fileID: 1890984638}
+      objectReference: {fileID: 0}
     - target: {fileID: 4993304921118884606, guid: 2d50066a34dcfa84e88e66e6bd18ee4b, type: 3}
       propertyPath: m_Name
       value: XP

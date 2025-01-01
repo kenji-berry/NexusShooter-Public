@@ -32,6 +32,12 @@ public class EnemyShooter : Enemy
 
             // muzzleFlash.Play();
 
+            HealthController healthController = hit.collider.GetComponent<HealthController>();
+            if (healthController != null)
+            {
+                healthController.TakeDamage(damage);
+            }
+
             TrailRenderer trail = Instantiate(bulletTrail, gunPoint.position, Quaternion.identity);
             StartCoroutine(SpawnTrail(trail, hit));
         }
