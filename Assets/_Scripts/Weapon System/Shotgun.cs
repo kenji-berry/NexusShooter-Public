@@ -29,6 +29,10 @@ public class Shotgun : Gun
                 {
                     totalDamage += gunData.damage;
                     enemyHit = true;
+                } else
+                {
+                    GameObject impact = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    Destroy(impact, 0.5f);
                 }
             }
         }

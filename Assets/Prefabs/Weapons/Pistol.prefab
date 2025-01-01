@@ -158,6 +158,7 @@ MonoBehaviour:
   soundController: {fileID: 0}
   gunData: {fileID: 11400000, guid: cfda7e30142e1554d8e36e2566fe6f32, type: 2}
   muzzleFlash: {fileID: 748792902670760526}
+  hitEffect: {fileID: 1411045508206430806, guid: 9d1905700c0d9c241b5dc1e75e1dc2f1, type: 3}
   ammoText: {fileID: 0}
 --- !u!114 &4926493786294550843
 MonoBehaviour:

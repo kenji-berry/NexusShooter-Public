@@ -10,6 +10,7 @@ public abstract class Gun : Weapon
 {
     public GunData gunData;
     public ParticleSystem muzzleFlash;
+    public GameObject hitEffect;
 
     private float nextTimeToFire = 0f;
 
