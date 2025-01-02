@@ -40,7 +40,7 @@ public abstract class Enemy : MonoBehaviour
     public bool alreadyAttacked;
 
     [SerializeField] private List<LootItem> possibleLoot; // List of possible items
-    private void Start()
+    public void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -158,7 +158,7 @@ public abstract class Enemy : MonoBehaviour
         currentDeaggroTime = Time.time + deaggroTimer; // Reset deaggro timer when taking damage
     }
 
-    public void Die()
+    public virtual void Die()
     {
         float adjustedDropChance = healthController.GetDropChance();
         // First roll - determine if anything drops
@@ -179,7 +179,7 @@ public abstract class Enemy : MonoBehaviour
                 }
             }
         }
-
+    
         animator.SetTrigger("death");
         agent.isStopped = true;
         isDead = true;
