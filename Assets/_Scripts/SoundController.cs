@@ -22,6 +22,7 @@ public class SoundController : MonoBehaviour
     public AudioClip getHit;
     public AudioClip criticalHit;
     public AudioClip doorButtonPress;
+    public AudioClip splat;
 
 
 
