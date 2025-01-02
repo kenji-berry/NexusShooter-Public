@@ -6,5 +6,5 @@ using UnityEngine;
 public class LootItem
 {
     public GameObject itemPrefab;
-    [Range(0, 100)] public float dropChance;
+    public float dropWeight; // Higher weight = more likely to drop
 }

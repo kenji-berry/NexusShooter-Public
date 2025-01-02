@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1701049249930429927}
   - component: {fileID: 3217004350693823032}
   - component: {fileID: 1648442596389968463}
+  - component: {fileID: -6420139338100092992}
   m_Layer: 0
   m_Name: MetalFragment
   m_TagString: Untagged
@@ -135,3 +136,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryManager: {fileID: 0}
   gameController: {fileID: 0}
+--- !u!114 &-6420139338100092992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577465886318698139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e321e8bdf7cd0d4a890a2c25f8422fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceHeight: 0.1
+  bounceSpeed: 3
+  rotationSpeed: 40
