@@ -12,10 +12,10 @@ public class TutorialGuide : MonoBehaviour
         // Initialize tutorial messages
         tutorialMessages = new Dictionary<string, string>
         {
-            { "Move", "Use WASD to move." },
-            { "Jump", "Press Space to jump." },
-            { "Crouch", "Press C to crouch." },
-            { "Interact", "Press E to interact with objects." },
+            { "Move", "Use WASD to move" },
+            { "Jump", "Press Space to jump" },
+            { "Crouch", "Press C to crouch" },
+            { "Interact", "Press E to interact with objects" },
             { "Melee", "Press ? to melee enemives" },
             { "Shoot", "Press LMB to shoot enemies" },
             { "Clear", "" }
