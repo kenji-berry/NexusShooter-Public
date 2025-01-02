@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -38,9 +39,7 @@ public abstract class Enemy : MonoBehaviour
     public float attackRange;
     public bool alreadyAttacked;
 
-    [Header("Loot")]
-    public List<LootItem> lootTable = new List<LootItem>();
-
+    [SerializeField] private List<LootItem> possibleLoot; // List of possible items
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -161,12 +160,23 @@ public abstract class Enemy : MonoBehaviour
 
     public void Die()
     {
-        foreach (LootItem lootItem in lootTable)
+        float adjustedDropChance = healthController.GetDropChance();
+        // First roll - determine if anything drops
+        if (UnityEngine.Random.Range(0f, 100f) <= adjustedDropChance)
         {
-            float adjustedDropChance = healthController.GetDropChance();
-            if (UnityEngine.Random.Range(0f, 100f) <= adjustedDropChance)
+            // Second roll - determine which item drops
+            float totalWeight = possibleLoot.Sum(item => item.dropWeight);
+            float randomValue = UnityEngine.Random.Range(0f, totalWeight);
+            float currentWeight = 0f;
+
+            foreach (var lootItem in possibleLoot)
             {
-                InstantiateLoot(lootItem.itemPrefab);
+                currentWeight += lootItem.dropWeight;
+                if (randomValue <= currentWeight)
+                {
+                    InstantiateLoot(lootItem.itemPrefab);
+                    break;
+                }
             }
         }
 
@@ -176,11 +186,13 @@ public abstract class Enemy : MonoBehaviour
         gameObject.GetComponent<Collider>().enabled = false;
     }
 
+
     void InstantiateLoot(GameObject loot)
     {
         if (loot)
         {
-            GameObject droppedLoot = Instantiate(loot, transform.position, Quaternion.identity);
+            Vector3 dropPosition = transform.position + Vector3.up * 1f; // Slight offset upward
+            GameObject droppedLoot = Instantiate(loot, dropPosition, Quaternion.identity);
         }
     }
 
