@@ -768,7 +768,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 121a71c86e42db74d9b726a915c48115, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -882,6 +882,7 @@ MonoBehaviour:
   getHit: {fileID: 0}
   criticalHit: {fileID: 0}
   doorButtonPress: {fileID: 0}
+  splat: {fileID: 0}
 --- !u!1 &686805273
 GameObject:
   m_ObjectHideFlags: 0
