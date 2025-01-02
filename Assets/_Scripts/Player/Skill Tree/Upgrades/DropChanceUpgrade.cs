@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class CritDamageUpgrade : Upgrade
+public class DropChanceUpgrade : Upgrade
 {
-    private int newCritDamage;
+    private float newDropChance;
 
-    public CritDamageUpgrade(string name, int skillPointsCost, int newCritDamage)
+    public DropChanceUpgrade(string name, int skillPointsCost, float newDropChance)
         : base(name, skillPointsCost)
     {
-        this.newCritDamage = newCritDamage;
+        this.newDropChance = newDropChance;
     }
 
     public override void ApplyUpgrade()
@@ -15,7 +15,7 @@ public class CritDamageUpgrade : Upgrade
         EnemyHealthController[] enemyHealthControllers = GameObject.FindObjectsOfType<EnemyHealthController>();
         foreach (var enemyHealthController in enemyHealthControllers)
         {
-            enemyHealthController.increaseCritDamage(newCritDamage);
+            enemyHealthController.SetDropChance(newDropChance);
         }
     }
 }
