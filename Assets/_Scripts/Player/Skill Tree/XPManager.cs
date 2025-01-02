@@ -13,9 +13,11 @@ public class XPManager : MonoBehaviour
     public TextMeshProUGUI levelText; // Reference to the Level Text
     public TextMeshProUGUI skillPointsText; // Reference to the Skill Points Text
     public TextMeshProUGUI levelUpText; // Reference to the Level Up Text
+    public TextMeshProUGUI avaliableSkillPoints;
     public HealthController healthController; // Reference to the HealthController script
     public EnemyHealthController enemyHealthController; // Reference to the EnemyHealthController script
     public PlayerController playerController; // Reference to the PlayerController script
+    public AmmoManager ammoManager; // Reference to the AmmoManager script
     public SoundController soundController; // Reference to the SoundController script
     public TextMeshProUGUI insufficientSkillPointsText; 
     private int level = 1;
@@ -27,6 +29,7 @@ public class XPManager : MonoBehaviour
 
     private List<Upgrade> upgrades = new List<Upgrade>(); // List of available upgrades
     private Dictionary<System.Type, List<Upgrade>> upgradesByType = new Dictionary<System.Type, List<Upgrade>>(); // Group upgrades by type
+
 
     void Awake()
     {
@@ -41,6 +44,11 @@ public class XPManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    enemyHealthController = FindObjectOfType<EnemyHealthController>();
+    if (enemyHealthController == null)
+    {
+        Debug.LogError("EnemyHealthController not found in the scene.");
+    }
     }
 
     private void Start()
@@ -56,7 +64,7 @@ public class XPManager : MonoBehaviour
             levelText.text = "Level: " + level;
         }
 
-        // Initialize upgrades
+        if (healthController != null && playerController != null && ammoManager != null)
         if (healthController != null && playerController != null)
         {
             upgrades.Add(new HealthUpgrade("Increase Health I", 1, healthController, 10));
@@ -75,13 +83,22 @@ public class XPManager : MonoBehaviour
             upgrades.Add(new MedkitUpgrade("Increase Medkit Effectiveness II", 2, healthController, 1.25f));
             upgrades.Add(new MedkitUpgrade("Increase Medkit Effectiveness III", 3, healthController, 1.5f));
 
-            upgrades.Add(new CritChanceUpgrade("Increase Crit Chance I", 1, enemyHealthController, 10));
-            upgrades.Add(new CritChanceUpgrade("Increase Crit Chance II", 1, enemyHealthController, 17));
-            upgrades.Add(new CritChanceUpgrade("Increase Crit Chance III", 1, enemyHealthController, 27));
+            upgrades.Add(new CritChanceUpgrade("Increase Crit Chance I", 1, 10));
+            upgrades.Add(new CritChanceUpgrade("Increase Crit Chance II", 1, 17));
+            upgrades.Add(new CritChanceUpgrade("Increase Crit Chance III", 1, 27));
 
-            upgrades.Add(new CritDamageUpgrade("Increase Crit Damage I", 1, enemyHealthController, 175));
-            upgrades.Add(new CritDamageUpgrade("Increase Crit Damage II", 1, enemyHealthController, 200));
-            upgrades.Add(new CritDamageUpgrade("Increase Crit Damage III", 1, enemyHealthController, 225));
+            upgrades.Add(new CritDamageUpgrade("Increase Crit Damage I", 1, 175));
+            upgrades.Add(new CritDamageUpgrade("Increase Crit Damage II", 1, 200));
+            upgrades.Add(new CritDamageUpgrade("Increase Crit Damage III", 1, 225));
+
+            upgrades.Add(new DropChanceUpgrade("Increase Drop Chance I", 1, 100f));
+            upgrades.Add(new DropChanceUpgrade("Increase Drop Chance II", 2, 100f));
+            upgrades.Add(new DropChanceUpgrade("Increase Drop Chance III", 3, 80f));
+
+            
+            upgrades.Add(new AmmoEffectivenessUpgrade("Increase Ammo Effectiveness I", 1, ammoManager, 1.1f));
+            upgrades.Add(new AmmoEffectivenessUpgrade("Increase Ammo Effectiveness II", 2, ammoManager, 1.25f));
+            upgrades.Add(new AmmoEffectivenessUpgrade("Increase Ammo Effectiveness III", 3, ammoManager, 1.5f));
         }
         else
         {
@@ -160,6 +177,7 @@ public class XPManager : MonoBehaviour
 
     private void UpdateSkillPointsText()
     {
+        Debug.Log("Skill points: " + skillPoints);
         if (skillPointsText != null)
         {
             skillPointsText.text = "Skill Points: " + skillPoints;
@@ -170,7 +188,8 @@ public class XPManager : MonoBehaviour
     {
         if (levelUpText != null)
         {
-            levelUpText.text = "Level Up! Level " + level;
+            levelUpText.text = "Level Up!";
+            avaliableSkillPoints.text = "Available Skill Points: " + skillPoints;
             levelUpText.gameObject.SetActive(true);
             StartCoroutine(HideLevelUpText());
         }
@@ -180,12 +199,29 @@ public class XPManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         levelUpText.gameObject.SetActive(false);
+        avaliableSkillPoints.text = "";
     }
 
     // Update the upgrade buttons with the available upgrades
     private void UpdateUpgradeButtons()
     {
+        Debug.Log("Updating upgrade buttons");
         int buttonIndex = 0;
+
+        // Check if upgradesByType is populated
+        if (upgradesByType == null || upgradesByType.Count == 0)
+        {
+            Debug.LogError("upgradesByType is null or empty");
+            return;
+        }
+
+        // Check if upgradeButtons and upgradeCostTexts are correctly assigned
+        if (upgradeButtons == null || upgradeCostTexts == null)
+        {
+            Debug.LogError("upgradeButtons or upgradeCostTexts is null");
+            return;
+        }
+
         // Loop through the upgrades by type
         foreach (var upgradeGroup in upgradesByType)
         {
@@ -197,6 +233,7 @@ public class XPManager : MonoBehaviour
                 // If there is an upgrade available that is not purchased yet set the button text and cost
                 if (currentUpgrade != null)
                 {
+                    Debug.Log($"Setting button {buttonIndex} text to {currentUpgrade.name} and cost to {currentUpgrade.skillPointsCost}");
                     upgradeButtons[buttonIndex].GetComponentInChildren<TextMeshProUGUI>().text = currentUpgrade.name;
                     upgradeCostTexts[buttonIndex].text = "Cost: " + currentUpgrade.skillPointsCost;
                     int index = buttonIndex; // Capture the index for the lambda
@@ -205,14 +242,19 @@ public class XPManager : MonoBehaviour
                 }
                 else
                 {
-                    // If all upgrades of this type are purchased, set the cost to MAX LEVEL
-                    upgradeCostTexts[buttonIndex].text = "MAX LEVEL";
-                    SetButtonToMaxLevel(upgradeButtons[buttonIndex]);
+                    // If no upgrade is available, disable the button
+                    Debug.Log($"No available upgrade for button {buttonIndex}, disabling button");
+                    upgradeButtons[buttonIndex].interactable = false;
                 }
-                buttonIndex++;
             }
+            else
+            {
+                Debug.LogError($"Button index {buttonIndex} is out of range for upgradeButtons or upgradeCostTexts");
+            }
+            buttonIndex++;
         }
     }
+
 
     private void SetButtonToMaxLevel(Button button)
     {

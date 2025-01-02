@@ -6,6 +6,7 @@ using UnityEngine;
 public class AmmoManager : MonoBehaviour
 {
     private WeaponsManager weaponsManager;
+    private float ammoEffectivenessMultiplier = 1.0f;
 
     [System.Serializable]
     public class Ammo
@@ -38,13 +39,19 @@ public class AmmoManager : MonoBehaviour
         }
     }
 
+    public void SetAmmoEffectivenessMultiplier(float multiplier)
+    {
+        ammoEffectivenessMultiplier = multiplier;
+    }
+
     public void AddAmmo(GunData.AmmoType type, int amount)
     {
-        for (int i=0; i<ammoInventory.Count; i++)
+        int adjustedAmount = Mathf.RoundToInt(amount * ammoEffectivenessMultiplier);
+        for (int i = 0; i < ammoInventory.Count; i++)
         {
             if (ammoInventory[i].type == type)
             {
-                ammoInventory[i].currAmount = Math.Min(ammoInventory[i].currAmount + amount, ammoInventory[i].maxAmount);
+                ammoInventory[i].currAmount = Mathf.Min(ammoInventory[i].currAmount + adjustedAmount, ammoInventory[i].maxAmount);
                 weaponsManager.UpdateAmmoPanel();
                 return;
             }
@@ -55,11 +62,11 @@ public class AmmoManager : MonoBehaviour
 
     public void UseAmmo(GunData.AmmoType type, int amount)
     {
-        for (int i = 0; i<ammoInventory.Count; i++)
+        for (int i = 0; i < ammoInventory.Count; i++)
         {
             if (ammoInventory[i].type == type)
             {
-                ammoInventory[i].currAmount = Math.Max(ammoInventory[i].currAmount - amount, 0);
+                ammoInventory[i].currAmount = Mathf.Max(ammoInventory[i].currAmount - amount, 0);
                 return;
             }
         }
@@ -69,7 +76,7 @@ public class AmmoManager : MonoBehaviour
 
     public int GetAmmo(GunData.AmmoType type)
     {
-        for (int i=0; i<ammoInventory.Count; i++)
+        for (int i = 0; i < ammoInventory.Count; i++)
         {
             if (ammoInventory[i].type == type)
             {

@@ -163,7 +163,8 @@ public abstract class Enemy : MonoBehaviour
     {
         foreach (LootItem lootItem in lootTable)
         {
-            if (UnityEngine.Random.Range(0f, 100f) <= lootItem.dropChance)
+            float adjustedDropChance = healthController.GetDropChance();
+            if (UnityEngine.Random.Range(0f, 100f) <= adjustedDropChance)
             {
                 InstantiateLoot(lootItem.itemPrefab);
             }

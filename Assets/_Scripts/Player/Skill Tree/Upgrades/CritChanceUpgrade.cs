@@ -1,17 +1,21 @@
+using UnityEngine;
+
 public class CritChanceUpgrade : Upgrade
 {
-    private EnemyHealthController enemyHealthController;
-    private int critChanceIncrease;
+    private int newCritChance;
 
-    public CritChanceUpgrade(string name, int skillPointsCost, EnemyHealthController enemyHealthController, int critChanceIncrease)
+    public CritChanceUpgrade(string name, int skillPointsCost, int newCritChance)
         : base(name, skillPointsCost)
     {
-        this.enemyHealthController = enemyHealthController;
-        this.critChanceIncrease = critChanceIncrease;
+        this.newCritChance = newCritChance;
     }
 
     public override void ApplyUpgrade()
     {
-        enemyHealthController.increaseCritChance(critChanceIncrease);
+        EnemyHealthController[] enemyHealthControllers = GameObject.FindObjectsOfType<EnemyHealthController>();
+        foreach (var enemyHealthController in enemyHealthControllers)
+        {
+            enemyHealthController.increaseCritChance(newCritChance);
+        }
     }
 }

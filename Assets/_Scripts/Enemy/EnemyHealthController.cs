@@ -18,6 +18,7 @@ public class EnemyHealthController : MonoBehaviour
     public int critMultiplier = 150;  // 1.5x damage for a critical hit
     
     public SoundController soundController;
+    private float dropChance = 5f; // Default drop chance
 
     void Awake()
     {
@@ -58,8 +59,8 @@ public class EnemyHealthController : MonoBehaviour
         if (currentHealth <= 0)
         {
             enemy.Die();
-            
-            // Reward XP when the enemy is defeated
+
+            // Reward XP when enemy is defeated
             XPManager.instance.AddXP(xpReward);
         }
     }
@@ -119,4 +120,13 @@ public class EnemyHealthController : MonoBehaviour
         critMultiplier = amount;
     }
 
+    public void SetDropChance(float amount)
+    {
+        dropChance = amount;
+    }
+
+    public float GetDropChance()
+    {
+        return dropChance;
+    }
 }

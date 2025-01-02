@@ -157,6 +157,54 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void OnToggleUpgradeMenu(InputValue value)
+    {
+        if (isPaused)
+        {
+            CloseUpgradeMenu();
+        }
+        else
+        {
+            OpenUpgradeMenu();
+        }
+    }
+
+    private void OpenUpgradeMenu()
+    {
+        isPaused = true;
+        Time.timeScale = 0f;
+        skillTreePanel.SetActive(true);
+        playerController.inventoryOpen = true;
+        playerController.enabled = false;
+
+        var weaponsManager = FindFirstObjectByType<WeaponsManager>();
+        if (weaponsManager != null && weaponsManager.inventoryUI.activeInHierarchy)
+        {
+            weaponsManager.inventoryUI.SetActive(false);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        ButtonPressSound();
+    }
+
+    public void CloseUpgradeMenu()
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
+        skillTreePanel.SetActive(false);
+        playerController.inventoryOpen = false;
+        playerController.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        ButtonPressSound();
+    }
+
+
+
+
     private void PauseGame()
     {
         isPaused = true;
@@ -175,6 +223,7 @@ public class GameController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        ButtonPressSound();
     }
 
     public void ResumeGame()
