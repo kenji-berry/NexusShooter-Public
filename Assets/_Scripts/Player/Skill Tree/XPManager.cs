@@ -44,11 +44,11 @@ public class XPManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    enemyHealthController = FindObjectOfType<EnemyHealthController>();
-    if (enemyHealthController == null)
-    {
-        Debug.LogError("EnemyHealthController not found in the scene.");
-    }
+        enemyHealthController = FindObjectOfType<EnemyHealthController>();
+        if (enemyHealthController == null)
+        {
+            Debug.LogError("EnemyHealthController not found in the scene.");
+        }
     }
 
     private void Start()
@@ -64,7 +64,6 @@ public class XPManager : MonoBehaviour
             levelText.text = "Level: " + level;
         }
 
-        if (healthController != null && playerController != null && ammoManager != null)
         if (healthController != null && playerController != null)
         {
             upgrades.Add(new HealthUpgrade("Increase Health I", 1, healthController, 10));

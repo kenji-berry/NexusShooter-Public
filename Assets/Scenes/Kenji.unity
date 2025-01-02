@@ -16618,9 +16618,11 @@ MonoBehaviour:
   levelText: {fileID: 651653201504409062}
   skillPointsText: {fileID: 15646068346025679}
   levelUpText: {fileID: 5424389693068299291}
+  avaliableSkillPoints: {fileID: 15646068346025679}
   healthController: {fileID: 1252842753}
   enemyHealthController: {fileID: 0}
   playerController: {fileID: 1252842754}
+  ammoManager: {fileID: 0}
   soundController: {fileID: 293748130}
   insufficientSkillPointsText: {fileID: 3466373879970127902}
   upgradeButtons:
@@ -23327,7 +23329,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-175866
+  m_Name: pb_Mesh-7276
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -84074,10 +84076,6 @@ GameObject:
   - component: {fileID: 543450652204325719}
   - component: {fileID: 3469287838201730290}
   - component: {fileID: 1711813854407172152}
-  - component: {fileID: 1529527486}
-  - component: {fileID: 1529527490}
-  - component: {fileID: 1529527491}
-  - component: {fileID: 1529527492}
   m_Layer: 0
   m_Name: pouncer2
   m_TagString: Untagged
@@ -89380,6 +89378,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 493837646}
+    - target: {fileID: 381567818654761603, guid: ea0011eab197a1443b89f2e9c80d31b2, type: 3}
+      propertyPath: instructionText
+      value: 
+      objectReference: {fileID: 5142751514922019422}
     - target: {fileID: 385464731352254734, guid: ea0011eab197a1443b89f2e9c80d31b2, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -111483,3 +111485,4 @@ SceneRoots:
   - {fileID: 543450652204325719}
   - {fileID: 3893592448570076278}
   - {fileID: 8904358567770159819}
+  - {fileID: 700002412}
