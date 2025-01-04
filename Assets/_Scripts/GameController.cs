@@ -57,6 +57,10 @@ public class GameController : MonoBehaviour
 
     private float itemPickupHideTimer;
 
+    [Header("Load/save system")]
+    public GameObject loadSlotsPanel;
+    public int saveSlot;
+
     void Awake()
     {
         playerController = FindFirstObjectByType<PlayerController>();
@@ -69,6 +73,9 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        LoadPlayer(SaveSystem.saveSlot);
+        saveSlot = SaveSystem.saveSlot;
+
         startTime = Time.time;
 
         if (audioSource != null)
@@ -202,9 +209,6 @@ public class GameController : MonoBehaviour
         ButtonPressSound();
     }
 
-
-
-
     private void PauseGame()
     {
         isPaused = true;
@@ -283,6 +287,19 @@ public class GameController : MonoBehaviour
         ButtonPressSound();
     }
 
+    public void OpenLoadSlotsMenu()
+    {
+        pauseMenu.SetActive(false);
+        loadSlotsPanel.SetActive(true);
+        ButtonPressSound();
+    }
+
+    public void CloseLoadSlotsMenu()
+    {
+        loadSlotsPanel.SetActive(false);
+        pauseMenu.SetActive(true);
+        ButtonPressSound();
+    }
 
     public void MainMenu()
     {
@@ -350,14 +367,19 @@ public class GameController : MonoBehaviour
 
     public void SavePlayer()
     {
-        SaveSystem.SavePlayer(playerController);
-        Debug.Log("SAVING PLAYER");
+        SaveSystem.SavePlayer(playerController, saveSlot);
+        Debug.Log("saving to slot " + saveSlot);
     }
 
-    public void LoadPlayer()
+    public void LoadPlayer(int slot)
     {
-        PlayerData data = SaveSystem.LoadPlayer();
-        Debug.Log("LOADING PLAYER");
+        PlayerData data = SaveSystem.LoadPlayer(slot);
+
+        if (data == null) return;
+
+        Debug.Log("loading slot " + slot);
+
+        saveSlot = slot;
 
         GameObject player = playerController.gameObject;
         player.SetActive(false);

@@ -290,4 +290,9 @@ public class PlayerController : MonoBehaviour
 
         yield return null;
     }
+
+    public Vector2 GetMoveInputs()
+    {
+        return moveValue;
+    }
 }

@@ -4,7 +4,9 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject playPanel;
+    [SerializeField] private GameObject loadSlotsPanel;
     [SerializeField] private GameObject difficultyPanel;
+    [SerializeField] private GameObject newGameSlotsPanel;
     [SerializeField] private SoundController soundController;
 
     private void Awake()
@@ -74,5 +76,59 @@ public class MainMenu : MonoBehaviour
     public void buttonHover()
     {
         soundController.Play(soundController.buttonHover);
+    }
+
+    public void NewSave(int slot)
+    {
+        SaveSystem.ClearSave(slot);
+        SaveSystem.saveSlot = slot;
+
+        ProceedToDifficultMenu();
+    }
+
+    public void SaveLoad(int slot)
+    {
+        SaveSystem.saveSlot = slot;
+
+        ProceedToDifficultMenu();
+    }
+
+    public void OpenLoadSlotsMenu()
+    {
+        playPanel.SetActive(false);
+        loadSlotsPanel.SetActive(true);
+    }
+
+    public void CloseLoadSlotsMenu()
+    {
+        loadSlotsPanel.SetActive(false);
+        playPanel.SetActive(true);
+    }
+
+    public void OpenNewGameSlotsMenu()
+    {
+        playPanel.SetActive(false);
+        newGameSlotsPanel.SetActive(true);
+    }
+
+    public void CloseNewGameSlotsMenu()
+    {
+        newGameSlotsPanel.SetActive(false);
+        playPanel.SetActive(true);
+    }
+
+    private void ProceedToDifficultMenu()
+    {
+        if (loadSlotsPanel.activeInHierarchy)
+        {
+            loadSlotsPanel.SetActive(false);
+        }
+
+        if (newGameSlotsPanel.activeInHierarchy)
+        {
+            newGameSlotsPanel.SetActive(false);
+        }
+
+        difficultyPanel.SetActive(true);
     }
 }
