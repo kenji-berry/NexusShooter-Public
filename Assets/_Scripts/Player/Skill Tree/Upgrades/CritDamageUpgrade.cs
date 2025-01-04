@@ -12,7 +12,7 @@ public class CritDamageUpgrade : Upgrade
 
     public override void ApplyUpgrade()
     {
-        EnemyHealthController[] enemyHealthControllers = GameObject.FindObjectsOfType<EnemyHealthController>();
+        EnemyHealthController[] enemyHealthControllers = GameObject.FindObjectsByType<EnemyHealthController>(FindObjectsSortMode.None);
         foreach (var enemyHealthController in enemyHealthControllers)
         {
             enemyHealthController.increaseCritDamage(newCritDamage);

@@ -44,7 +44,7 @@ public class XPManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        enemyHealthController = FindObjectOfType<EnemyHealthController>();
+        enemyHealthController = FindFirstObjectByType<EnemyHealthController>();
         if (enemyHealthController == null)
         {
             Debug.LogError("EnemyHealthController not found in the scene.");
