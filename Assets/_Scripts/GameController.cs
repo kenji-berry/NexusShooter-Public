@@ -38,6 +38,9 @@ public class GameController : MonoBehaviour
     [Header("Audio")]
     public AudioSource audioSource;
     public SoundController soundController;
+    [SerializeField] private AudioSource mainAudioSource;
+    [SerializeField] private AudioSource bgmAudioSource;
+    private const float BGM_VOLUME_SCALE = 0.3f;
 
     [Header("Camera")]
     public Camera playerCamera;
@@ -244,14 +247,12 @@ public class GameController : MonoBehaviour
         pauseMenu.SetActive(false);
         settingsPanel.SetActive(true);
         ButtonPressSound();
-        Debug.Log("Audio Source Volume: " + audioSource.volume);
     }
 
     public void CloseSettingsMenu()
     {
         settingsPanel.SetActive(false);
         pauseMenu.SetActive(true);
-        Debug.Log("Audio Source Volume: " + audioSource.volume);
         ButtonPressSound();
     }
 
@@ -304,7 +305,9 @@ public class GameController : MonoBehaviour
         if (audioSource != null)
         {
             audioSource.volume = volume / 10f;
+            bgmAudioSource.volume = audioSource.volume * BGM_VOLUME_SCALE;
             Debug.Log("Volume set to: " + audioSource.volume);
+            Debug.Log("BackgroundAudio set to: " + bgmAudioSource.volume);
             Debug.Log("Slider value: " + volumeSlider.value);
         }
     }
