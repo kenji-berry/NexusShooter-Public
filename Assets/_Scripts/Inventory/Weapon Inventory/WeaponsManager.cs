@@ -9,7 +9,7 @@ public class WeaponsManager : MonoBehaviour
 {
     private AmmoManager ammoManager;
 
-    const int WEAPON_INVENTORY_SIZE = 3;
+    const int WEAPON_INVENTORY_SIZE = 5;
 
     public List<Weapon> startingWeapons = new List<Weapon>();
     public WeaponSlot[] weaponSlots = new WeaponSlot[WEAPON_INVENTORY_SIZE];
@@ -38,6 +38,10 @@ public class WeaponsManager : MonoBehaviour
     void OnSelectWeaponTwo(InputValue value) { SwitchWeapon(1); }
 
     void OnSelectWeaponThree(InputValue value) { SwitchWeapon(2); }
+
+    void OnSelectWeaponFour(InputValue value) { SwitchWeapon(3); }
+
+    void OnSelectWeaponFive(InputValue value) { SwitchWeapon(4); }
 
     void Awake()
     {
