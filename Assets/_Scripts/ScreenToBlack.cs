@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ScreenToBlack : MonoBehaviour
 {
     [SerializeField] private Image blackOverlay;
-    [SerializeField] private float fadeSpeed = 1f;
+    [SerializeField] private float fadeSpeed = 1000f;
     private Canvas[] allCanvases;
     private bool hasFaded = false;
 
