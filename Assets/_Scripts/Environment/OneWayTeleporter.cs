@@ -10,6 +10,12 @@ public class OneWayTeleporter : MonoBehaviour
     {
         if (other.CompareTag(playerTag))
         {
+            if (teleportDestination == null)
+            {
+                Debug.LogError("Teleport destination is not assigned!");
+                return;
+            }
+
             // Disable the collider to avoid any issues during teleportation
             other.enabled = false;
 
