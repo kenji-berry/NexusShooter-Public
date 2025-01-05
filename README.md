@@ -18,20 +18,51 @@ Clone the repository by running the following:
 git clone https://github.com/IvanSeagull/NexusShooter.git
 ```
 
-Open the project in Unity version 2023.1.
-
 ### Usage
 
-#### Controls
+Open the project in Unity version 2023.1.
 
+#### Controls
+Movement
 - WASD: Move forwards, left, backwards, right
 - Spacebar: Jump
-- Shift: Sprint
-- C key: Crouch
-- Mouse 1: Shoot
+- Shift: Walk
+- C: Crouch
 
-#### Tutorials
-Below are the tutorials used during the development of the game:
+General:
+- E: Use/Interact
+
+Combat
+- Mouse 1: Shoot
+- 1: Select Weapon 1
+- 2: Select Weapon 2
+- 3: Select Weapon 3
+
+UI
+- Q: Weapon inventory
+- Tab: Item Inventory
+- K: Upgrade menu
+
+## Third Party Assets
+
+### Weapon System
+- [Oldschool AFPS Weapons](https://opengameart.org/content/oldschool-afps-weapons)
+- [PSX Ammo Boxes](https://doctor-sci3nce.itch.io/psx-ammo-boxes)
+
+### UI
+- [Grenade icons](https://mtk.itch.io/grenades-16x16)
+- [2D Health & Ammo Pickups](https://fightswithbears.itch.io/2d-health-and-ammo-pickups)
+- [Wrench icon](https://www.flaticon.com/free-icon/wrench_4415248)
+
+### Items
+- [Medical Stuff](https://opengameart.org/content/medical-stuff)
+
+### Sounds
+- [Button clicks](https://opengameart.org/content/16-button-clicks)
+- [Door sounds](https://www.moddb.com/games/quake-space/videos/door-sounds)
+- [Melee sounds](https://opengameart.org/content/3-melee-sounds)
+
+### Tutorials
 
 - [Sliding Doors](https://youtu.be/cPltQK5LlGE?si=mDqAX2rSS99pg8fU)
 - [Inventory System](https://youtu.be/OzvKBW4FvWg?si=wSZqLaPvC1mbBs_p)
