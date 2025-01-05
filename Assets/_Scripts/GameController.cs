@@ -76,8 +76,10 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        LoadPlayer(SaveSystem.saveSlot);
-        saveSlot = SaveSystem.saveSlot;
+        /*
+            LoadPlayer(SaveSystem.saveSlot);
+            saveSlot = SaveSystem.saveSlot;
+        */
 
         startTime = Time.time;
 
