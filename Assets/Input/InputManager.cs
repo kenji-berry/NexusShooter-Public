@@ -136,6 +136,24 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""SelectWeaponThree1"",
+                    ""type"": ""Button"",
+                    ""id"": ""268c98b0-8a3f-4a58-b5e8-89c29cdc9289"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectWeaponThree2"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c6633b2-70d5-449c-84ca-b34cbd4f7f3b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""TooglePauseMenu"",
                     ""type"": ""Button"",
                     ""id"": ""d14ade03-b3bd-46ce-bace-5603fb16c90d"",
@@ -372,6 +390,28 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""action"": ""ToggleUpgradeMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8aa59ca6-63f1-4932-bf38-ffd395628b8e"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectWeaponThree1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1084f24-388e-408f-a040-6dbcd1514a51"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectWeaponThree2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -392,6 +432,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         m_Player_SelectWeaponOne = m_Player.FindAction("SelectWeaponOne", throwIfNotFound: true);
         m_Player_SelectWeaponTwo = m_Player.FindAction("SelectWeaponTwo", throwIfNotFound: true);
         m_Player_SelectWeaponThree = m_Player.FindAction("SelectWeaponThree", throwIfNotFound: true);
+        m_Player_SelectWeaponThree1 = m_Player.FindAction("SelectWeaponThree1", throwIfNotFound: true);
+        m_Player_SelectWeaponThree2 = m_Player.FindAction("SelectWeaponThree2", throwIfNotFound: true);
         m_Player_TooglePauseMenu = m_Player.FindAction("TooglePauseMenu", throwIfNotFound: true);
         m_Player_ToggleItemInventory = m_Player.FindAction("ToggleItemInventory", throwIfNotFound: true);
         m_Player_ToggleUpgradeMenu = m_Player.FindAction("ToggleUpgradeMenu", throwIfNotFound: true);
@@ -468,6 +510,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SelectWeaponOne;
     private readonly InputAction m_Player_SelectWeaponTwo;
     private readonly InputAction m_Player_SelectWeaponThree;
+    private readonly InputAction m_Player_SelectWeaponThree1;
+    private readonly InputAction m_Player_SelectWeaponThree2;
     private readonly InputAction m_Player_TooglePauseMenu;
     private readonly InputAction m_Player_ToggleItemInventory;
     private readonly InputAction m_Player_ToggleUpgradeMenu;
@@ -487,6 +531,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         public InputAction @SelectWeaponOne => m_Wrapper.m_Player_SelectWeaponOne;
         public InputAction @SelectWeaponTwo => m_Wrapper.m_Player_SelectWeaponTwo;
         public InputAction @SelectWeaponThree => m_Wrapper.m_Player_SelectWeaponThree;
+        public InputAction @SelectWeaponThree1 => m_Wrapper.m_Player_SelectWeaponThree1;
+        public InputAction @SelectWeaponThree2 => m_Wrapper.m_Player_SelectWeaponThree2;
         public InputAction @TooglePauseMenu => m_Wrapper.m_Player_TooglePauseMenu;
         public InputAction @ToggleItemInventory => m_Wrapper.m_Player_ToggleItemInventory;
         public InputAction @ToggleUpgradeMenu => m_Wrapper.m_Player_ToggleUpgradeMenu;
@@ -535,6 +581,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @SelectWeaponThree.started += instance.OnSelectWeaponThree;
             @SelectWeaponThree.performed += instance.OnSelectWeaponThree;
             @SelectWeaponThree.canceled += instance.OnSelectWeaponThree;
+            @SelectWeaponThree1.started += instance.OnSelectWeaponThree1;
+            @SelectWeaponThree1.performed += instance.OnSelectWeaponThree1;
+            @SelectWeaponThree1.canceled += instance.OnSelectWeaponThree1;
+            @SelectWeaponThree2.started += instance.OnSelectWeaponThree2;
+            @SelectWeaponThree2.performed += instance.OnSelectWeaponThree2;
+            @SelectWeaponThree2.canceled += instance.OnSelectWeaponThree2;
             @TooglePauseMenu.started += instance.OnTooglePauseMenu;
             @TooglePauseMenu.performed += instance.OnTooglePauseMenu;
             @TooglePauseMenu.canceled += instance.OnTooglePauseMenu;
@@ -584,6 +636,12 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
             @SelectWeaponThree.started -= instance.OnSelectWeaponThree;
             @SelectWeaponThree.performed -= instance.OnSelectWeaponThree;
             @SelectWeaponThree.canceled -= instance.OnSelectWeaponThree;
+            @SelectWeaponThree1.started -= instance.OnSelectWeaponThree1;
+            @SelectWeaponThree1.performed -= instance.OnSelectWeaponThree1;
+            @SelectWeaponThree1.canceled -= instance.OnSelectWeaponThree1;
+            @SelectWeaponThree2.started -= instance.OnSelectWeaponThree2;
+            @SelectWeaponThree2.performed -= instance.OnSelectWeaponThree2;
+            @SelectWeaponThree2.canceled -= instance.OnSelectWeaponThree2;
             @TooglePauseMenu.started -= instance.OnTooglePauseMenu;
             @TooglePauseMenu.performed -= instance.OnTooglePauseMenu;
             @TooglePauseMenu.canceled -= instance.OnTooglePauseMenu;
@@ -624,6 +682,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
         void OnSelectWeaponOne(InputAction.CallbackContext context);
         void OnSelectWeaponTwo(InputAction.CallbackContext context);
         void OnSelectWeaponThree(InputAction.CallbackContext context);
+        void OnSelectWeaponThree1(InputAction.CallbackContext context);
+        void OnSelectWeaponThree2(InputAction.CallbackContext context);
         void OnTooglePauseMenu(InputAction.CallbackContext context);
         void OnToggleItemInventory(InputAction.CallbackContext context);
         void OnToggleUpgradeMenu(InputAction.CallbackContext context);
