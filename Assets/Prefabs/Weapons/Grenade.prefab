@@ -50,8 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionRadius: 5
   explosionForce: 700
-  damage: 50
-  explosionDelay: 5
+  damage: 100
+  explosionDelay: 1.5
   explosionEffect: {fileID: 1304058204780954455, guid: 5b210b168513c4f9599564addf796835, type: 3}
 --- !u!54 &1953721594882336564
 Rigidbody:
