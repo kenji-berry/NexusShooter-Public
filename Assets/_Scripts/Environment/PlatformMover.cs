@@ -1,60 +1,88 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlatformMover : MonoBehaviour
 {
     [Header("Movement Points")]
-    public Transform pointA; // Starting point
-    public Transform pointB; // Ending point
+    public Transform pointA;
+    public Transform pointB;
 
     [Header("Movement Settings")]
-    public float speed = 2f;          // Speed of movement
-    public bool pingPong = true;      // If true, platform moves back and forth
+    public float speed = 2f;
+    public bool pingPong = true;
+    public float slowdownDistance = 1f;
+    public float pauseDuration = 0.2f;
 
     private Vector3 targetPosition;
     private bool movingToB = true;
+    private bool isPaused = false;
 
     void Start()
     {
         if (pointA == null || pointB == null)
         {
-            Debug.LogError("Point A and Point B must be assigned in the inspector.");
             enabled = false;
             return;
         }
-
-        // Initialize the platform's position to Point A
         transform.position = pointA.position;
         targetPosition = pointB.position;
     }
 
     void Update()
     {
-        MovePlatform();
+        if (!isPaused)
+        {
+            MovePlatform();
+        }
     }
 
     void MovePlatform()
     {
-        // Move towards the target position
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        Vector3 startingPoint = movingToB ? pointA.position : pointB.position;
 
-        // Check if the platform has reached the target
-        if (Vector3.Distance(transform.position, targetPosition) < 0.001f)
+        float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
+        float distanceFromStart = Vector3.Distance(transform.position, startingPoint);
+
+        float currentSpeed = speed;
+
+        if (distanceToTarget < slowdownDistance)
         {
+            float slowdownFactor = distanceToTarget / slowdownDistance;
+            currentSpeed *= slowdownFactor;
+            currentSpeed = Mathf.Max(currentSpeed, speed * 0.1f);
+        }
+
+        if (distanceFromStart < slowdownDistance)
+        {
+            float accelerationFactor = distanceFromStart / slowdownDistance;
+            currentSpeed *= accelerationFactor;
+            currentSpeed = Mathf.Max(currentSpeed, speed * 0.1f);
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
+
+        if (distanceToTarget < 0.01f)
+        {
+            StartCoroutine(PauseAtPoint());
             if (pingPong)
             {
-                // Switch target between Point A and Point B
                 movingToB = !movingToB;
                 targetPosition = movingToB ? pointB.position : pointA.position;
             }
             else
             {
-                // If not ping-pong, stop moving once it reaches Point B
                 enabled = false;
             }
         }
     }
 
-    // Optional: Visualize the points in the editor
+    IEnumerator PauseAtPoint()
+    {
+        isPaused = true;
+        yield return new WaitForSeconds(pauseDuration);
+        isPaused = false;
+    }
+
     void OnDrawGizmos()
     {
         if (pointA != null && pointB != null)
