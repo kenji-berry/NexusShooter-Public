@@ -14,6 +14,11 @@ public class ScreenToBlack : MonoBehaviour
     {
         // Cache all canvases in the scene
         allCanvases = FindObjectsOfType<Canvas>();
+        // Ensure black overlay starts inactive with alpha 0
+        blackOverlay.gameObject.SetActive(true);
+        Color startColor = blackOverlay.color;
+        startColor.a = 0f;
+        blackOverlay.color = startColor;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,23 +43,27 @@ public class ScreenToBlack : MonoBehaviour
 
     private IEnumerator FadeCoroutine(float targetAlpha)
     {
-        // Disable all canvases except those with voicelines
-        foreach (Canvas canvas in allCanvases)
-        {
-            if (!canvas.CompareTag("VoiceLines"))
-            {
-                canvas.enabled = targetAlpha > 0.5f ? false : true;
-            }
-        }
+        blackOverlay.gameObject.SetActive(true);
+        blackOverlay.raycastTarget = true; // Ensure image blocks raycasts
 
-        Color currentColor = blackOverlay.color;
-        float currentAlpha = currentColor.a;
+        // Get fresh color reference each time
+        Color currentColor = Color.black;
+        float currentAlpha = blackOverlay.color.a;
+
+        Debug.Log($"Starting fade from {currentAlpha} to {targetAlpha}");
 
         while (!Mathf.Approximately(currentAlpha, targetAlpha))
         {
             currentAlpha = Mathf.MoveTowards(currentAlpha, targetAlpha, fadeSpeed * Time.deltaTime);
-            blackOverlay.color = new Color(currentColor.r, currentColor.g, currentColor.b, currentAlpha);
+            currentColor.a = currentAlpha;
+            blackOverlay.color = currentColor;
+            Debug.Log($"Current alpha: {currentAlpha}");
             yield return null;
+        }
+
+        if (Mathf.Approximately(targetAlpha, 0f))
+        {
+            blackOverlay.gameObject.SetActive(false);
         }
     }
 }
