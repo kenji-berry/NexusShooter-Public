@@ -232,7 +232,6 @@ public class XPManager : MonoBehaviour
                 // If there is an upgrade available that is not purchased yet set the button text and cost
                 if (currentUpgrade != null)
                 {
-                    Debug.Log($"Setting button {buttonIndex} text to {currentUpgrade.name} and cost to {currentUpgrade.skillPointsCost}");
                     upgradeButtons[buttonIndex].GetComponentInChildren<TextMeshProUGUI>().text = currentUpgrade.name;
                     upgradeCostTexts[buttonIndex].text = "Cost: " + currentUpgrade.skillPointsCost;
                     int index = buttonIndex; // Capture the index for the lambda
