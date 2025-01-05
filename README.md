@@ -30,4 +30,13 @@ Open the project in Unity version 2023.1.
 - C key: Crouch
 - Mouse 1: Shoot
 
+#### Tutorials
+Below are the tutorials used during the development of the game:
 
+- [Sliding Doors](https://youtu.be/cPltQK5LlGE?si=mDqAX2rSS99pg8fU)
+- [Inventory System](https://youtu.be/OzvKBW4FvWg?si=wSZqLaPvC1mbBs_p)
+- [Game Over Screen](https://youtu.be/K4uOjb5p3Io?si=USxk94azVdRaAEzF)
+- [Save/Load System](https://youtu.be/XOjd_qU2Ido?si=hKAH1Iu5TZo8mEgf)
+- [Enemy AI 1](https://youtu.be/UjkSFoLxesw?si=8z3S6qyv53YAYlGo)
+- [Enemy AI 2](https://youtu.be/rs7xUi9BqjE?si=WKdHhyDokw8RIdD0)
+- [Bullet Tracers](https://youtu.be/cI3E7_f74MA?si=ZyySXts5tbupN-tC)
