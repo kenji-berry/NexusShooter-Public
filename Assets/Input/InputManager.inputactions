@@ -114,6 +114,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SelectWeaponThree1",
+                    "type": "Button",
+                    "id": "268c98b0-8a3f-4a58-b5e8-89c29cdc9289",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectWeaponThree2",
+                    "type": "Button",
+                    "id": "8c6633b2-70d5-449c-84ca-b34cbd4f7f3b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "TooglePauseMenu",
                     "type": "Button",
                     "id": "d14ade03-b3bd-46ce-bace-5603fb16c90d",
@@ -348,6 +366,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleUpgradeMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8aa59ca6-63f1-4932-bf38-ffd395628b8e",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectWeaponThree1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1084f24-388e-408f-a040-6dbcd1514a51",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectWeaponThree2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
