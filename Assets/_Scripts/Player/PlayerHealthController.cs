@@ -152,6 +152,14 @@ public class HealthController : MonoBehaviour
         }
     }
 
+    public void InstaKill(){
+        currentHealth -= 1000;
+        currentHealth = Mathf.Max(currentHealth, 0);
+        FindFirstObjectByType<GameController>().Die();
+        gameObject.GetComponent<PlayerController>().SetDead();
+
+    }
+
     // Method to heal
     public void Heal(int amount)
     {
