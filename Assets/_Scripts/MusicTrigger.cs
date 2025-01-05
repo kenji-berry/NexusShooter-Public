@@ -10,7 +10,6 @@ public class MusicTrigger : MonoBehaviour
 
     void Start()
     {
-        audioSource = FindFirstObjectByType<AudioSource>();  // Find the AudioSource component in the scene
     }
 
     void OnTriggerEnter(Collider other)
