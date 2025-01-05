@@ -16,8 +16,8 @@ public class TutorialGuide : MonoBehaviour
             { "Jump", "Press Space to jump" },
             { "Crouch", "Press C to crouch" },
             { "Interact", "Press E to interact with objects" },
-            { "Attack", "Press LMB to attack with your equipped weapon" },
-            { "Equip", "Press Q to open the weapon inventory or use the number keys to switch weapons quickly" },
+            { "Melee", "Press ? to melee enemives" },
+            { "Shoot", "Press LMB to shoot enemies" },
             { "Clear", "" }
         };
 

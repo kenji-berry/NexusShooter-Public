@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3252391592081771063}
   - component: {fileID: 914522831086619923}
   - component: {fileID: 7651818557225374873}
-  - component: {fileID: 8029100088402601717}
   m_Layer: 0
   m_Name: BulletPickup
   m_TagString: Untagged
@@ -122,18 +121,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.025603151, y: 0.010472048, z: 0.0059443484}
   m_Center: {x: 0.0028015757, y: 0.000028956676, z: 0.007691615}
---- !u!114 &8029100088402601717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6589255790392682385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e321e8bdf7cd0d4a890a2c25f8422fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bounceHeight: 0.1
-  bounceSpeed: 3
-  rotationSpeed: 40
