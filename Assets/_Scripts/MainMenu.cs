@@ -43,17 +43,17 @@ public class MainMenu : MonoBehaviour
 
     public void LoadEasy()
     {
-        SceneManager.LoadScene("1- Easy");
+        SceneManager.LoadScene("1 - Easy");
     }
 
     public void LoadMedium()
     {
-        SceneManager.LoadScene("2- Medium");
+        SceneManager.LoadScene("2 - Medium");
     }
 
     public void LoadHard()
     {
-        SceneManager.LoadScene("3- Hard");
+        SceneManager.LoadScene("3 - Hard");
     }
 
     public void ReturnToMenu()
