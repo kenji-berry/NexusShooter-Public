@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour
     private InputManager inputManager;
 
     [Header("UI")]
-    public TextMeshProUGUI timer;
     public GameObject deathScreen;
     public GameObject pauseMenu;
     public GameObject settingsPanel;
@@ -53,16 +52,12 @@ public class GameController : MonoBehaviour
     public PostProcessProfile tritanopiaProfile;
 
     [Header("Game State")]
-    private float startTime;
-    private float endTime;
-    private bool levelCompleted = false;
     public bool isPaused = false;
 
     private float itemPickupHideTimer;
 
     [Header("Load/save system")]
     public GameObject loadSlotsPanel;
-    public int saveSlot;
 
     void Awake()
     {
@@ -77,9 +72,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         LoadPlayer(SaveSystem.saveSlot);
-        saveSlot = SaveSystem.saveSlot;
-
-        startTime = Time.time;
 
         if (audioSource != null)
         {
@@ -116,11 +108,6 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (!levelCompleted && !isPaused) {
-            float timeTaken = Time.time - startTime;
-            timer.text = FormatTime(timeTaken);
-        }
-
         if (itemPickupPanel.activeInHierarchy)
         {
             itemPickupHideTimer -= Time.deltaTime;
@@ -128,17 +115,6 @@ public class GameController : MonoBehaviour
             {
                 HidePickupMessage();
             }
-        }
-    }
-
-    public void CompleteLevel()
-    {
-        if (!levelCompleted)
-        {
-            endTime = Time.time;
-            levelCompleted = true;
-            float timeTaken = endTime - startTime;
-            timer.text = FormatTime(timeTaken);
         }
     }
 
@@ -370,8 +346,7 @@ public class GameController : MonoBehaviour
 
     public void SavePlayer()
     {
-        SaveSystem.SavePlayer(playerController, saveSlot);
-        Debug.Log("saving to slot " + saveSlot);
+        SaveSystem.SavePlayer(playerController);
     }
 
     public void LoadPlayer(int slot)
@@ -381,8 +356,6 @@ public class GameController : MonoBehaviour
         if (data == null) return;
 
         Debug.Log("loading slot " + slot);
-
-        saveSlot = slot;
 
         GameObject player = playerController.gameObject;
         player.SetActive(false);

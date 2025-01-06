@@ -10,7 +10,7 @@ public class DeathScreen : MonoBehaviour
     {
         if (Input.anyKey)
         {
-            SceneManager.LoadScene("Armin");
+            SceneManager.LoadScene("1 - Easy");
             gameObject.SetActive(false);
         }
     }

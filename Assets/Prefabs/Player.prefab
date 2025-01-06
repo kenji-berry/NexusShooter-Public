@@ -459,7 +459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingWeapons:
   - {fileID: 786375492381046145, guid: 4907eafd97791a84f943b892d33b1e09, type: 3}
-  - {fileID: 2910700331770387811, guid: 0acbc0ddfe8274e9b8b34d89ef6cb7dd, type: 3}
+  - {fileID: 7767989793569434416, guid: c72a10ccad0b095459d0304babe4a0d8, type: 3}
+  - {fileID: 5991769660722351569, guid: 6c69ad05ef03b994990a9fbb0c0054d0, type: 3}
   weaponSlots:
   - {fileID: 0}
   - {fileID: 0}
