@@ -23,7 +23,7 @@ public class SoundController : MonoBehaviour
     public AudioClip criticalHit;
     public AudioClip doorButtonPress;
     public AudioClip splat;
-
+    public AudioClip finalShot;
 
 
     private static bool isSoundEnabled = true; // Global sound state
