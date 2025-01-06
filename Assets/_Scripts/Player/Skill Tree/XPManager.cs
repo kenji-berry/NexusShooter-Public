@@ -22,7 +22,7 @@ public class XPManager : MonoBehaviour
     public TextMeshProUGUI insufficientSkillPointsText; 
     private int level = 1;
     private int xpToNextLevel = 10;
-    private static int skillPoints = 50; // Skill points that the player can use
+    private static int skillPoints = 0; // Skill points that the player can use
     public List<Button> upgradeButtons; // List of upgrade buttons
     public List<TextMeshProUGUI> upgradeCostTexts; // List of upgrade cost texts
     private float xpMultiplier = 1.0f;
@@ -90,9 +90,9 @@ public class XPManager : MonoBehaviour
             upgrades.Add(new CritDamageUpgrade("Increase Crit Damage II", 1, 200));
             upgrades.Add(new CritDamageUpgrade("Increase Crit Damage III", 1, 225));
 
-            upgrades.Add(new DropChanceUpgrade("Increase Drop Chance I", 1, 100f));
-            upgrades.Add(new DropChanceUpgrade("Increase Drop Chance II", 2, 100f));
-            upgrades.Add(new DropChanceUpgrade("Increase Drop Chance III", 3, 80f));
+            upgrades.Add(new DropChanceUpgrade("Increase Drop Chance I", 1, 10f));
+            upgrades.Add(new DropChanceUpgrade("Increase Drop Chance II", 2, 12f));
+            upgrades.Add(new DropChanceUpgrade("Increase Drop Chance III", 3, 15f));
 
             
             upgrades.Add(new AmmoEffectivenessUpgrade("Increase Ammo Effectiveness I", 1, ammoManager, 1.1f));
