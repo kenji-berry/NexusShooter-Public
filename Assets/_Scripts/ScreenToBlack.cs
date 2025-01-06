@@ -7,13 +7,11 @@ public class ScreenToBlack : MonoBehaviour
 {
     [SerializeField] private Image blackOverlay;
     [SerializeField] private float fadeSpeed = 1000f;
-    private Canvas[] allCanvases;
     private bool hasFaded = false;
+    public Canvas canvas1;
 
     private void Start()
     {
-        // Cache all canvases in the scene
-        allCanvases = FindObjectsOfType<Canvas>();
         // Ensure black overlay starts inactive with alpha 0
         blackOverlay.gameObject.SetActive(true);
         Color startColor = blackOverlay.color;
@@ -33,6 +31,7 @@ public class ScreenToBlack : MonoBehaviour
     public void FadeToBlack()
     {
         StartCoroutine(FadeCoroutine(1f));
+        HideNonVoiceLineElements();
     }
 
     public void FadeFromBlack()
@@ -57,6 +56,7 @@ public class ScreenToBlack : MonoBehaviour
             currentAlpha = Mathf.MoveTowards(currentAlpha, targetAlpha, fadeSpeed * Time.deltaTime);
             currentColor.a = currentAlpha;
             blackOverlay.color = currentColor;
+
             Debug.Log($"Current alpha: {currentAlpha}");
             yield return null;
         }
@@ -64,6 +64,18 @@ public class ScreenToBlack : MonoBehaviour
         if (Mathf.Approximately(targetAlpha, 0f))
         {
             blackOverlay.gameObject.SetActive(false);
+        }
+    }
+
+    public void HideNonVoiceLineElements()
+    {
+        foreach (Transform child in canvas1.transform)
+        {
+            Debug.Log($"Checking child {child.name}");
+            if (child.tag != "VoiceLines")
+            {
+                child.gameObject.SetActive(false);
+            }
         }
     }
 }

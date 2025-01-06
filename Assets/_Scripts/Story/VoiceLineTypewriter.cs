@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class VoiceLineTypewriter : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class VoiceLineTypewriter : MonoBehaviour
     public bool isPlaying;
     private Coroutine currentCoroutine;
     private static int currentIndex = 0;
+    [SerializeField] private GameObject endElement;
 
     private void Awake()
     {
@@ -31,7 +33,7 @@ public class VoiceLineTypewriter : MonoBehaviour
         voiceLineText.text = string.Empty;
         
         voiceLines = new string[]
-        {    
+        {
             "Ugh... my head... what just happened?",
             "This isn't the research lab... Where am I?",
             "I was working on that strange device and then... everything went black.",
@@ -82,14 +84,22 @@ public class VoiceLineTypewriter : MonoBehaviour
             "No... no, that can’t be right... I was trying to help.",
 
             "Dont you feel like you've been here before? You have. You've been here many times. We both have.",
-            "This time I will end this finally wretched cycle.",
+            "This time I will finally end this wretched cycle.",
 
             "No, please... I can fix this. I can fix everyth-",
             "You can't fix this. You've tried. You've failed",
             
-
-            "May you rest in peace, Johnny my best friend and greatest enemy.",
+            "*The trigger pulls, and the end comes with a sharp, resonant blast.*",
+            "May you rest in peace, Johnny.",
         };
+
+        // Ensure the endElement is hidden on awake
+        CanvasGroup canvasGroup = endElement.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = endElement.AddComponent<CanvasGroup>();
+        }
+        canvasGroup.alpha = 0f;
     }
 
     public void TriggerLine()
@@ -114,7 +124,15 @@ public class VoiceLineTypewriter : MonoBehaviour
 
     private void ProcessNextInQueue()
     {
-        if (voiceLineQueue.Count == 0) return;
+        if (voiceLineQueue.Count == 0)
+        {
+            if (currentIndex == voiceLines.Length)
+            {
+                StartCoroutine(FadeInEndElement());
+                Debug.Log("End element faded in");
+            }
+            return;
+        }
 
         int nextIndex = voiceLineQueue.Dequeue();
         if (currentCoroutine != null)
@@ -159,5 +177,33 @@ public class VoiceLineTypewriter : MonoBehaviour
         // After finishing the current line, process next in queue
         isPlaying = false;
         ProcessNextInQueue();
+
+        // Start fading in the end element
+        if (!isPlaying)
+        {
+            StartCoroutine(FadeInEndElement());
+        }
+    }
+
+    private IEnumerator FadeInEndElement()
+    {
+        endElement.SetActive(true);
+        CanvasGroup canvasGroup = endElement.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = endElement.AddComponent<CanvasGroup>();
+        }
+
+        float duration = 1.0f; // Duration of the fade-in effect
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Clamp01(elapsedTime / duration);
+            yield return null;
+        }
+
+        canvasGroup.alpha = 1f;
     }
 }
