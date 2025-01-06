@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour
     private InputManager inputManager;
 
     [Header("UI")]
-    public TextMeshProUGUI timer;
     public GameObject deathScreen;
     public GameObject pauseMenu;
     public GameObject settingsPanel;
@@ -53,9 +52,6 @@ public class GameController : MonoBehaviour
     public PostProcessProfile tritanopiaProfile;
 
     [Header("Game State")]
-    private float startTime;
-    private float endTime;
-    private bool levelCompleted = false;
     public bool isPaused = false;
 
     private float itemPickupHideTimer;
@@ -76,8 +72,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         LoadPlayer(SaveSystem.saveSlot);
-
-        startTime = Time.time;
 
         if (audioSource != null)
         {
@@ -114,11 +108,6 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (!levelCompleted && !isPaused) {
-            float timeTaken = Time.time - startTime;
-            timer.text = FormatTime(timeTaken);
-        }
-
         if (itemPickupPanel.activeInHierarchy)
         {
             itemPickupHideTimer -= Time.deltaTime;
@@ -126,17 +115,6 @@ public class GameController : MonoBehaviour
             {
                 HidePickupMessage();
             }
-        }
-    }
-
-    public void CompleteLevel()
-    {
-        if (!levelCompleted)
-        {
-            endTime = Time.time;
-            levelCompleted = true;
-            float timeTaken = endTime - startTime;
-            timer.text = FormatTime(timeTaken);
         }
     }
 
