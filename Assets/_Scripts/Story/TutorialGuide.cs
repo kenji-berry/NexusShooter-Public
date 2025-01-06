@@ -18,6 +18,7 @@ public class TutorialGuide : MonoBehaviour
             { "Interact", "Press E to interact with objects" },
             { "Attack", "Press LMB to attack with your equipped weapon" },
             { "Equip", "Press Q to open the weapon inventory or use the number keys to switch weapons quickly" },
+            {"Craft", "Press TAB to open the crafting menu" },
             { "Clear", "" }
         };
 
