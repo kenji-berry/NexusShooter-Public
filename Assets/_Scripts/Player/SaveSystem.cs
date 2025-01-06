@@ -6,10 +6,10 @@ public static class SaveSystem
 {
     public static int saveSlot = -1;
 
-    public static void SavePlayer (PlayerController playerController, int slot)
+    public static void SavePlayer (PlayerController playerController)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + $"/player_slot{slot}.txt";
+        string path = Application.persistentDataPath + $"/player_slot{saveSlot}.txt";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerData data = new PlayerData(playerController);
@@ -20,6 +20,9 @@ public static class SaveSystem
 
     public static PlayerData LoadPlayer (int slot)
     {
+        if (slot == -1) return null;
+
+        saveSlot = slot;
         string path = Application.persistentDataPath + $"/player_slot{slot}.txt";
         if (File.Exists(path))
         {

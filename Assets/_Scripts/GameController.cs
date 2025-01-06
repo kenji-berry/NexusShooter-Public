@@ -62,7 +62,6 @@ public class GameController : MonoBehaviour
 
     [Header("Load/save system")]
     public GameObject loadSlotsPanel;
-    public int saveSlot;
 
     void Awake()
     {
@@ -76,10 +75,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        /*
-            LoadPlayer(SaveSystem.saveSlot);
-            saveSlot = SaveSystem.saveSlot;
-        */
+        LoadPlayer(SaveSystem.saveSlot);
 
         startTime = Time.time;
 
@@ -372,8 +368,7 @@ public class GameController : MonoBehaviour
 
     public void SavePlayer()
     {
-        SaveSystem.SavePlayer(playerController, saveSlot);
-        Debug.Log("saving to slot " + saveSlot);
+        SaveSystem.SavePlayer(playerController);
     }
 
     public void LoadPlayer(int slot)
@@ -383,8 +378,6 @@ public class GameController : MonoBehaviour
         if (data == null) return;
 
         Debug.Log("loading slot " + slot);
-
-        saveSlot = slot;
 
         GameObject player = playerController.gameObject;
         player.SetActive(false);
